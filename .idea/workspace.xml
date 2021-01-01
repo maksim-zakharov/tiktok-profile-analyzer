@@ -22,6 +22,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.19.11" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -30,7 +33,21 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\tiktok-chrome-extension" />
+      <recent name="D:\Projects\tiktok-chrome-extension\modal" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\tiktok-chrome-extension\src\components" />
+      <recent name="D:\Projects\tiktok-chrome-extension\src" />
+      <recent name="D:\Projects\tiktok-chrome-extension\public" />
+      <recent name="D:\Projects\tiktok-chrome-extension\images" />
+      <recent name="D:\Projects\tiktok-chrome-extension\content" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -40,7 +57,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1609343575724</updated>
-      <workItem from="1609343575922" duration="29773000" />
+      <workItem from="1609343575922" duration="56697000" />
     </task>
     <servers />
   </component>
@@ -48,13 +65,17 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="734" y="289" width="579" height="534" key="find.popup" timestamp="1609437565784">
+    <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609517909742">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="734" y="289" width="579" height="534" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609437565784" />
-    <state x="681" y="259" key="run.anything.popup" timestamp="1609347425246">
+    <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1609517909742" />
+    <state x="734" y="289" width="579" height="534" key="find.popup" timestamp="1609530274862">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="681" y="259" key="run.anything.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609347425246" />
+    <state x="734" y="289" width="579" height="534" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609530274862" />
+    <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="681" y="259" key="run.anything.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609510986513" />
   </component>
 </project>
