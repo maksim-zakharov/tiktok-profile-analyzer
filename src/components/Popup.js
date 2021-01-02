@@ -7,10 +7,7 @@ import ReactGA from 'react-ga';
 class Popup extends React.Component {
 
     async componentDidMount() {
-        ReactGA.initialize('UA-186370775-1', {
-            debug: true,
-            titleCase: false,
-        });
+        ReactGA.initialize('UA-186370775-1');
         ReactGA.ga('set', 'checkProtocolTask', null);
         ReactGA.pageview('/popup.html');
 
