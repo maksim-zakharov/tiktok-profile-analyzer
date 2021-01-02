@@ -76,5 +76,8 @@
   },
   "data_views": {
     "message": "Views"
+  },
+  "donate": {
+    "message": "Donate"
   }
 }

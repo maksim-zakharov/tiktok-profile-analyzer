@@ -63,6 +63,7 @@ class Popup extends React.Component {
                                       onChange={(e) => this.onChange(e, checkbox.name)}>{chrome.i18n.getMessage(checkbox.name)}</Checkbox>)}
                     </div>
                 </div>
+                <a href="https://yoomoney.ru/to/410016200700541" target="_blank">{chrome.i18n.getMessage('donate')}</a>
             </div>
         );
     }

@@ -74,3 +74,29 @@
     transform: rotate(360deg);
   }
 }
+
+a {
+  display: flex;
+  background-color: #fe2c55 !important;
+  color: #fff !important;
+  border: none;
+  min-width: 164px;
+  min-height: 36px;
+  font-family: "sofiapro-semibold",PingFangSC,sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  width: 208px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  margin-top: 16px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #FE2C55 !important;
+  border-color: #FE2C55 !important;
+}

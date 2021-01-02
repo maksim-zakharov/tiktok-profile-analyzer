@@ -76,5 +76,8 @@
   },
   "data_views": {
     "message": "Просмотры"
+  },
+  "donate": {
+    "message": "Помочь автору :)"
   }
 }
