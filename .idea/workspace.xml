@@ -59,7 +59,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1609343575724</updated>
-      <workItem from="1609343575922" duration="80678000" />
+      <workItem from="1609343575922" duration="82415000" />
     </task>
     <servers />
   </component>
@@ -71,10 +71,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1609517909742" />
-    <state x="1363" y="302" width="579" height="592" key="find.popup" timestamp="1609617196895">
+    <state x="1363" y="302" width="579" height="592" key="find.popup" timestamp="1609618774474">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="1363" y="302" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609617196895" />
+    <state x="1363" y="302" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609618774474" />
     <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -85,13 +85,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/content/content.js</url>
-          <line>183</line>
+          <line>188</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/content/content.js</url>
-          <line>563</line>
+          <line>586</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>

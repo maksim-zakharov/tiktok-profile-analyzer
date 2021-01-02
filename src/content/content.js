@@ -7,17 +7,19 @@ if (!+localStorage.getItem('timeout')) {
     localStorage.setItem('timeout', 1000);
 }
 
-createAnalyzeButton();
+let isProfilePage = () => {
+    return !!document.querySelector('meta[property="twitter:creator:id"]');
+}
 
 var tiktokParse = () => {
-    const twitterCreatorId = document.querySelector('meta[property="twitter:creator:id"]');
-
-    if (!twitterCreatorId) {
+    if (!isProfilePage()) {
         // Мы не на странице профиля
         return;
     }
 
-    const nick = twitterCreatorId.content;
+    createAnalyzeButton();
+
+    const nick = document.querySelector('meta[property="twitter:creator:id"]').content;
     const loadedVideosCount = document.querySelectorAll('.video-feed-item-wrapper').length;
     const markedVideosCount = document.querySelectorAll('.video-feed-item-wrapper.marked').length;
 
@@ -51,6 +53,7 @@ let addItem = async (item, link) => {
     link.setAttribute(`data-video_create-time`, item.createTime);
 
     await onChanged('video_Likes', enable => {
+        if (!isProfilePage()) return;
         enable ? addLikes(link, item.stats.diggCount) : Array.from(document.querySelectorAll("[data-video_like]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
 
@@ -60,12 +63,15 @@ let addItem = async (item, link) => {
     link.querySelector('.jsx-1036923518.card-footer.normal.no-avatar').appendChild(firstContainer);
 
     await onChanged('video_Shares', enable => {
+        if (!isProfilePage()) return;
         enable ? addShare(link, item) : Array.from(document.querySelectorAll("[data-video_share]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
     await onChanged('video_Comments', enable => {
+        if (!isProfilePage()) return;
         enable ? addComment(link, item) : Array.from(document.querySelectorAll("[data-video_comment]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
     await onChanged('video_ER', enable => {
+        if (!isProfilePage()) return;
         enable ? addER(link, item) : Array.from(document.querySelectorAll("[data-video_ER]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
 
@@ -374,6 +380,7 @@ let addViewsCount = (nick, dataTag, fieldName, row, name) => {
 let updateProfile = async (nick) => {
 
     await onChanged('profile_Views', enable => {
+        if (!isProfilePage()) return;
         if (enable) {
             addViewsCount(nick, "data_views", "playCount", "tt-analytic-1", chrome.i18n.getMessage('data_views'))
         } else {
@@ -382,6 +389,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Shares', enable => {
+        if (!isProfilePage()) return;
         if (enable) {
             addViewsCount(nick, "data_shares", "shareCount", "tt-analytic-1", chrome.i18n.getMessage('data_shares'));
         } else {
@@ -390,6 +398,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Comments', enable => {
+        if (!isProfilePage()) return;
         if (enable) {
             addViewsCount(nick, "data_comments", "commentCount", "tt-analytic-1", chrome.i18n.getMessage('data_comments'));
         } else {
@@ -398,6 +407,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_views', enable => {
+        if (!isProfilePage()) return;
         if (enable) {
             addAverageCounterPerVideo(nick, "data_avg_views", "playCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_views'));
         } else {
@@ -406,6 +416,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_shares', enable => {
+        if (!isProfilePage()) return;
         if (enable) {
             addAverageCounterPerVideo(nick, "data_avg_shares", "shareCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_shares'));
         } else {
@@ -414,6 +425,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_comments', enable => {
+        if (!isProfilePage()) return;
         if (enable) {
             addAverageCounterPerVideo(nick, "data_avg_comments", "commentCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_comments'));
         } else {
@@ -422,6 +434,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_ER', enable => {
+        if (!isProfilePage()) return;
         if (enable) {
             addAverageERPerVideo(nick, "data_avg_er", "tt-analytic-2", chrome.i18n.getMessage('data_avg_er'));
         } else {
@@ -430,6 +443,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_created_time', enable => {
+        if (!isProfilePage()) return;
         if (enable) {
             addAverageCreatedTimePerVideo(nick, "data_avg_created_time", "tt-analytic-2", chrome.i18n.getMessage('data_avg_created_time'));
         } else {
@@ -438,6 +452,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_videos_per_day', enable => {
+        if (!isProfilePage()) return;
         if (enable) {
             addAverageVideoCountPerDay(nick, "data_avg_videos_per_day", "tt-analytic-2", chrome.i18n.getMessage('data_avg_videos_per_day'));
         } else {
@@ -451,8 +466,19 @@ let updateProfile = async (nick) => {
  * Создает кнопку для анализа профиля
  */
 function createAnalyzeButton() {
-    var button = document.querySelector('.follow-button').cloneNode(true)
-    document.querySelector('.follow-button').parentNode.appendChild(button);
+    if (document.querySelector('[data_content_start_analyzing]')) {
+        return;
+    }
+    const button = document.createElement('button')
+    button.classList.add('follow-button');
+    button.classList.add('jsx-3251180706');
+    button.classList.add('jsx-683523640');
+    button.classList.add('share-follow');
+    button.classList.add('tiktok-btn-pc');
+    button.classList.add('tiktok-btn-pc-medium');
+    button.classList.add('tiktok-btn-pc-primary');
+    button.setAttribute('data_content_start_analyzing', 'button');
+    document.querySelector('.share-title-container').appendChild(button);
     button.textContent = chrome.i18n.getMessage('content_start_analyzing');
     button.addEventListener('click', analyzeProfile);
 }
@@ -461,20 +487,17 @@ function createAnalyzeButton() {
  * Анализирует текущий профиль, запрашивая все видосы по API, обновляет каунтеры
  */
 async function analyzeProfile() {
-    document.querySelector('.follow-button:last-of-type').setAttribute('disabled', 'disabled');
-    document.querySelector('.follow-button:last-of-type').innerHTML = `
-    <div className="tiktok-loading-ring" style="width: 18px; height: 18px;">
-        <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="#121212"></path></svg>
-    </div>`;
+    document.querySelector('[data_content_start_analyzing]').setAttribute('disabled', 'disabled');
+    document.querySelector('[data_content_start_analyzing]').innerHTML = `
+    <div class="tiktok-loading-ring" style="width: 18px; height: 18px;">
+    <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="white"></path></svg></div>`;
 
-    const twitterCreatorId = document.querySelector('meta[property="twitter:creator:id"]');
-
-    if (!twitterCreatorId) {
+    if (!isProfilePage()) {
         // Мы не на странице профиля
         return;
     }
 
-    const nick = twitterCreatorId.content;
+    const nick = document.querySelector('meta[property="twitter:creator:id"]').content;
 
     let lastCursor;
 
@@ -527,13 +550,14 @@ async function analyzeProfile() {
     }
 
     await onChanged('video_Sort_by_ER', enable => {
+        if (!isProfilePage()) return;
         enable ? sortByER() : sortByCreationTime(nick);
     }, true)
 
     updateProfile(nick)
 
-    document.querySelector('.follow-button:last-of-type').removeAttribute('disabled');
-    document.querySelector('.follow-button:last-of-type').innerHTML = chrome.i18n.getMessage('content_start_analyzing');
+    document.querySelector('[data_content_start_analyzing]').removeAttribute('disabled');
+    document.querySelector('[data_content_start_analyzing]').innerHTML = chrome.i18n.getMessage('content_start_analyzing');
 }
 
 /**
