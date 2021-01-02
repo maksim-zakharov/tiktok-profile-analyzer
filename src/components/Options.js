@@ -30,15 +30,15 @@ function Options() {
                     </nav>
                 </div>
                 <Switch>
-                    <Route exact path="/popup">
-                        <Popup />
-                    </Route>
-                    <Route exact path="/foreground">
-                        <Foreground />
-                    </Route>
-                    <Route exact path="/">
-                        <Redirect to="/options.html" />
-                    </Route>
+                    {/*<Route exact path="/popup">*/}
+                    {/*    <Popup />*/}
+                    {/*</Route>*/}
+                    {/*<Route exact path="/foreground">*/}
+                    {/*    <Foreground />*/}
+                    {/*</Route>*/}
+                    {/*<Route exact path="/">*/}
+                    {/*    <Redirect to="/options.html" />*/}
+                    {/*</Route>*/}
                 </Switch>
             </div>
         </Router>

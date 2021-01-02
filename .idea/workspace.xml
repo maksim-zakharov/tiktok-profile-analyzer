@@ -24,7 +24,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.11" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/_locales" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -39,6 +39,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\tiktok-chrome-extension\src\_locales" />
       <recent name="D:\Projects\tiktok-chrome-extension" />
       <recent name="D:\Projects\tiktok-chrome-extension\modal" />
     </key>
@@ -58,7 +59,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1609343575724</updated>
-      <workItem from="1609343575922" duration="66858000" />
+      <workItem from="1609343575922" duration="80678000" />
     </task>
     <servers />
   </component>
@@ -70,13 +71,31 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1609517909742" />
-    <state x="1362" y="302" width="579" height="534" key="find.popup" timestamp="1609534971556">
+    <state x="1363" y="302" width="579" height="592" key="find.popup" timestamp="1609617196895">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="1362" y="302" width="579" height="534" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609534971556" />
+    <state x="1363" y="302" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609617196895" />
     <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="681" y="259" key="run.anything.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609510986513" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/content/content.js</url>
+          <line>183</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/content/content.js</url>
+          <line>563</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

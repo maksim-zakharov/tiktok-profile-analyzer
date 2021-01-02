@@ -1,0 +1,80 @@
+{
+  "profile_Views": {
+    "message": "Показать просмотры"
+  },
+  "profile_Shares": {
+    "message": "Показать репосты"
+  },
+  "profile_Comments": {
+    "message": "Показать комментарии"
+  },
+  "profile_Average_views": {
+    "message": "Показать среднее просмотров"
+  },
+  "profile_Average_shares": {
+    "message": "Показать среднее репостов"
+  },
+  "profile_Average_comments": {
+    "message": "Показать среднее комментариев"
+  },
+  "profile_Average_ER": {
+    "message": "Показать средний коеффициент вовлеченности"
+  },
+  "profile_Average_created_time": {
+    "message": "Показать среднее время постинга"
+  },
+  "profile_Average_videos_per_day": {
+    "message": "Показать среднее количество видео в день"
+  },
+  "video_Likes": {
+    "message": "Показать лайки"
+  },
+  "video_Shares": {
+    "message": "Показать репосты"
+  },
+  "video_Comments": {
+    "message": "Показать комментарии"
+  },
+  "video_ER": {
+    "message": "Показать вовлеченность"
+  },
+  "video_Sort_by_ER": {
+    "message": "Сортировать по вовлеченности"
+  },
+  "content_start_analyzing": {
+    "message": "Сканировать"
+  },
+  "popup_profile_title": {
+    "message": "Профиль"
+  },
+  "popup_video_title": {
+    "message": "Видео"
+  },
+  "data_avg_videos_per_day": {
+    "message": "Средн. кол-во видео в день"
+  },
+  "data_avg_created_time": {
+    "message": "Средн. время создания"
+  },
+  "data_avg_er": {
+    "message": "Средн. коэффициент вовлеченности"
+  },
+  "data_avg_comments": {
+    "message": "Средн. комментарии"
+  },
+  "data_avg_shares": {
+    "message": "Средн. репосты"
+  },
+  "data_avg_views": {
+    "message": "Средн. просмотры"
+  },
+  "data_comments": {
+    "message": "Комментарии"
+  },
+  "data_shares": {
+    "message": "Поделились"
+  },
+  "data_views": {
+    "message": "Просмотры"
+  }
+}

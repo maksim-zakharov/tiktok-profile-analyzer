@@ -22,24 +22,23 @@ class Popup extends React.Component {
     }
 
     profileCheckboxes = [
-        {name: 'Profile:Views', text: 'Enable Views'},
-        {name: 'Profile:Shares', text: 'Enable Shares'},
-        {name: 'Profile:Comments', text: 'Enable Comments'},
-        // {name: 'Profile:Average likes', text: 'Enable Average likes'},
-        {name: 'Profile:Average views', text: 'Enable Average views'},
-        {name: 'Profile:Average shares', text: 'Enable Average shares'},
-        {name: 'Profile:Average comments', text: 'Enable Average comments'},
-        {name: 'Profile:Average ER', text: 'Enable Average ER'},
-        {name: 'Profile:Average created time', text: 'Enable Average created time'},
-        {name: 'Profile:Average videos per day', text: 'Enable Average videos per day'}
+        {name: 'profile_Views'},
+        {name: 'profile_Shares'},
+        {name: 'profile_Comments'},
+        {name: 'profile_Average_views'},
+        {name: 'profile_Average_shares'},
+        {name: 'profile_Average_comments'},
+        {name: 'profile_Average_ER'},
+        {name: 'profile_Average_created_time'},
+        {name: 'profile_Average_videos_per_day'}
     ]
 
     videoCheckboxes = [
-        {name: 'Video:Likes', text: 'Enable Likes'},
-        {name: 'Video:Shares', text: 'Enable Shares'},
-        {name: 'Video:Comments', text: 'Enable Comments'},
-        {name: 'Video:ER', text: 'Enable ER'},
-        {name: 'Video:Sort by ER', text: 'Enable sorting by ER'},
+        {name: 'video_Likes'},
+        {name: 'video_Shares'},
+        {name: 'video_Comments'},
+        {name: 'video_ER'},
+        {name: 'video_Sort_by_ER'},
     ]
 
     state = {};
@@ -49,22 +48,22 @@ class Popup extends React.Component {
             <div className="profile-container">
                 <div className="logo">
                     <img src="../images/icon_128x128.png" alt=""/>
-                    <h1>Tiktok Profile Analyzer1</h1>
+                    <h1>Tiktok Profile Analyzer</h1>
                 </div>
                 <div className="checkbox-group">
-                    <h2>Profile</h2>
+                    <h2>{chrome.i18n.getMessage('popup_profile_title')}</h2>
                     <div className="checkbox-container">
                         {this.profileCheckboxes.map(checkbox =>
                             <Checkbox checked={this.state[checkbox.name]}
-                                      onChange={(e) => this.onChange(e, checkbox.name)}>{checkbox.text}</Checkbox>)}
+                                      onChange={(e) => this.onChange(e, checkbox.name)}>{chrome.i18n.getMessage(checkbox.name)}</Checkbox>)}
                     </div>
                 </div>
                 <div className="checkbox-group">
-                    <h2>Video</h2>
+                    <h2>{chrome.i18n.getMessage('popup_video_title')}</h2>
                     <div className="checkbox-container">
                         {this.videoCheckboxes.map(checkbox =>
                             <Checkbox checked={this.state[checkbox.name]}
-                                      onChange={(e) => this.onChange(e, checkbox.name)}>{checkbox.text}</Checkbox>)}
+                                      onChange={(e) => this.onChange(e, checkbox.name)}>{chrome.i18n.getMessage(checkbox.name)}</Checkbox>)}
                     </div>
                 </div>
             </div>

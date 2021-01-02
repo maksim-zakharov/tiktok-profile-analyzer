@@ -66,7 +66,10 @@ module.exports = {
                 { from: 'src/background.js', to: '[name].[ext]' },
                 { from: 'src/inject_script.js', to: '[name].[ext]' },
                 { from: 'src/images/*.png', to: 'images/[name].[ext]' },
-                { from: 'src/content/*', to: 'content/[name].[ext]' }
+                { from: 'src/content/*', to: 'content/[name].[ext]' },
+                // TODO Переделать на мультипапочность
+                { from: 'src/_locales/en/*', to: '_locales/en/[name].[ext]' },
+                { from: 'src/_locales/ru/*', to: '_locales/ru/[name].[ext]' }
             ]
         }),
         new CleanWebpackPlugin(),

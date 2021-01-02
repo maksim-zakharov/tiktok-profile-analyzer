@@ -1,0 +1,80 @@
+{
+  "profile_Views": {
+    "message": "Enable Views"
+  },
+  "profile_Shares": {
+    "message": "Enable Shares"
+  },
+  "profile_Comments": {
+    "message": "Enable Comments"
+  },
+  "profile_Average_views": {
+    "message": "Enable Average views"
+  },
+  "profile_Average_shares": {
+    "message": "Enable Average shares"
+  },
+  "profile_Average_comments": {
+    "message": "Enable Average comments"
+  },
+  "profile_Average_ER": {
+    "message": "Enable Average ER"
+  },
+  "profile_Average_created_time": {
+    "message": "Enable Average created time"
+  },
+  "profile_Average_videos_per_day": {
+    "message": "Enable Average videos per day"
+  },
+  "video_Likes": {
+    "message": "Enable Likes"
+  },
+  "video_Shares": {
+    "message": "Enable Shares"
+  },
+  "video_Comments": {
+    "message": "Enable Comments"
+  },
+  "video_ER": {
+    "message": "Enable ER"
+  },
+  "video_Sort_by_ER": {
+    "message": "Enable sorting by ER"
+  },
+  "content_start_analyzing": {
+    "message": "Start Analyzing"
+  },
+  "popup_profile_title": {
+    "message": "Profile"
+  },
+  "popup_video_title": {
+    "message": "Video"
+  },
+  "data_avg_videos_per_day": {
+    "message": "Avg. videos per day"
+  },
+  "data_avg_created_time": {
+    "message": "Avg. created time"
+  },
+  "data_avg_er": {
+    "message": "Avg. ER"
+  },
+  "data_avg_comments": {
+    "message": "Avg. comments"
+  },
+  "data_avg_shares": {
+    "message": "Avg. shares"
+  },
+  "data_avg_views": {
+    "message": "Avg. views"
+  },
+  "data_comments": {
+    "message": "Comments"
+  },
+  "data_shares": {
+    "message": "Shares"
+  },
+  "data_views": {
+    "message": "Views"
+  }
+}
