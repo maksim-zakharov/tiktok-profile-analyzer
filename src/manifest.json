@@ -4,16 +4,27 @@
   "description": "This extension will analyze a Tiktok profile using API",
   "version": "1.0.1",
   "author": "Maksim Zakharov",
-  "icons": {"128": "images/icon_128x128.png"},
+  "icons": {
+    "128": "images/icon_128x128.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
   "content_scripts": [
     {
-      "matches": ["*://*.tiktok.com/*"],
-      "js": ["content/content.js"],
-      "css": ["content/styles.css"]
+      "matches": [
+        "*://*.tiktok.com/*"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "css": [
+        "content/styles.css"
+      ]
     }
   ],
   "background": {
-    "scripts": ["./background.js"]
+    "scripts": [
+      "./background.js"
+    ]
   },
   "options_page": "./options.html",
   "browser_action": {

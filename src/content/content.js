@@ -65,11 +65,9 @@ var tiktokParse = () => {
 
             document.querySelectorAll(`a[href^="https://www.tiktok.com/@${nick}/video/"]`).forEach(link => link.classList.add('marked'));
 
-            if (await getItem('Video:Sort by ER')) {
-                sortByER();
-            } else {
-                sortByCreationTime(nick);
-            }
+            onChanged('Video:Sort by ER', enable => {
+                enable ? sortByER() : sortByCreationTime(nick);
+            }, true)
         } else {
 
             itemsDict[nick].push(...responseObj.items);
@@ -99,11 +97,9 @@ var tiktokParse = () => {
                 addItem(item, link);
             }
 
-            if (await getItem('Video:Sort by ER')) {
-                sortByER();
-            } else {
-                sortByCreationTime(nick);
-            }
+            onChanged('Video:Sort by ER', enable => {
+                enable ? sortByER() : sortByCreationTime(nick);
+            }, true)
         }
     };
 
@@ -124,32 +120,24 @@ let addItem = async (item, link) => {
         return;
     }
 
-    if (await getItem('Video:Likes')) {
-        addLikes(link, item.stats.diggCount);
-    } else {
-        Array.from(document.querySelectorAll("[data-video-like]")).map(elem => elem?.parentNode.removeChild(elem))
-    }
+    onChanged('Video:Likes', enable => {
+        enable ? addLikes(link, item.stats.diggCount) : Array.from(document.querySelectorAll("[data-video-like]")).map(elem => elem?.parentNode.removeChild(elem));
+    }, true)
 
     const firstContainer = document.createElement('strong');
     firstContainer.classList.add('jsx-1036923518');
     firstContainer.classList.add('video-bottom-info');
     link.querySelector('.jsx-1036923518.card-footer.normal.no-avatar').appendChild(firstContainer);
 
-    if (await getItem('Video:Shares')) {
-        addShare(firstContainer, item);
-    } else {
-        Array.from(document.querySelectorAll("[data-video-share]")).map(elem => elem?.parentNode.removeChild(elem))
-    }
-    if (await getItem('Video:Comments')) {
-        addComment(firstContainer, item);
-    } else {
-        Array.from(document.querySelectorAll("[data-video-comment]")).map(elem => elem?.parentNode.removeChild(elem))
-    }
-    if (await getItem('Video:ER')) {
-        addER(link, item);
-    } else {
-        Array.from(document.querySelectorAll("[data-video-ER]")).map(elem => elem?.parentNode.removeChild(elem))
-    }
+    onChanged('Video:Shares', enable => {
+        enable ? addShare(link, item) : Array.from(document.querySelectorAll("[data-video-share]")).map(elem => elem?.parentNode.removeChild(elem));
+    }, true)
+    onChanged('Video:Comments', enable => {
+        enable ? addComment(link, item) : Array.from(document.querySelectorAll("[data-video-comment]")).map(elem => elem?.parentNode.removeChild(elem));
+    }, true)
+    onChanged('Video:ER', enable => {
+        enable ? addER(link, item) : Array.from(document.querySelectorAll("[data-video-ER]")).map(elem => elem?.parentNode.removeChild(elem));
+    }, true)
 
     link.classList.add('marked');
 }
@@ -227,7 +215,7 @@ let addER = (link, item) => {
 
 let sortByCreationTime = (nick) => {
     const timeDict = itemsDict[nick].reduce((acc, curr) => ({[curr.id]: curr.createTime, ...acc}), {});
-    var array = Array.from(document.querySelectorAll(`a[href^="https://www.tiktok.com/${nick}/video/"]`))
+    var array = Array.from(document.querySelectorAll(`a[href^="https://www.tiktok.com/@${nick}/video/"]`))
     array = array.sort((a, b) => {
         if (timeDict[+a.href.split('/')[a.href.split('/') - 1]] > timeDict[+b.href.split('/')[b.href.split('/') - 1]]) {
             return -1;
@@ -432,64 +420,81 @@ let addViewsCount = (nick, dataTag, fieldName, row) => {
 }
 
 let updateProfile = async (nick) => {
-    if (await getItem('Profile:Views')) {
-        addViewsCount(nick, "data-Views", "playCount", "tt-analytic-1");
-    } else {
-        var elem = document.querySelector("[data-Views]")
-        elem?.parentNode.removeChild(elem)
-    }
-    if (await getItem('Profile:Shares')) {
-        addViewsCount(nick, "data-Shares", "shareCount", "tt-analytic-1");
-    } else {
-        var elem = document.querySelector("[data-Shares]")
-        elem?.parentNode.removeChild(elem)
-    }
-    if (await getItem('Profile:Comments')) {
-        addViewsCount(nick, "data-Comments", "commentCount", "tt-analytic-1");
-    } else {
-        var elem = document.querySelector("[data-Comments]");
-        elem?.parentNode.removeChild(elem)
-    }
-
-    if (await getItem('Profile:Average views')) {
-        addAverageCounterPerVideo(nick, "data-avg-Views", "playCount", "tt-analytic-2");
-    } else {
-        var elem = document.querySelector("[data-avg-Views]")
-        elem?.parentNode.removeChild(elem)
-    }
-    if (await getItem('Profile:Average shares')) {
-        addAverageCounterPerVideo(nick, "data-avg-Shares", "shareCount", "tt-analytic-2");
-    } else {
-        var elem = document.querySelector("[data-avg-Shares]")
-        elem?.parentNode.removeChild(elem)
-    }
-    if (await getItem('Profile:Average comments')) {
-        addAverageCounterPerVideo(nick, "data-avg-Comments", "commentCount", "tt-analytic-2");
-    } else {
-        var elem = document.querySelector("[data-avg-Comments]");
-        elem?.parentNode.removeChild(elem)
-    }
-    if (await getItem('Profile:Average ER')) {
-        addAverageERPerVideo(nick, "data-avg-ER", "tt-analytic-2");
-    } else {
-        var elem = document.querySelector("[data-avg-ER]")
-        elem?.parentNode.removeChild(elem)
-    }
-    if (await getItem('Profile:Average created time')) {
-        addAverageCreatedTimePerVideo(nick, "data-avg-CreatedTime", "tt-analytic-2");
-    } else {
-        var elem = document.querySelector("[data-avg-CreatedTime]")
-        elem?.parentNode.removeChild(elem)
-    }
-    if (await getItem('Profile:Average videos per day')) {
-        addAverageVideoCountPerDay(nick, "data-avg-VideosPerDay", "tt-analytic-2");
-    } else {
-        var elem = document.querySelector("[data-avg-VideosPerDay]")
-        elem?.parentNode.removeChild(elem)
-    }
+    onChanged('Profile:Views', enable => {
+        if (enable) {
+            addViewsCount(nick, "data-Views", "playCount", "tt-analytic-1")
+        } else {
+            var elem = document.querySelector("[data-Views]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+    onChanged('Profile:Shares', enable => {
+        if (enable) {
+            addViewsCount(nick, "data-Shares", "shareCount", "tt-analytic-1");
+        } else {
+            var elem = document.querySelector("[data-Shares]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+    onChanged('Profile:Comments', enable => {
+        if (enable) {
+            addViewsCount(nick, "data-Comments", "commentCount", "tt-analytic-1");
+        } else {
+            var elem = document.querySelector("[data-Comments]");
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+    onChanged('Profile:Average views', enable => {
+        if (enable) {
+            addAverageCounterPerVideo(nick, "data-avg-Views", "playCount", "tt-analytic-2");
+        } else {
+            var elem = document.querySelector("[data-avg-Views]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+    onChanged('Profile:Average shares', enable => {
+        if (enable) {
+            addAverageCounterPerVideo(nick, "data-avg-Shares", "shareCount", "tt-analytic-2");
+        } else {
+            var elem = document.querySelector("[data-avg-Shares]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+    onChanged('Profile:Average comments', enable => {
+        if (enable) {
+            addAverageCounterPerVideo(nick, "data-avg-Comments", "commentCount", "tt-analytic-2");
+        } else {
+            var elem = document.querySelector("[data-avg-Comments]");
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+    onChanged('Profile:Average ER', enable => {
+        if (enable) {
+            addAverageERPerVideo(nick, "data-avg-ER", "tt-analytic-2");
+        } else {
+            var elem = document.querySelector("[data-avg-ER]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+    onChanged('Profile:Average created time', enable => {
+        if (enable) {
+            addAverageCreatedTimePerVideo(nick, "data-avg-CreatedTime", "tt-analytic-2");
+        } else {
+            var elem = document.querySelector("[data-avg-CreatedTime]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+    onChanged('Profile:Average videos per day', enable => {
+        if (enable) {
+            addAverageVideoCountPerDay(nick, "data-avg-VideosPerDay", "tt-analytic-2");
+        } else {
+            var elem = document.querySelector("[data-avg-VideosPerDay]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
 }
 
-async function getItem(name) {
+function getItem(name) {
     if (!chrome?.storage) {
         return localStorage.getItem(name);
     }
@@ -500,7 +505,7 @@ async function getItem(name) {
     });
 }
 
-async function setItem(name, value) {
+function setItem(name, value) {
     if (!chrome?.storage) {
         return localStorage.setItem(name, value);
     }
@@ -509,5 +514,23 @@ async function setItem(name, value) {
             resolve(data);
             console.log(data);
         });
+    });
+}
+
+function onChanged(keyName, resolve, init) {
+    if (!chrome?.storage) {
+        return;
+    }
+    if (init) {
+        chrome.storage.sync.get(keyName, data => {
+            resolve(data[keyName]);
+        });
+    }
+    chrome.storage.onChanged.addListener(function (changes) {
+        for (key in changes) {
+            if (key === keyName) {
+                resolve(changes[keyName].newValue);
+            }
+        }
     });
 }

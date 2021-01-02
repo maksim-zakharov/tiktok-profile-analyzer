@@ -2,10 +2,18 @@ import './App.scss';
 import 'antd/dist/antd.css';
 import {Checkbox} from 'antd';
 import * as React from 'react';
+import ReactGA from 'react-ga';
 
 class Popup extends React.Component {
 
     async componentDidMount() {
+        ReactGA.initialize('UA-186370775-1', {
+            debug: true,
+            titleCase: false,
+        });
+        ReactGA.ga('set', 'checkProtocolTask', null);
+        ReactGA.pageview('/popup.html');
+
         const profileCheckboxes = await Promise.all(this.profileCheckboxes.map(item => getItem(item.name)))
         this.setState(profileCheckboxes.reduce((acc, curr, index) => ({[this.profileCheckboxes[index].name]: curr, ...acc}), {}));
 
@@ -41,7 +49,7 @@ class Popup extends React.Component {
             <div className="profile-container">
                 <div className="logo">
                     <img src="../images/icon_128x128.png" alt=""/>
-                    <h1>Tiktok Profile Analyzer</h1>
+                    <h1>Tiktok Profile Analyzer1</h1>
                 </div>
                 <div className="checkbox-group">
                     <h2>Profile</h2>
@@ -68,6 +76,11 @@ class Popup extends React.Component {
         this.setState(this.state);
 
         await setItem(storageName, this.state[storageName]);
+
+        ReactGA.event({
+            category: storageName,
+            action: e.target.checked ? 'enable' : 'disable',
+        });
     }
 }
 
