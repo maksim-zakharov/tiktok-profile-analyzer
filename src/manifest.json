@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Tiktok Profile Analyzer",
   "description": "This extension will analyze a Tiktok profile using API",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Maksim Zakharov",
   "icons": {
     "128": "images/icon_128x128.png"
