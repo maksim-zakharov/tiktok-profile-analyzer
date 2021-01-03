@@ -1,5 +1,3 @@
-// import './storage.service'
-
 var itemsDict = {};
 var lastCursorDict = {};
 
@@ -504,6 +502,7 @@ async function analyzeProfile() {
     const meta = document.querySelector('meta[property="al:ios:url"]').content;
     const url1 = new URL(`https://tiktok.com/${meta.replace('snssdk1233://', '')}`);
     const tagId = url1.pathname.split('/')[url1.pathname.split('/').length - 1];
+    chrome.runtime.sendMessage({action: "start-analyze", data: {nick, tagId}});
 
     if (!itemsDict[nick] || !itemsDict[nick].length) {
         lastCursor = new Date().getTime() * 1000;

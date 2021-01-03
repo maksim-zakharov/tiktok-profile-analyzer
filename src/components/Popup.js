@@ -3,6 +3,8 @@ import 'antd/dist/antd.css';
 import {Checkbox} from 'antd';
 import * as React from 'react';
 import ReactGA from 'react-ga';
+import { YMInitializer } from 'react-yandex-metrika';
+import ym from 'react-yandex-metrika';
 
 class Popup extends React.Component {
 
@@ -43,6 +45,7 @@ class Popup extends React.Component {
     render() {
         return (
             <div className="profile-container">
+                {/*<YMInitializer accounts={[70946401]} options={{webvisor: true}} version="2" />*/}
                 <div className="logo">
                     <img src="../images/icon_128x128.png" alt=""/>
                     <h1>Tiktok Profile Analyzer</h1>
@@ -74,6 +77,8 @@ class Popup extends React.Component {
 
         await setItem(storageName, this.state[storageName]);
 
+        // ym(storageName, e.target.checked ? 'enable' : 'disable');
+        // ym('reachGoal', 'whateverGoal', {awesomeParameter: 42});
         ReactGA.event({
             category: storageName,
             action: e.target.checked ? 'enable' : 'disable',
