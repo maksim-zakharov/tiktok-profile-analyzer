@@ -21,6 +21,7 @@ class Popup extends React.Component {
     }
 
     profileCheckboxes = [
+        {name: 'profile_videos'},
         {name: 'profile_Views'},
         {name: 'profile_Shares'},
         {name: 'profile_Comments'},

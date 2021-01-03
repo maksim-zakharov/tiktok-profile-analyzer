@@ -17,6 +17,8 @@ var tiktokParse = () => {
 
     createAnalyzeButton();
 
+    createCsvButton();
+
     const nick = document.querySelector('meta[property="twitter:creator:id"]').content;
     const loadedVideosCount = document.querySelectorAll('.video-feed-item-wrapper').length;
     const markedVideosCount = document.querySelectorAll('.video-feed-item-wrapper.marked').length;
@@ -342,6 +344,39 @@ let addAverageCounterPerVideo = (nick, dataTag, fieldName, row, name) => {
     numberContainer.appendChild(numberTextLabel);
 }
 
+let addVideosCount = (nick, dataTag, row, name) => {
+
+    let counter = 0;
+    if (itemsDict[nick]?.length) {
+        counter = itemsDict[nick][0].authorStats.videoCount;
+    }
+
+    let container = getOrCreateContainer(row);
+
+    let numberContainer = document.querySelector(`div[${dataTag}]`);
+
+    if (!numberContainer) {
+        numberContainer = document.createElement('div');
+        numberContainer.classList.add('number');
+        container.appendChild(numberContainer);
+    }
+    numberContainer.setAttribute(`${dataTag}`, convertNumberToString(counter));
+
+    let numberCountLabel = document.querySelector(`div[${dataTag}]`);
+    if (!numberCountLabel) {
+        numberCountLabel = document.createElement('strong');
+        numberCountLabel.title = name;
+        numberContainer.appendChild(numberCountLabel);
+    }
+    numberCountLabel.textContent = convertNumberToString(counter);
+    numberCountLabel.setAttribute(`${dataTag}`, convertNumberToString(counter));
+
+    const numberTextLabel = document.createElement('span');
+    numberTextLabel.classList.add('unit');
+    numberTextLabel.textContent = name;
+    numberContainer.appendChild(numberTextLabel);
+}
+
 let addViewsCount = (nick, dataTag, fieldName, row, name) => {
 
     let counter = 0;
@@ -386,6 +421,16 @@ let updateProfile = async (nick) => {
             elem?.parentNode.removeChild(elem)
         }
     }, true)
+    await onChanged('profile_videos', enable => {
+        if (!isProfilePage()) return;
+        if (enable) {
+            addVideosCount(nick, "data_videos", "tt-analytic-1", chrome.i18n.getMessage('data_videos'))
+        } else {
+            var elem = document.querySelector("[data_videos]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+
     await onChanged('profile_Shares', enable => {
         if (!isProfilePage()) return;
         if (enable) {
@@ -479,6 +524,62 @@ function createAnalyzeButton() {
     document.querySelector('.share-title-container').appendChild(button);
     button.textContent = chrome.i18n.getMessage('content_start_analyzing');
     button.addEventListener('click', analyzeProfile);
+}
+
+/**
+ * Создает кнопку для анализа профиля
+ */
+function createCsvButton() {
+    if (document.querySelector('[data_content_download_Csv]')) {
+        return;
+    }
+    const button = document.createElement('button')
+    button.classList.add('follow-button');
+    button.classList.add('jsx-3251180706');
+    button.classList.add('jsx-683523640');
+    button.classList.add('share-follow');
+    button.classList.add('tiktok-btn-pc');
+    button.classList.add('tiktok-btn-pc-medium');
+    button.classList.add('tiktok-btn-pc-primary');
+    button.setAttribute('data_content_download_Csv', 'button');
+    document.querySelector('.share-title-container').appendChild(button);
+    button.textContent = chrome.i18n.getMessage('content_download_Csv');
+    button.addEventListener('click', async () => {
+
+        if (!isProfilePage()) {
+            // Мы не на странице профиля
+            return;
+        }
+
+        const nick = document.querySelector('meta[property="twitter:creator:id"]').content;
+
+        if (!itemsDict[nick] || !itemsDict[nick].length) {
+            await analyzeProfile()
+        }
+
+        document.querySelector('[data_content_download_Csv]').setAttribute('disabled', 'disabled');
+        document.querySelector('[data_content_download_Csv]').innerHTML = `
+    <div class="tiktok-loading-ring" style="width: 18px; height: 18px;">
+    <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="white"></path></svg></div>`;
+
+        downloadCsv([[
+            "desc",
+            "createDate",
+            "createTime",
+            "challenges",
+            "duration",
+            ...Object.keys(itemsDict[nick][0].stats)
+        ].join(","), ...itemsDict[nick].map(i => [
+            i.desc.replaceAll(',', ' '),
+            new Date(i.createTime * 1000).toLocaleString(),
+            i.challenges?.map(c => `#${c.title}`).join(';'),
+            i.video.duration,
+            ...Object.values(i.stats)
+        ].join(","))], nick);
+
+        document.querySelector('[data_content_download_Csv]').removeAttribute('disabled');
+        document.querySelector('[data_content_download_Csv]').innerHTML = chrome.i18n.getMessage('content_download_Csv');
+    });
 }
 
 /**
@@ -652,4 +753,14 @@ async function onChanged(keyName, resolve, init) {
             }
         }
     });
+}
+
+function downloadCsv(data, name) {
+    var pom = document.createElement('a');
+    var csvContent = data.join("\r\n"); //here we load our csv data
+    var blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
+    var url = URL.createObjectURL(blob);
+    pom.href = url;
+    pom.setAttribute('download', `${name}.csv`);
+    pom.click();
 }

@@ -60,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1609343575724</updated>
-      <workItem from="1609343575922" duration="93187000" />
+      <workItem from="1609343575922" duration="96476000" />
     </task>
     <servers />
   </component>
@@ -72,14 +72,18 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1609517909742" />
-    <state x="1363" y="302" width="579" height="592" key="find.popup" timestamp="1609662783103">
+    <state x="1363" y="302" width="579" height="592" key="find.popup" timestamp="1609672288847">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="1363" y="302" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609662783103" />
+    <state x="1363" y="302" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609672288847" />
     <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="681" y="259" key="run.anything.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609510986513" />
+    <state x="687" y="243" key="search.everywhere.popup" timestamp="1609669991964">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="687" y="243" key="search.everywhere.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609669991964" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -92,7 +96,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/content/content.js</url>
-          <line>588</line>
+          <line>680</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>

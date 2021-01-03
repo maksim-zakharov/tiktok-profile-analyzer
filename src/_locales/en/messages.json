@@ -1,4 +1,7 @@
 {
+  "profile_videos": {
+    "message": "Enable Videos"
+  },
   "profile_Views": {
     "message": "Enable Views"
   },
@@ -71,6 +74,9 @@
   "data_comments": {
     "message": "Comments"
   },
+  "data_videos": {
+    "message": "Videos"
+  },
   "data_shares": {
     "message": "Shares"
   },
@@ -79,5 +85,8 @@
   },
   "donate": {
     "message": "Donate"
+  },
+  "content_download_Csv": {
+    "message": "Download CSV"
   }
 }

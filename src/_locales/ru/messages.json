@@ -1,4 +1,7 @@
 {
+  "profile_videos": {
+    "message": "Показать видео"
+  },
   "profile_Views": {
     "message": "Показать просмотры"
   },
@@ -68,6 +71,9 @@
   "data_avg_views": {
     "message": "Средн. просмотры"
   },
+  "data_videos": {
+    "message": "Видео"
+  },
   "data_comments": {
     "message": "Комментарии"
   },
@@ -79,5 +85,8 @@
   },
   "donate": {
     "message": "Помочь автору :)"
+  },
+  "content_download_Csv": {
+    "message": "Скачать CSV"
   }
 }
