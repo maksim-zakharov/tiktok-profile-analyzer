@@ -88,5 +88,38 @@
   },
   "content_download_Csv": {
     "message": "Скачать CSV"
+  },
+  "content_csv_url": {
+    "message": "Ссылка"
+  },
+  "content_csv_desc": {
+    "message": "Описание"
+  },
+  "content_csv_createDate": {
+    "message": "Дата создания"
+  },
+  "content_csv_createTime": {
+    "message": "Время создания"
+  },
+  "content_csv_challenges": {
+    "message": "Теги"
+  },
+  "content_csv_duration": {
+    "message": "Длительность"
+  },
+  "content_csv_ER": {
+    "message": "Вовлеченность"
+  },
+  "content_csv_likes": {
+    "message": "Лайки"
+  },
+  "content_csv_shares": {
+    "message": "Поделились"
+  },
+  "content_csv_comments": {
+    "message": "Комментарии"
+  },
+  "content_csv_views": {
+    "message": "Просмотры"
   }
 }

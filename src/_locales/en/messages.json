@@ -88,5 +88,38 @@
   },
   "content_download_Csv": {
     "message": "Download CSV"
+  },
+  "content_csv_url": {
+    "message": "Link"
+  },
+  "content_csv_desc": {
+    "message": "Description"
+  },
+  "content_csv_createDate": {
+    "message": "Created date"
+  },
+  "content_csv_createTime": {
+    "message": "Created time"
+  },
+  "content_csv_challenges": {
+    "message": "Tags"
+  },
+  "content_csv_duration": {
+    "message": "Duration"
+  },
+  "content_csv_ER": {
+    "message": "ER"
+  },
+  "content_csv_likes": {
+    "message": "Likes"
+  },
+  "content_csv_shares": {
+    "message": "Shares"
+  },
+  "content_csv_comments": {
+    "message": "Comments"
+  },
+  "content_csv_views": {
+    "message": "Views"
   }
 }

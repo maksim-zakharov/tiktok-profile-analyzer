@@ -563,17 +563,25 @@ function createCsvButton() {
     <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="white"></path></svg></div>`;
 
         downloadCsv([[
-            "desc",
-            "createDate",
-            "createTime",
-            "challenges",
-            "duration",
-            ...Object.keys(itemsDict[nick][0].stats)
+            chrome.i18n.getMessage('content_csv_url'),
+            chrome.i18n.getMessage('content_csv_desc'),
+            chrome.i18n.getMessage('content_csv_createDate'),
+            chrome.i18n.getMessage('content_csv_createTime'),
+            chrome.i18n.getMessage('content_csv_challenges'),
+            chrome.i18n.getMessage('content_csv_duration'),
+            chrome.i18n.getMessage('content_csv_ER'),
+            chrome.i18n.getMessage('content_csv_likes'),
+            chrome.i18n.getMessage('content_csv_shares'),
+            chrome.i18n.getMessage('content_csv_comments'),
+            chrome.i18n.getMessage('content_csv_views'),
+            // ...Object.keys(itemsDict[nick][0].stats)
         ].join(","), ...itemsDict[nick].map(i => [
+            `https://www.tiktok.com/@${nick}/video/${i.id}`,
             i.desc.replaceAll(',', ' '),
             new Date(i.createTime * 1000).toLocaleString(),
-            i.challenges?.map(c => `#${c.title}`).join(';'),
+            i.challenges?.map(c => `#${c.title}`).join(' '),
             i.video.duration,
+            ((i.stats.commentCount + i.stats.diggCount + i.stats.shareCount) * 100 / i.stats.playCount).toFixed(2) + '%', // ER
             ...Object.values(i.stats)
         ].join(","))], nick);
 
