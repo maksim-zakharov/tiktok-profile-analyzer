@@ -1,4 +1,12 @@
 {
+  "appName": {
+    "message": "Расширенная аналитика Tiktok",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Расширение сканирует профиль на текущей странице и выводит подробную статистику",
+    "description":"The description of the application, displayed in the web store."
+  },
   "profile_videos": {
     "message": "Enable Videos"
   },

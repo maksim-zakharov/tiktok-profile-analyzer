@@ -30,15 +30,12 @@
 
 .checkbox-container {
   display: inline-grid;
-  //.ant-checkbox-wrapper:nth-child(2n) {
-  //    grid-column: 2;
-  //}
   .ant-checkbox-wrapper:first-of-type {
     margin-left: 8px;
   }
 
-  .ant-checkbox-wrapper:nth-child(3n) {
-    grid-column: 3;
+  .ant-checkbox-wrapper:nth-child(2n) {
+    grid-column: 2;
   }
 }
 
@@ -63,7 +60,7 @@
 
 .profile-container {
   padding: 20px;
-  width: 1000px;
+  width: 700px;
 }
 
 @keyframes App-logo-spin {

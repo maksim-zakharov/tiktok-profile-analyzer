@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Tiktok Profile Analyzer",
-  "description": "This extension will analyze a Tiktok profile using API",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
   "version": "1.0.4",
   "author": "Maksim Zakharov",
   "icons": {
