@@ -146,7 +146,7 @@ let addItem = async (item, link) => {
 }
 
 let addViews = (linkElement, likesCount) => {
-    if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_views]')) {
+    if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_views], .jsx-1036923518.video-bottom-info svg')) {
         return;
     }
     const likesButton = document.createElement('strong');
