@@ -5,43 +5,86 @@ if (!+localStorage.getItem('timeout')) {
     localStorage.setItem('timeout', 1000);
 }
 
-let isProfilePage = () => {
-    return !!document.querySelector('meta[property="twitter:creator:id"]');
+let getProfilePage = () => {
+    return document.querySelector('meta[property="twitter:creator:id"]')?.content;
 }
 
-var tiktokParse = () => {
-    if (!isProfilePage()) {
-        // Мы не на странице профиля
-        return;
+let getTagPage = () => {
+    const meta = document.querySelector('meta[property="al:ios:url"][content*="snssdk1233://challenge"]');
+    if (!meta) {
+        return undefined;
     }
 
-    createAnalyzeButton();
+    const url1 = new URL(`https://tiktok.com/${meta.getAttribute('content').replace('snssdk1233://', '')}`);
+    const tagId = url1.pathname?.split('/')[url1.pathname?.split('/').length - 1];
+    if (tagId === 'feed') {
+        return undefined;
+    }
 
-    createCsvButton();
+    return +tagId;
+}
 
-    const nick = document.querySelector('meta[property="twitter:creator:id"]').content;
-    const loadedVideosCount = document.querySelectorAll('.video-feed-item-wrapper').length;
-    const markedVideosCount = document.querySelectorAll('.video-feed-item-wrapper.marked').length;
+var tiktokParse = async () => {
+    const tag = getTagPage();
+    const nick = getProfilePage();
+    if (nick) {
 
-    updateProfile(nick);
+        createAnalyzeButton();
 
-    if (lastCursorDict[nick] || itemsDict[nick] && loadedVideosCount <= markedVideosCount) {
-        for (let i = 0; i < itemsDict[nick].length; i++) {
-            const item = itemsDict[nick][i];
+        createCsvButton();
 
-            const link = document.querySelector(`a[href^="https://www.tiktok.com/@${nick}/video/${item.id}"]`)
-            if (!link) {
-                continue;
+        const loadedVideosCount = document.querySelectorAll('.video-feed-item-wrapper').length;
+        const markedVideosCount = document.querySelectorAll('.video-feed-item-wrapper.marked').length;
+
+        updateProfile(nick);
+
+        if (lastCursorDict[nick] || itemsDict[nick] && loadedVideosCount <= markedVideosCount) {
+            for (let i = 0; i < itemsDict[nick].length; i++) {
+                const item = itemsDict[nick][i];
+
+                const link = document.querySelector(`a[href^="https://www.tiktok.com/@${nick}/video/${item.id}"]`)
+                if (!link) {
+                    continue;
+                }
+
+                addItem(item, link);
             }
 
-            addItem(item, link);
+            document.querySelectorAll(`a[href^="https://www.tiktok.com/@${nick}/video/"]`).forEach(link => link.classList.add('marked'));
         }
 
-        document.querySelectorAll(`a[href^="https://www.tiktok.com/@${nick}/video/"]`).forEach(link => link.classList.add('marked'));
+        clearInterval(interval);
+        interval = setInterval(tiktokParse, +localStorage.getItem('timeout'))
     }
 
-    clearInterval(interval);
-    interval = setInterval(tiktokParse, +localStorage.getItem('timeout'))
+    if (tag) {
+        createAnalyzeButton();
+
+        createCsvButton();
+
+        const loadedVideosCount = document.querySelectorAll('.video-feed-item-wrapper').length;
+        const markedVideosCount = document.querySelectorAll('.video-feed-item-wrapper.marked').length;
+
+        updateProfile(tag);
+
+        if (lastCursorDict[tag] || itemsDict[tag] && loadedVideosCount <= markedVideosCount) {
+            for (let i = 0; i < itemsDict[tag].length; i++) {
+                const item = itemsDict[tag][i];
+
+                const link = document.querySelector(`a[href*="/video/${item.id}"]`)
+                if (!link) {
+                    continue;
+                }
+
+                addItem(item, link);
+            }
+
+            document.querySelectorAll(`a[href^="https://www.tiktok.com/@"]`).forEach(link => link.classList.add('marked'));
+        }
+
+        clearInterval(interval);
+        interval = setInterval(tiktokParse, +localStorage.getItem('timeout'))
+    }
 };
 
 var interval = setInterval(tiktokParse, +localStorage.getItem('timeout'))
@@ -52,30 +95,72 @@ let addItem = async (item, link) => {
     }
     link.setAttribute(`data-video_create-time`, item.createTime);
 
+    let footer = link.querySelector('.jsx-1036923518.card-footer.normal.no-avatar');
+    if (!footer) {
+        footer = document.createElement('div');
+        footer.classList.add('jsx-1036923518');
+        footer.classList.add('card-footer');
+        footer.classList.add('normal');
+        footer.classList.add('no-avatar');
+        link.querySelector('.jsx-1778455663.video-card-mask').appendChild(footer);
+    }
+    let firstContainer = link.querySelector('strong.jsx-1036923518.video-bottom-info');
+    if (!firstContainer) {
+        firstContainer = document.createElement('strong');
+        firstContainer.classList.add('jsx-1036923518');
+        firstContainer.classList.add('video-bottom-info');
+        footer.appendChild(firstContainer);
+    }
+    let secondContainer = link.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info');
+    if (!secondContainer) {
+        secondContainer = document.createElement('strong');
+        secondContainer.classList.add('jsx-1036923518');
+        secondContainer.classList.add('video-bottom-info');
+        footer.appendChild(secondContainer);
+    }
+
+    await onChanged('video_Views', enable => {
+        if (!getProfilePage() && !getTagPage()) return;
+        enable ? addViews(link, item.stats.playCount) : Array.from(document.querySelectorAll("[data-video_views]")).map(elem => elem?.parentNode.removeChild(elem));
+    }, true)
+
     await onChanged('video_Likes', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         enable ? addLikes(link, item.stats.diggCount) : Array.from(document.querySelectorAll("[data-video_like]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
 
-    const firstContainer = document.createElement('strong');
-    firstContainer.classList.add('jsx-1036923518');
-    firstContainer.classList.add('video-bottom-info');
-    link.querySelector('.jsx-1036923518.card-footer.normal.no-avatar').appendChild(firstContainer);
-
     await onChanged('video_Shares', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         enable ? addShare(link, item) : Array.from(document.querySelectorAll("[data-video_share]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
     await onChanged('video_Comments', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         enable ? addComment(link, item) : Array.from(document.querySelectorAll("[data-video_comment]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
     await onChanged('video_ER', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         enable ? addER(link, item) : Array.from(document.querySelectorAll("[data-video_ER]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
 
     link.classList.add('marked');
+}
+
+let addViews = (linkElement, likesCount) => {
+    if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_views]')) {
+        return;
+    }
+    const likesButton = document.createElement('strong');
+    likesButton.classList.add('like-icon');
+    likesButton.classList.add('custom-views');
+    likesButton.setAttribute(`data-video_views`, convertNumberToString(likesCount));
+
+    const likesText = document.createElement('strong');
+    likesText.classList.add('jsx-1036923518');
+    likesText.innerText = convertNumberToString(likesCount);
+    likesText.setAttribute(`data-video_views`, convertNumberToString(likesCount));
+
+    linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesButton);
+    linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesText);
 }
 
 let addLikes = (linkElement, likesCount) => {
@@ -84,12 +169,12 @@ let addLikes = (linkElement, likesCount) => {
     }
     const likesButton = document.createElement('strong');
     likesButton.classList.add('custom-like');
-    likesButton.setAttribute(`data-video_like`, likesCount);
+    likesButton.setAttribute(`data-video_like`, convertNumberToString(likesCount));
 
     const likesText = document.createElement('strong');
     likesText.classList.add('jsx-1036923518');
-    likesText.innerText = likesCount;
-    likesText.setAttribute(`data-video_like`, likesCount);
+    likesText.innerText = convertNumberToString(likesCount);
+    likesText.setAttribute(`data-video_like`, convertNumberToString(likesCount));
 
     linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesButton);
     linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesText);
@@ -101,12 +186,12 @@ let addShare = (linkElement, item) => {
     }
     const shareButton = document.createElement('svg');
     shareButton.classList.add('custom-share');
-    shareButton.setAttribute(`data-video_share`, item.stats.shareCount);
+    shareButton.setAttribute(`data-video_share`, convertNumberToString(item.stats.shareCount));
 
     const shareText = document.createElement('strong');
     shareText.classList.add('jsx-1036923518');
-    shareText.innerText = item.stats.shareCount;
-    shareText.setAttribute(`data-video_share`, item.stats.shareCount);
+    shareText.innerText = convertNumberToString(item.stats.shareCount);
+    shareText.setAttribute(`data-video_share`, convertNumberToString(item.stats.shareCount));
 
     linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(shareButton);
     linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(shareText);
@@ -118,12 +203,12 @@ let addComment = (linkElement, item) => {
     }
     const commentButton = document.createElement('strong');
     commentButton.classList.add('custom-comment');
-    commentButton.setAttribute(`data-video_comment`, item.stats.commentCount);
+    commentButton.setAttribute(`data-video_comment`, convertNumberToString(item.stats.commentCount));
 
     const commentText = document.createElement('strong');
     commentText.classList.add('jsx-1036923518');
-    commentText.innerText = item.stats.commentCount;
-    commentText.setAttribute(`data-video_comment`, item.stats.commentCount);
+    commentText.innerText = convertNumberToString(item.stats.commentCount);
+    commentText.setAttribute(`data-video_comment`, convertNumberToString(item.stats.commentCount));
 
     linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(commentButton);
     linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(commentText);
@@ -206,9 +291,13 @@ let addAverageERPerVideo = (nick, dataTag, row, name) => {
 
     let avgER = 0;
     if (itemsDict[nick]?.length) {
-        const fnER = (item) => (item.stats.commentCount + item.stats.diggCount + item.stats.shareCount) * 100 / item.stats.playCount;
 
-        avgER = (itemsDict[nick].reduce((acc, item) => acc + fnER(item), 0) / itemsDict[nick].length).toFixed(2) + '%';
+        const fnER = (item) =>
+            item.stats.playCount ? (item.stats.commentCount + item.stats.diggCount + item.stats.shareCount) * 100 / item.stats.playCount
+                : 0;
+
+        const sum = itemsDict[nick].reduce((acc, item) => acc + fnER(item), 0);
+        avgER = (sum / itemsDict[nick].length).toFixed(2) + '%';
     }
 
     let container = getOrCreateContainer(row);
@@ -348,7 +437,7 @@ let addVideosCount = (nick, dataTag, row, name) => {
 
     let counter = 0;
     if (itemsDict[nick]?.length) {
-        counter = itemsDict[nick][0].authorStats.videoCount;
+        counter = itemsDict[nick].length; // [0].authorStats.videoCount;
     }
 
     let container = getOrCreateContainer(row);
@@ -375,6 +464,59 @@ let addVideosCount = (nick, dataTag, row, name) => {
     numberTextLabel.classList.add('unit');
     numberTextLabel.textContent = name;
     numberContainer.appendChild(numberTextLabel);
+}
+
+let addTopTags = (nick, dataTag, row, name) => {
+
+    let counter = [];
+    if (itemsDict[nick]?.length) {
+        counter = itemsDict[nick].filter(curr => curr.challenges).reduce((acc, curr) => acc.concat(...curr.challenges), []);
+        counter = countBy(counter, i => i.title).sort((a, b) => {
+            if (a[1] > b[1]) {
+                return -1;
+            }
+            if (a[1] < b[1]) {
+                return 1;
+            }
+            // a должно быть равным b
+            return 0;
+        }).splice(0, 5).map(([key]) => key);
+    }
+
+    let container = getOrCreateContainer(row);
+
+    let numberContainer = document.querySelector(`div[${dataTag}]`);
+
+    if (!numberContainer) {
+        numberContainer = document.createElement('div');
+        numberContainer.classList.add('number');
+        container.appendChild(numberContainer);
+    } else {
+        numberContainer.innerHTML = '';
+    }
+    numberContainer.setAttribute(`${dataTag}`, counter.map(key => `#${key}`).join(' '));
+
+    let numberTextLabel = document.querySelector(`div[${dataTag}] span`);
+    if (!numberTextLabel) {
+        numberTextLabel = document.createElement('span');
+        numberTextLabel.classList.add('unit');
+        numberTextLabel.textContent = name;
+        numberContainer.appendChild(numberTextLabel);
+    }
+
+    let numberCountLabel = numberContainer.querySelector(`a[${dataTag}]`);
+    if (!numberCountLabel) {
+        counter.forEach(tag => {
+            numberCountLabel = document.createElement('a');
+            numberCountLabel.title = `${tag}`;
+            numberContainer.appendChild(numberCountLabel);
+
+            numberCountLabel.href = `https://www.tiktok.com/tag/${tag}`
+            numberCountLabel.target = '_blank';
+            numberCountLabel.textContent = `#${tag}`;
+            numberCountLabel.setAttribute(`${dataTag}`, `#${tag}`);
+        })
+    }
 }
 
 let addViewsCount = (nick, dataTag, fieldName, row, name) => {
@@ -413,7 +555,7 @@ let addViewsCount = (nick, dataTag, fieldName, row, name) => {
 let updateProfile = async (nick) => {
 
     await onChanged('profile_Views', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
             addViewsCount(nick, "data_views", "playCount", "tt-analytic-1", chrome.i18n.getMessage('data_views'))
         } else {
@@ -422,7 +564,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_videos', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
             addVideosCount(nick, "data_videos", "tt-analytic-1", chrome.i18n.getMessage('data_videos'))
         } else {
@@ -432,7 +574,7 @@ let updateProfile = async (nick) => {
     }, true)
 
     await onChanged('profile_Shares', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
             addViewsCount(nick, "data_shares", "shareCount", "tt-analytic-1", chrome.i18n.getMessage('data_shares'));
         } else {
@@ -441,7 +583,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Comments', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
             addViewsCount(nick, "data_comments", "commentCount", "tt-analytic-1", chrome.i18n.getMessage('data_comments'));
         } else {
@@ -450,7 +592,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_views', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
             addAverageCounterPerVideo(nick, "data_avg_views", "playCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_views'));
         } else {
@@ -459,7 +601,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_shares', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
             addAverageCounterPerVideo(nick, "data_avg_shares", "shareCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_shares'));
         } else {
@@ -468,7 +610,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_comments', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
             addAverageCounterPerVideo(nick, "data_avg_comments", "commentCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_comments'));
         } else {
@@ -477,7 +619,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_ER', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
             addAverageERPerVideo(nick, "data_avg_er", "tt-analytic-2", chrome.i18n.getMessage('data_avg_er'));
         } else {
@@ -486,7 +628,7 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_created_time', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
             addAverageCreatedTimePerVideo(nick, "data_avg_created_time", "tt-analytic-2", chrome.i18n.getMessage('data_avg_created_time'));
         } else {
@@ -495,11 +637,20 @@ let updateProfile = async (nick) => {
         }
     }, true)
     await onChanged('profile_Average_videos_per_day', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
             addAverageVideoCountPerDay(nick, "data_avg_videos_per_day", "tt-analytic-2", chrome.i18n.getMessage('data_avg_videos_per_day'));
         } else {
             var elem = document.querySelector("[data_avg_videos_per_day]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+    await onChanged('profile_top5_tags', enable => {
+        if (!getProfilePage() && !getTagPage()) return;
+        if (enable) {
+            addTopTags(nick, "data_top5_tags", "tt-analytic-3", chrome.i18n.getMessage('data_top5_tags'))
+        } else {
+            var elem = document.querySelector("[data_top5_tags]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
@@ -523,7 +674,7 @@ function createAnalyzeButton() {
     button.setAttribute('data_content_start_analyzing', 'button');
     document.querySelector('.share-title-container').appendChild(button);
     button.textContent = chrome.i18n.getMessage('content_start_analyzing');
-    button.addEventListener('click', analyzeProfile);
+    button.addEventListener('click', getProfilePage() ? analyzeProfile : analyzeTagPage);
 }
 
 /**
@@ -545,16 +696,15 @@ function createCsvButton() {
     document.querySelector('.share-title-container').appendChild(button);
     button.textContent = chrome.i18n.getMessage('content_download_Csv');
     button.addEventListener('click', async () => {
-
-        if (!isProfilePage()) {
+        const nick = getProfilePage();
+        const tag = getTagPage();
+        if (!nick && !tag) {
             // Мы не на странице профиля
             return;
         }
 
-        const nick = document.querySelector('meta[property="twitter:creator:id"]').content;
-
-        if (!itemsDict[nick] || !itemsDict[nick].length) {
-            await analyzeProfile()
+        if (!itemsDict[nick || tag] || !itemsDict[nick || tag].length) {
+            nick ? await analyzeProfile() : await analyzeTagPage();
         }
 
         document.querySelector('[data_content_download_Csv]').setAttribute('disabled', 'disabled');
@@ -575,19 +725,86 @@ function createCsvButton() {
             chrome.i18n.getMessage('content_csv_comments'),
             chrome.i18n.getMessage('content_csv_views'),
             // ...Object.keys(itemsDict[nick][0].stats)
-        ].join(","), ...itemsDict[nick].map(i => [
-            `https://www.tiktok.com/@${nick}/video/${i.id}`,
+        ].join(","), ...itemsDict[nick || tag].map(i => [
+            `https://www.tiktok.com/@${i.author.uniqueId}/video/${i.id}`,
             i.desc.replaceAll(',', ' '),
             new Date(i.createTime * 1000).toLocaleString(),
             i.challenges?.map(c => `#${c.title}`).join(' '),
             i.video.duration,
             ((i.stats.commentCount + i.stats.diggCount + i.stats.shareCount) * 100 / i.stats.playCount).toFixed(2) + '%', // ER
             ...Object.values(i.stats)
-        ].join(","))], nick);
+        ].join(","))], nick || tag);
 
         document.querySelector('[data_content_download_Csv]').removeAttribute('disabled');
         document.querySelector('[data_content_download_Csv]').innerHTML = chrome.i18n.getMessage('content_download_Csv');
     });
+}
+
+/**
+ * Анализирует текущий профиль, запрашивая все видосы по API, обновляет каунтеры
+ */
+async function analyzeTagPage() {
+    document.querySelector('[data_content_start_analyzing]').setAttribute('disabled', 'disabled');
+    document.querySelector('[data_content_start_analyzing]').innerHTML = `
+    <div class="tiktok-loading-ring" style="width: 18px; height: 18px;">
+    <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="white"></path></svg></div>`;
+
+    const tag = getTagPage();
+    if (!tag) {
+        // Мы не на странице профиля
+        return;
+    }
+
+    let lastCursor;
+
+    const meta = document.querySelector('meta[property="al:ios:url"]').content;
+    const url1 = new URL(`https://tiktok.com/${meta.replace('snssdk1233://', '')}`);
+    const tagId = url1.pathname.split('/')[url1.pathname.split('/').length - 1];
+    chrome.runtime.sendMessage({action: "start-analyze", data: {tagId}});
+
+    let response;
+    do {
+        if (!itemsDict[tag] || !itemsDict[tag].length) {
+            lastCursor = 0; // new Date().getTime() * 1000;
+            itemsDict[tag] = [];
+        } else {
+            const minTime = itemsDict[tag].reduce((acc, val) => {
+                return acc < val.createTime ? acc : val.createTime;
+            })
+            lastCursor = itemsDict[tag].length; //  minTime * 1000;
+        }
+
+        response = await getRequestAsync(`https://m.tiktok.com/api/challenge/item_list/?aid=1988&count=35&challengeID=${tagId}&cursor=${lastCursor}`);
+
+        if (!response.itemList) {
+            break;
+        }
+
+        itemsDict[tag].push(...response.itemList);
+
+        lastCursorDict[tag] = lastCursor;
+    } while (response.hasMore)
+
+    for (let i = 0; i < itemsDict[tag].length; i++) {
+        const item = itemsDict[tag][i];
+
+        const link = document.querySelector(`a[href*="/video/${item.id}"]`)
+        if (!link) {
+            continue;
+        }
+
+        addItem(item, link);
+    }
+
+    await onChanged('video_Sort_by_ER', enable => {
+        if (!getProfilePage() && !getTagPage()) return;
+        enable ? sortByER() : sortByCreationTime(tag);
+    }, true)
+
+    updateProfile(tag);
+
+    document.querySelector('[data_content_start_analyzing]').removeAttribute('disabled');
+    document.querySelector('[data_content_start_analyzing]').innerHTML = chrome.i18n.getMessage('content_start_analyzing');
 }
 
 /**
@@ -599,12 +816,11 @@ async function analyzeProfile() {
     <div class="tiktok-loading-ring" style="width: 18px; height: 18px;">
     <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="white"></path></svg></div>`;
 
-    if (!isProfilePage()) {
+    const nick = getProfilePage();
+    if (!nick) {
         // Мы не на странице профиля
         return;
     }
-
-    const nick = document.querySelector('meta[property="twitter:creator:id"]').content;
 
     let lastCursor;
 
@@ -658,11 +874,11 @@ async function analyzeProfile() {
     }
 
     await onChanged('video_Sort_by_ER', enable => {
-        if (!isProfilePage()) return;
+        if (!getProfilePage() && !getTagPage()) return;
         enable ? sortByER() : sortByCreationTime(nick);
     }, true)
 
-    updateProfile(nick)
+    updateProfile(nick);
 
     document.querySelector('[data_content_start_analyzing]').removeAttribute('disabled');
     document.querySelector('[data_content_start_analyzing]').innerHTML = chrome.i18n.getMessage('content_start_analyzing');
@@ -698,7 +914,12 @@ let getOrCreateContainer = (name) => {
     if (!container) {
         const shareHeader = document.querySelector('.share-layout-header.share-header');
         container = document.createElement('h2');
-        shareHeader.insertBefore(container, document.querySelector('.share-desc'));
+        // Если ТЕГ
+        if (!document.querySelector(`.count-infos`)) {
+            shareHeader.appendChild(container);
+        } else { // Если профиль
+            shareHeader.insertBefore(container, document.querySelector('.share-desc'));
+        }
         container.classList.add('count-infos');
         container.classList.add(name);
     }
@@ -734,7 +955,6 @@ function setItem(name, value) {
     return new Promise(resolve => {
         chrome.storage.sync.set({[name]: value}, data => {
             resolve(data);
-            console.log(data);
         });
     });
 }
@@ -762,6 +982,14 @@ async function onChanged(keyName, resolve, init) {
         }
     });
 }
+
+const countBy = (arr, predicate) => {
+    return Object.entries(arr.reduce((acc, val) => {
+        const value = predicate(val);
+        acc[value.toString()] = (acc[value.toString()] || 0) + 1;
+        return acc;
+    }, {}));
+};
 
 function downloadCsv(data, name) {
     var pom = document.createElement('a');

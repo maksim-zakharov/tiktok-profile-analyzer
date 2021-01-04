@@ -30,10 +30,12 @@ class Popup extends React.Component {
         {name: 'profile_Average_comments'},
         {name: 'profile_Average_ER'},
         {name: 'profile_Average_created_time'},
-        {name: 'profile_Average_videos_per_day'}
+        {name: 'profile_Average_videos_per_day'},
+        {name: 'profile_top5_tags'}
     ]
 
     videoCheckboxes = [
+        {name: 'video_Views'},
         {name: 'video_Likes'},
         {name: 'video_Shares'},
         {name: 'video_Comments'},
@@ -105,7 +107,6 @@ async function setItem(name, value) {
     return new Promise(resolve => {
         chrome.storage.sync.set({[name]: value}, data => {
             resolve(data);
-            console.log(data);
         });
     });
 }

@@ -37,8 +37,14 @@
   "profile_Average_videos_per_day": {
     "message": "Enable Average videos per day"
   },
+  "profile_top5_tags": {
+    "message": "Enable top 5 tags"
+  },
   "video_Likes": {
     "message": "Enable Likes"
+  },
+  "video_Views": {
+    "message": "Enable Views"
   },
   "video_Shares": {
     "message": "Enable Shares"
@@ -90,6 +96,9 @@
   },
   "data_views": {
     "message": "Views"
+  },
+  "data_top5_tags": {
+    "message": "Top 5 tags"
   },
   "donate": {
     "message": "Donate"

@@ -37,6 +37,12 @@
   "profile_Average_videos_per_day": {
     "message": "Показать среднее количество видео в день"
   },
+  "profile_top5_tags": {
+    "message": "Показать топ 5 тегов"
+  },
+  "video_Views": {
+    "message": "Показать просмотры"
+  },
   "video_Likes": {
     "message": "Показать лайки"
   },
@@ -90,6 +96,9 @@
   },
   "data_views": {
     "message": "Просмотры"
+  },
+  "data_top5_tags": {
+    "message": "Топ 5 тегов"
   },
   "donate": {
     "message": "Помочь автору :)"

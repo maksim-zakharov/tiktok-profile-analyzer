@@ -16,7 +16,6 @@ function setItem(name, value) {
     return new Promise(resolve => {
         chrome.storage.sync.set({[name]: value}, data => {
             resolve(data);
-            console.log(data);
         });
     });
 }

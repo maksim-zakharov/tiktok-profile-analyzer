@@ -30,6 +30,7 @@
 
 .checkbox-container {
   display: inline-grid;
+
   .ant-checkbox-wrapper:first-of-type {
     margin-left: 8px;
   }
@@ -79,7 +80,7 @@ a {
   border: none;
   min-width: 164px;
   min-height: 36px;
-  font-family: "sofiapro-semibold",PingFangSC,sans-serif;
+  font-family: "sofiapro-semibold", PingFangSC, sans-serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 25px;
