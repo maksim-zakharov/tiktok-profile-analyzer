@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Maksim Zakharov",
   "icons": {
     "128": "images/icon_128x128.png"

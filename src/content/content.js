@@ -1,5 +1,5 @@
-import {getItem, setItem, onChanged} from './storage.service';
-import {countBy, downloadCsv, getOrCreateContainer} from './utility';
+import {onChanged} from './storage.service';
+import {countBy, downloadCsv, getOrCreateContainer, createCounter} from './utility';
 import axios from 'axios';
 
 var itemsDict = {};
@@ -242,7 +242,7 @@ let addER = (link, item) => {
     ERContainer.setAttribute(`data-video_ER`, ER);
 }
 
-let sortByCreationTime = (nick) => {
+let sortByCreationTime = () => {
     var array = Array.from(document.querySelectorAll(`a[data-video_create-time]`))
     array = array.sort((a, b) => {
         if (+a.getAttribute('data-video_create-time') > +b.getAttribute('data-video_create-time')) {
@@ -304,29 +304,7 @@ let addAverageERPerVideo = (nick, dataTag, row, name) => {
         avgER = (sum / itemsDict[nick].length).toFixed(2) + '%';
     }
 
-    let container = getOrCreateContainer(row);
-    let numberContainer = document.querySelector(`div[${dataTag}]`);
-
-    if (!numberContainer) {
-        numberContainer = document.createElement('div');
-        numberContainer.classList.add('number');
-        container.appendChild(numberContainer);
-    }
-    numberContainer.setAttribute(`${dataTag}`, avgER);
-
-    let numberCountLabel = document.querySelector(`div[${dataTag}]`);
-    if (!numberCountLabel) {
-        numberCountLabel = document.createElement('strong');
-        numberCountLabel.title = name;
-        numberContainer.appendChild(numberCountLabel);
-    }
-    numberCountLabel.textContent = avgER;
-    numberCountLabel.setAttribute(`${dataTag}`, avgER);
-
-    const numberTextLabel = document.createElement('span');
-    numberTextLabel.classList.add('unit');
-    numberTextLabel.textContent = name;
-    numberContainer.appendChild(numberTextLabel);
+    createCounter(avgER, name, dataTag, row);
 }
 
 let addAverageVideoCountPerDay = (nick, dataTag, row, name) => {
@@ -344,29 +322,7 @@ let addAverageVideoCountPerDay = (nick, dataTag, row, name) => {
         counter = (diffInMs / (1000 * 60 * 60 * 24 * itemsDict[nick].length)).toFixed(2);
     }
 
-    let container = getOrCreateContainer(row);
-    let numberContainer = document.querySelector(`div[${dataTag}]`);
-
-    if (!numberContainer) {
-        numberContainer = document.createElement('div');
-        numberContainer.classList.add('number');
-        container.appendChild(numberContainer);
-    }
-    numberContainer.setAttribute(`${dataTag}`, counter);
-
-    let numberCountLabel = document.querySelector(`div[${dataTag}]`);
-    if (!numberCountLabel) {
-        numberCountLabel = document.createElement('strong');
-        numberCountLabel.title = name;
-        numberContainer.appendChild(numberCountLabel);
-    }
-    numberCountLabel.textContent = counter;
-    numberCountLabel.setAttribute(`${dataTag}`, counter);
-
-    const numberTextLabel = document.createElement('span');
-    numberTextLabel.classList.add('unit');
-    numberTextLabel.textContent = name;
-    numberContainer.appendChild(numberTextLabel);
+    createCounter(convertNumberToString(counter), name, dataTag, row);
 }
 
 let addAverageCreatedTimePerVideo = (nick, dataTag, row, name) => {
@@ -381,29 +337,7 @@ let addAverageCreatedTimePerVideo = (nick, dataTag, row, name) => {
         counter = new Date(counter).toLocaleTimeString();
     }
 
-    let container = getOrCreateContainer(row);
-    let numberContainer = document.querySelector(`div[${dataTag}]`);
-
-    if (!numberContainer) {
-        numberContainer = document.createElement('div');
-        numberContainer.classList.add('number');
-        container.appendChild(numberContainer);
-    }
-    numberContainer.setAttribute(`${dataTag}`, counter);
-
-    let numberCountLabel = document.querySelector(`div[${dataTag}]`);
-    if (!numberCountLabel) {
-        numberCountLabel = document.createElement('strong');
-        numberCountLabel.title = name;
-        numberContainer.appendChild(numberCountLabel);
-    }
-    numberCountLabel.textContent = counter;
-    numberCountLabel.setAttribute(`${dataTag}`, counter);
-
-    const numberTextLabel = document.createElement('span');
-    numberTextLabel.classList.add('unit');
-    numberTextLabel.textContent = name;
-    numberContainer.appendChild(numberTextLabel);
+    createCounter(convertNumberToString(counter), name, dataTag, row);
 }
 
 let addAverageCounterPerVideo = (nick, dataTag, fieldName, row, name) => {
@@ -412,29 +346,16 @@ let addAverageCounterPerVideo = (nick, dataTag, fieldName, row, name) => {
         counter = (itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName], 0) / itemsDict[nick].length).toFixed(1);
     }
 
-    let container = getOrCreateContainer(row);
-    let numberContainer = document.querySelector(`div[${dataTag}]`);
+    createCounter(convertNumberToString(counter), name, dataTag, row);
+}
 
-    if (!numberContainer) {
-        numberContainer = document.createElement('div');
-        numberContainer.classList.add('number');
-        container.appendChild(numberContainer);
+let addRatingPerViews = (nick, dataTag, fieldName, row, name) => {
+    let counter = 0;
+    if (itemsDict[nick]?.length) {
+        counter = (itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName] * 100 / curr.stats.playCount, 0) / itemsDict[nick].length).toFixed(2);
     }
-    numberContainer.setAttribute(`${dataTag}`, convertNumberToString(counter));
 
-    let numberCountLabel = document.querySelector(`div[${dataTag}]`);
-    if (!numberCountLabel) {
-        numberCountLabel = document.createElement('strong');
-        numberCountLabel.title = name;
-        numberContainer.appendChild(numberCountLabel);
-    }
-    numberCountLabel.textContent = convertNumberToString(counter);
-    numberCountLabel.setAttribute(`${dataTag}`, convertNumberToString(counter));
-
-    const numberTextLabel = document.createElement('span');
-    numberTextLabel.classList.add('unit');
-    numberTextLabel.textContent = name;
-    numberContainer.appendChild(numberTextLabel);
+    createCounter(counter + '%', name, dataTag, row);
 }
 
 let addVideosCount = (nick, dataTag, row, name) => {
@@ -444,30 +365,7 @@ let addVideosCount = (nick, dataTag, row, name) => {
         counter = itemsDict[nick].length; // [0].authorStats.videoCount;
     }
 
-    let container = getOrCreateContainer(row);
-
-    let numberContainer = document.querySelector(`div[${dataTag}]`);
-
-    if (!numberContainer) {
-        numberContainer = document.createElement('div');
-        numberContainer.classList.add('number');
-        container.appendChild(numberContainer);
-    }
-    numberContainer.setAttribute(`${dataTag}`, convertNumberToString(counter));
-
-    let numberCountLabel = document.querySelector(`div[${dataTag}]`);
-    if (!numberCountLabel) {
-        numberCountLabel = document.createElement('strong');
-        numberCountLabel.title = name;
-        numberContainer.appendChild(numberCountLabel);
-    }
-    numberCountLabel.textContent = convertNumberToString(counter);
-    numberCountLabel.setAttribute(`${dataTag}`, convertNumberToString(counter));
-
-    const numberTextLabel = document.createElement('span');
-    numberTextLabel.classList.add('unit');
-    numberTextLabel.textContent = name;
-    numberContainer.appendChild(numberTextLabel);
+    createCounter(convertNumberToString(counter), name, dataTag, row);
 }
 
 let addTopTags = (nick, dataTag, row, name) => {
@@ -530,30 +428,7 @@ let addViewsCount = (nick, dataTag, fieldName, row, name) => {
         counter = itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName], 0);
     }
 
-    let container = getOrCreateContainer(row);
-
-    let numberContainer = document.querySelector(`div[${dataTag}]`);
-
-    if (!numberContainer) {
-        numberContainer = document.createElement('div');
-        numberContainer.classList.add('number');
-        container.appendChild(numberContainer);
-    }
-    numberContainer.setAttribute(`${dataTag}`, convertNumberToString(counter));
-
-    let numberCountLabel = document.querySelector(`div[${dataTag}]`);
-    if (!numberCountLabel) {
-        numberCountLabel = document.createElement('strong');
-        numberCountLabel.title = name;
-        numberContainer.appendChild(numberCountLabel);
-    }
-    numberCountLabel.textContent = convertNumberToString(counter);
-    numberCountLabel.setAttribute(`${dataTag}`, convertNumberToString(counter));
-
-    const numberTextLabel = document.createElement('span');
-    numberTextLabel.classList.add('unit');
-    numberTextLabel.textContent = name;
-    numberContainer.appendChild(numberTextLabel);
+    createCounter(convertNumberToString(counter), name, dataTag, row);
 }
 
 let updateProfile = async (nick) => {
@@ -592,6 +467,46 @@ let updateProfile = async (nick) => {
             addViewsCount(nick, "data_comments", "commentCount", "tt-analytic-1", chrome.i18n.getMessage('data_comments'));
         } else {
             var elem = document.querySelector("[data_comments]");
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+
+    await onChanged('profile_rating_likes', enable => {
+        if (!getProfilePage() && !getTagPage()) return;
+        if (enable) {
+            addRatingPerViews(nick, "data_rating_likes", "diggCount", "tt-analytic-2", chrome.i18n.getMessage('data_rating_likes'));
+        } else {
+            var elem = document.querySelector("[data_rating_likes]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+
+    await onChanged('profile_rating_shares', enable => {
+        if (!getProfilePage() && !getTagPage()) return;
+        if (enable) {
+            addRatingPerViews(nick, "data_rating_shares", "shareCount", "tt-analytic-2", chrome.i18n.getMessage('data_rating_shares'));
+        } else {
+            var elem = document.querySelector("[data_rating_shares]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+
+    await onChanged('profile_rating_comments', enable => {
+        if (!getProfilePage() && !getTagPage()) return;
+        if (enable) {
+            addRatingPerViews(nick, "data_rating_comments", "commentCount", "tt-analytic-2", chrome.i18n.getMessage('data_rating_comments'));
+        } else {
+            var elem = document.querySelector("[data_rating_comments]")
+            elem?.parentNode.removeChild(elem)
+        }
+    }, true)
+
+    await onChanged('profile_Average_likes', enable => {
+        if (!getProfilePage() && !getTagPage()) return;
+        if (enable) {
+            addAverageCounterPerVideo(nick, "data_avg_likes", "diggCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_likes'));
+        } else {
+            var elem = document.querySelector("[data_avg_likes]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
@@ -769,13 +684,10 @@ async function analyzeTagPage() {
     let response;
     do {
         if (!itemsDict[tag] || !itemsDict[tag].length) {
-            lastCursor = 0; // new Date().getTime() * 1000;
+            lastCursor = 0;
             itemsDict[tag] = [];
         } else {
-            const minTime = itemsDict[tag].reduce((acc, val) => {
-                return acc < val.createTime ? acc : val.createTime;
-            })
-            lastCursor = itemsDict[tag].length; //  minTime * 1000;
+            lastCursor = itemsDict[tag].length;
         }
 
         response = await axios.get(`https://m.tiktok.com/api/challenge/item_list/?aid=1988&count=35&challengeID=${tagId}&cursor=${lastCursor}`).then(res => res.data);
@@ -802,7 +714,7 @@ async function analyzeTagPage() {
 
     await onChanged('video_Sort_by_ER', enable => {
         if (!getProfilePage() && !getTagPage()) return;
-        enable ? sortByER() : sortByCreationTime(tag);
+        enable ? sortByER() : sortByCreationTime();
     }, true)
 
     updateProfile(tag);
@@ -879,7 +791,7 @@ async function analyzeProfile() {
 
     await onChanged('video_Sort_by_ER', enable => {
         if (!getProfilePage() && !getTagPage()) return;
-        enable ? sortByER() : sortByCreationTime(nick);
+        enable ? sortByER() : sortByCreationTime();
     }, true)
 
     updateProfile(nick);

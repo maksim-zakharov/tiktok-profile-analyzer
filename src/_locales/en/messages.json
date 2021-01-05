@@ -19,6 +19,15 @@
   "profile_Comments": {
     "message": "Enable Comments"
   },
+  "profile_rating_likes": {
+    "message": "Likes rating"
+  },
+  "profile_rating_comments": {
+    "message": "Comments rating"
+  },
+  "profile_rating_shares": {
+    "message": "Share rating"
+  },
   "profile_Average_views": {
     "message": "Enable Average views"
   },
@@ -27,6 +36,9 @@
   },
   "profile_Average_comments": {
     "message": "Enable Average comments"
+  },
+  "profile_Average_likes": {
+    "message": "Enable Average likes"
   },
   "profile_Average_ER": {
     "message": "Enable Average ER"
@@ -67,6 +79,15 @@
   "popup_video_title": {
     "message": "Video"
   },
+  "data_rating_likes": {
+    "message": "Enable Likes rating"
+  },
+  "data_rating_comments": {
+    "message": "EnableComments rating"
+  },
+  "data_rating_shares": {
+    "message": "Enable Share rating"
+  },
   "data_avg_videos_per_day": {
     "message": "Avg. videos per day"
   },
@@ -84,6 +105,9 @@
   },
   "data_avg_views": {
     "message": "Avg. views"
+  },
+  "data_avg_likes": {
+    "message": "Avg. likes"
   },
   "data_comments": {
     "message": "Comments"

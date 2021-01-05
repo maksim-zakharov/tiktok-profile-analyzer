@@ -21,6 +21,32 @@ let getOrCreateContainer = (name) => {
     return container;
 }
 
+let createCounter = (text, name, dataTag, row) => {
+    let container = getOrCreateContainer(row);
+    let numberContainer = document.querySelector(`div[${dataTag}]`);
+
+    if (!numberContainer) {
+        numberContainer = document.createElement('div');
+        numberContainer.classList.add('number');
+        container.appendChild(numberContainer);
+    }
+    numberContainer.setAttribute(`${dataTag}`, text);
+
+    let numberCountLabel = document.querySelector(`div[${dataTag}]`);
+    if (!numberCountLabel) {
+        numberCountLabel = document.createElement('strong');
+        numberCountLabel.title = name;
+        numberContainer.appendChild(numberCountLabel);
+    }
+    numberCountLabel.textContent = text;
+    numberCountLabel.setAttribute(`${dataTag}`, text);
+
+    const numberTextLabel = document.createElement('span');
+    numberTextLabel.classList.add('unit');
+    numberTextLabel.textContent = name;
+    numberContainer.appendChild(numberTextLabel);
+}
+
 const countBy = (arr, predicate) => {
     return Object.entries(arr.reduce((acc, val) => {
         const value = predicate(val);
@@ -39,4 +65,4 @@ function downloadCsv(data, name) {
     pom.click();
 }
 
-module.exports = {getOrCreateContainer, countBy, downloadCsv};
+module.exports = {getOrCreateContainer, countBy, downloadCsv, createCounter};

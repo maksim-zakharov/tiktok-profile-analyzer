@@ -19,6 +19,18 @@
   "profile_Comments": {
     "message": "Показать комментарии"
   },
+  "profile_rating_likes": {
+    "message": "Показать Рейтинг одобрения"
+  },
+  "profile_rating_comments": {
+    "message": "Показать Рейтинг обсуждаемости"
+  },
+  "profile_rating_shares": {
+    "message": "Показать Рейтинг распространения"
+  },
+  "profile_Average_likes": {
+    "message": "Показать среднее лайков"
+  },
   "profile_Average_views": {
     "message": "Показать среднее просмотров"
   },
@@ -67,6 +79,15 @@
   "popup_video_title": {
     "message": "Видео"
   },
+  "data_rating_likes": {
+    "message": "Рейтинг одобрения"
+  },
+  "data_rating_comments": {
+    "message": "Рейтинг обсуждаемости"
+  },
+  "data_rating_shares": {
+    "message": "Рейтинг распространения"
+  },
   "data_avg_videos_per_day": {
     "message": "Средн. кол-во видео в день"
   },
@@ -81,6 +102,9 @@
   },
   "data_avg_shares": {
     "message": "Средн. репосты"
+  },
+  "data_avg_likes": {
+    "message": "Средн. лайки"
   },
   "data_avg_views": {
     "message": "Средн. просмотры"
