@@ -6,8 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
+        content: path.resolve(__dirname, "./src/content/content.js"),
         popup: path.resolve(__dirname, "./src/index-popup.js"),
         options: path.resolve(__dirname, "./src/index-options.js"),
+    },
+    resolve: {
+        extensions: ['.js'],
     },
     output: {
         filename: '[name].bundle.js',
@@ -58,7 +62,7 @@ module.exports = {
                 { from: 'src/manifest.json', to: '[name].[ext]' },
                 { from: 'src/inject_script.js', to: '[name].[ext]' },
                 { from: 'src/images/*.png', to: 'images/[name].[ext]' },
-                { from: 'src/content/*', to: 'content/[name].[ext]' },
+                { from: 'src/content/styles.css', to: 'content/[name].[ext]' },
                 { from: 'src/background/*', to: '[name].[ext]' },
                 // TODO Переделать на мультипапочность
                 { from: 'src/_locales/en/*', to: '_locales/en/[name].[ext]' },

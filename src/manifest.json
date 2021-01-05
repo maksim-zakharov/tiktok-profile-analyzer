@@ -14,7 +14,7 @@
         "*://*.tiktok.com/*"
       ],
       "js": [
-        "content/content.js"
+        "content.bundle.js"
       ],
       "css": [
         "content/styles.css"

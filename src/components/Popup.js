@@ -1,5 +1,6 @@
 import './App.scss';
 import 'antd/dist/antd.css';
+import {getItem, setItem, onChanged} from '../content/storage.service';
 import {Checkbox} from 'antd';
 import * as React from 'react';
 import ReactGA from 'react-ga';
@@ -87,28 +88,6 @@ class Popup extends React.Component {
             action: e.target.checked ? 'enable' : 'disable',
         });
     }
-}
-
-async function getItem(name) {
-    if (!chrome?.storage) {
-        return localStorage.getItem(name);
-    }
-    return new Promise(resolve => {
-        chrome.storage.sync.get(name, data => {
-            resolve(data[name]);
-        });
-    });
-}
-
-async function setItem(name, value) {
-    if (!chrome?.storage) {
-        return localStorage.setItem(name, value);
-    }
-    return new Promise(resolve => {
-        chrome.storage.sync.set({[name]: value}, data => {
-            resolve(data);
-        });
-    });
 }
 
 

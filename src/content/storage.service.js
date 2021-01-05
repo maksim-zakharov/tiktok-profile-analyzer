@@ -1,3 +1,8 @@
+/**
+ * Возвращает данные из хранилища хрома
+ * @param name Ключ значения
+ * @returns Возвращает Promise с значением
+ */
 function getItem(name) {
     if (!chrome?.storage) {
         return localStorage.getItem(name);
@@ -9,6 +14,11 @@ function getItem(name) {
     });
 }
 
+/**
+ * Возвращает данные из хранилища хрома
+ * @param name Ключ значения
+ * @param value Значение
+ */
 function setItem(name, value) {
     if (!chrome?.storage) {
         return localStorage.setItem(name, value);
@@ -20,10 +30,21 @@ function setItem(name, value) {
     });
 }
 
-function onChanged(keyName, resolve) {
+/**
+ * Реагирует на изменения значения в хранилище хрома
+ * @param keyName Ключ значения
+ * @param resolve Функция в случае окей
+ * @param init Брать текущее значение или нет
+ */
+async function onChanged(keyName, resolve, init) {
     if (!chrome?.storage) {
         return;
     }
+
+    if (init) {
+        resolve(await getItem(keyName));
+    }
+
     chrome.storage.onChanged.addListener(function (changes) {
         for (key in changes) {
             if (key === keyName) {
@@ -32,3 +53,5 @@ function onChanged(keyName, resolve) {
         }
     });
 }
+
+module.exports = {getItem, setItem, onChanged}
