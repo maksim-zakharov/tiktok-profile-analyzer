@@ -1,5 +1,6 @@
 import {getItem, setItem, onChanged} from './storage.service';
-import {countBy, downloadCsv, getOrCreateContainer, getRequestAsync} from './utility';
+import {countBy, downloadCsv, getOrCreateContainer} from './utility';
+import axios from 'axios';
 
 var itemsDict = {};
 var lastCursorDict = {};
@@ -777,7 +778,7 @@ async function analyzeTagPage() {
             lastCursor = itemsDict[tag].length; //  minTime * 1000;
         }
 
-        response = await getRequestAsync(`https://m.tiktok.com/api/challenge/item_list/?aid=1988&count=35&challengeID=${tagId}&cursor=${lastCursor}`);
+        response = await axios.get(`https://m.tiktok.com/api/challenge/item_list/?aid=1988&count=35&challengeID=${tagId}&cursor=${lastCursor}`).then(res => res.data);
 
         if (!response.itemList) {
             break;
@@ -844,7 +845,7 @@ async function analyzeProfile() {
 
     let response;
     do {
-        response = await getRequestAsync(`https://m.tiktok.com/api/item_list/?count=30&id=${tagId}&maxCursor=${lastCursor}&minCursor=0&sourceType=8`)
+        response = await axios.get(`https://m.tiktok.com/api/item_list/?count=30&id=${tagId}&maxCursor=${lastCursor}&minCursor=0&sourceType=8`).then(res => res.data)
 
         if (!response.items) {
             break;

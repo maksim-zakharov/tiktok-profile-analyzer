@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32561dbd-9ce6-4995-8027-ed9b24e4203f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/content/utility.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Popup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/content/content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/storage.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/storage.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.common.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/utility.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609343575724</updated>
       <workItem from="1609343575922" duration="113600000" />
-      <workItem from="1609778333301" duration="8422000" />
+      <workItem from="1609778333301" duration="10334000" />
     </task>
     <servers />
   </component>
@@ -92,10 +88,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="805" y="311" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1609698313463" />
-    <state x="1372" y="384" width="579" height="592" key="find.popup" timestamp="1609792373118">
+    <state x="1372" y="384" width="579" height="592" key="find.popup" timestamp="1609833999337">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="1372" y="384" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609792373118" />
+    <state x="1372" y="384" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609833999337" />
     <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -110,8 +106,19 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/content/content.js</url>
-          <line>277</line>
+          <line>278</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/content/content.js</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/content/content.js</url>
+          <line>749</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

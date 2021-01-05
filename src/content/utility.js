@@ -1,24 +1,4 @@
 /**
- * Делает GET запрос
- * @param url URL запроса
- */
-let getRequestAsync = (url) => {
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('GET', url);
-
-    return new Promise((resolve, reject) => {
-        xhr.responseType = 'json';
-
-        xhr.onload = () => resolve(xhr.response);
-
-        xhr.onerror = reject;
-
-        xhr.send();
-    })
-}
-
-/**
  * Возвращает контейнер под каунтеры профиля или создает его, если еще не создан
  * @param name Название контейнера
  * @returns {Element}
@@ -59,4 +39,4 @@ function downloadCsv(data, name) {
     pom.click();
 }
 
-module.exports = {getRequestAsync, getOrCreateContainer, countBy, downloadCsv};
+module.exports = {getOrCreateContainer, countBy, downloadCsv};
