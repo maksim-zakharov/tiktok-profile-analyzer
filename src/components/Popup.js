@@ -56,7 +56,7 @@ class Popup extends React.Component {
                 {/*<YMInitializer accounts={[70946401]} options={{webvisor: true}} version="2" />*/}
                 <div className="logo">
                     <img src="../images/icon_128x128.png" alt=""/>
-                    <h1>Tiktok Profile Analyzer</h1>
+                    <h1>{chrome.i18n.getMessage("appName")}</h1>
                 </div>
                 <div className="checkbox-group">
                     <h2>{chrome.i18n.getMessage('popup_profile_title')}</h2>

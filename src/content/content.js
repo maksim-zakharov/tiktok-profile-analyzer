@@ -235,7 +235,7 @@ let addER = (link, item) => {
     const ERText = document.createElement('strong');
     ERText.classList.add('jsx-1036923518');
 
-    const ER = ((item.stats.commentCount + item.stats.diggCount + item.stats.shareCount) * 100 / item.stats.playCount);
+    const ER = item.stats.playCount ? (item.stats.commentCount + item.stats.diggCount + item.stats.shareCount) * 100 / item.stats.playCount : 0;
     ERText.innerText = ER.toFixed(2) + '%';
     ERContainer.appendChild(ERText);
     link.setAttribute('data-ER', ER);
@@ -352,7 +352,7 @@ let addAverageCounterPerVideo = (nick, dataTag, fieldName, row, name) => {
 let addRatingPerViews = (nick, dataTag, fieldName, row, name) => {
     let counter = 0;
     if (itemsDict[nick]?.length) {
-        counter = (itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName] * 100 / curr.stats.playCount, 0) / itemsDict[nick].length).toFixed(2);
+        counter = (itemsDict[nick].reduce((acc, curr) => curr.stats.playCount ? acc + curr.stats[fieldName] * 100 / curr.stats.playCount : acc, 0) / itemsDict[nick].length).toFixed(2);
     }
 
     createCounter(counter + '%', name, dataTag, row);
@@ -650,7 +650,7 @@ function createCsvButton() {
             new Date(i.createTime * 1000).toLocaleString(),
             i.challenges?.map(c => `#${c.title}`).join(' '),
             i.video.duration,
-            ((i.stats.commentCount + i.stats.diggCount + i.stats.shareCount) * 100 / i.stats.playCount).toFixed(2) + '%', // ER
+            i.stats.playCount ? ((i.stats.commentCount + i.stats.diggCount + i.stats.shareCount) * 100 / i.stats.playCount).toFixed(2) : 0 + '%', // ER
             ...Object.values(i.stats)
         ].join(","))], nick || tag);
 
