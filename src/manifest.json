@@ -35,6 +35,9 @@
   "start_url": ".",
   "permissions": [
     "storage",
+    "*://*.snaptik.app/*",
+    "*://*.tiktokcdn.com/*",
+    "*://mycoub.com/*",
     "*://*.tiktok.com/*"
   ]
 }
