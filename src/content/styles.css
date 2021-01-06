@@ -205,7 +205,7 @@
     animation: ext-lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) 0s infinite normal none running;
 }
 
-.item-video-container:hover .ext-dw-button, .video-card-container:hover .ext-dw-button,
+.video-feed-item:hover .ext-dw-button, .item-video-container:hover .ext-dw-button, .video-card-container:hover .ext-dw-button,
 .item-video-container:hover .ext-timeline, .video-card-container:hover .ext-timeline {
     opacity: 1;
 }
