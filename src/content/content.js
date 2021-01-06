@@ -631,6 +631,8 @@ function createCsvButton() {
     <div class="tiktok-loading-ring" style="width: 18px; height: 18px;">
     <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="white"></path></svg></div>`;
 
+        chrome.runtime.sendMessage({action: "export-csv", data: {tag, nick}});
+
         downloadCsv([[
             chrome.i18n.getMessage('content_csv_url'),
             chrome.i18n.getMessage('content_csv_desc'),
