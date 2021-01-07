@@ -4,7 +4,7 @@
     "description": "The title of the application, displayed in the web store."
   },
   "appDesc": {
-    "message": "Расширение сканирует профиль на текущей странице и выводит подробную статистику",
+    "message": "Расширение сканирует профиль на текущей странице и выводит подробную статистику, позволяет скачивать видео без водяного знака",
     "description":"The description of the application, displayed in the web store."
   },
   "profile_videos": {

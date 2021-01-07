@@ -4,7 +4,7 @@
     "description": "The title of the application, displayed in the web store."
   },
   "appDesc": {
-    "message": "This extension will analyze a Tiktok profile using API.",
+    "message": "This extension will analyze a Tiktok profile using API, allows download video without watermark.",
     "description":"The description of the application, displayed in the web store."
   },
   "profile_videos": {
