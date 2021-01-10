@@ -2,9 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32561dbd-9ce6-4995-8027-ed9b24e4203f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Popup.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/tiktok.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/storage.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/popup-build.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/popup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/setupTests.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/_locales/en/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/_locales/en/messages.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/_locales/ru/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/_locales/ru/messages.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/download-video.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/download-video.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/tracker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/tracker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Foreground.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Popup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/storage.service.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/utility.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/foreground.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-foreground.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index-popup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/inject_script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/options.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.common.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +69,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.11" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/content" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -45,7 +79,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="D:\Projects\tiktok-chrome-extension\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -57,10 +91,10 @@
       <recent name="D:\Projects\tiktok-chrome-extension\images" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\tiktok-chrome-extension" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\content" />
       <recent name="D:\Projects\tiktok-chrome-extension\src" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\_locales" />
-      <recent name="D:\Projects\tiktok-chrome-extension" />
       <recent name="D:\Projects\tiktok-chrome-extension\modal" />
     </key>
   </component>
@@ -73,7 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609343575724</updated>
       <workItem from="1609343575922" duration="113600000" />
-      <workItem from="1609778333301" duration="25651000" />
+      <workItem from="1609778333301" duration="47011000" />
     </task>
     <servers />
   </component>
@@ -81,18 +115,18 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609517909742">
+    <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1610092348004">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1609517909742" />
-    <state x="805" y="311" key="FileChooserDialogImpl" timestamp="1609698313463">
+    <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1610092348004" />
+    <state x="805" y="311" key="FileChooserDialogImpl" timestamp="1610083522137">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="805" y="311" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1609698313463" />
-    <state x="1372" y="384" width="579" height="592" key="find.popup" timestamp="1610004025580">
+    <state x="805" y="311" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1610083522137" />
+    <state x="1372" y="384" width="579" height="592" key="find.popup" timestamp="1610299307486">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="1372" y="384" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1610004025580" />
+    <state x="1372" y="384" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1610299307486" />
     <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -109,11 +143,6 @@
           <url>file://$PROJECT_DIR$/src/content/content.js</url>
           <line>278</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/content/content.js</url>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

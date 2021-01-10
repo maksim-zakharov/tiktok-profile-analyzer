@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener(function( request, sender, sendResponse ) {
 });
 
 function ymInit() {
-    <!-- Yandex.Metrika counter -->
+    // Yandex.Metrika counter
     var ymScript = document.createElement('script');
     ymScript.type = "text/javascript";
     ymScript.innerHTML = `
@@ -41,5 +41,5 @@ function ymInit() {
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(ymScript, s);
     s.parentNode.insertBefore(ymnoScript, s);
-    <!-- /Yandex.Metrika counter -->
+    // Yandex.Metrika counter
 }

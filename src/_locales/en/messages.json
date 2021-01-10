@@ -162,5 +162,11 @@
   },
   "content_csv_views": {
     "message": "Views"
+  },
+  "options_develop_by": {
+    "message": "Developed by"
+  },
+  "options_author": {
+    "message": "Maksim Zakharov"
   }
 }

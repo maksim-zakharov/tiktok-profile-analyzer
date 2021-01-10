@@ -162,5 +162,11 @@
   },
   "content_csv_views": {
     "message": "Просмотры"
+  },
+  "options_develop_by": {
+    "message": "Разработчик:"
+  },
+  "options_author": {
+    "message": "Максим Захаров"
   }
 }

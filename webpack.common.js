@@ -7,21 +7,39 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     entry: {
         content: path.resolve(__dirname, "./src/content/content.js"),
-        popup: path.resolve(__dirname, "./src/index-popup.js"),
-        options: path.resolve(__dirname, "./src/index-options.js"),
+        popup: path.resolve(__dirname, "./src/index-popup.tsx"),
     },
     resolve: {
-        extensions: ['.js'],
+        extensions: [ '.tsx', '.ts', '.js' ],
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
     },
     module: {
         rules: [
             {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+            {
                 test: /\.(sa|sc|c)ss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader', {
+                        loader: "less-loader",
+                        options: {
+                            lessOptions: { // If you are using less-loader@5 please spread the lessOptions to options directly
+                                javascriptEnabled: true,
+                            },
+                        },
+                    }
+                ]
             },
             {
                 test: /\.js$/,
@@ -52,15 +70,9 @@ module.exports = {
             template: 'src/popup.html',
             chunks: ['popup']
         }),
-        new HtmlWebpackPlugin({
-            filename: 'options.html',
-            template: 'src/options.html',
-            chunks: ['options']
-        }),
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'src/manifest.json', to: '[name].[ext]' },
-                { from: 'src/inject_script.js', to: '[name].[ext]' },
                 { from: 'src/images/*.png', to: 'images/[name].[ext]' },
                 { from: 'src/content/styles.css', to: 'content/[name].[ext]' },
                 { from: 'src/background/*', to: '[name].[ext]' },
@@ -70,8 +82,6 @@ module.exports = {
             ]
         }),
         new CleanWebpackPlugin(),
-        new MiniCssExtractPlugin({
-            filename: "style.css"
-        })
+        new MiniCssExtractPlugin()
     ]
 }

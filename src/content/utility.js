@@ -3,7 +3,7 @@
  * @param name Название контейнера
  * @returns {Element}
  */
-let getOrCreateContainer = (name) => {
+export let getOrCreateContainer = (name) => {
     let container = document.querySelector(`.count-infos.${name}`)
     if (!container) {
         const shareHeader = document.querySelector('.share-layout-header.share-header');
@@ -21,7 +21,7 @@ let getOrCreateContainer = (name) => {
     return container;
 }
 
-let createCounter = (text, name, dataTag, row) => {
+export let createCounter = (text, name, dataTag, row) => {
     let container = getOrCreateContainer(row);
     let numberContainer = document.querySelector(`div[${dataTag}]`);
 
@@ -47,7 +47,7 @@ let createCounter = (text, name, dataTag, row) => {
     numberContainer.appendChild(numberTextLabel);
 }
 
-const countBy = (arr, predicate) => {
+export const countBy = (arr, predicate) => {
     return Object.entries(arr.reduce((acc, val) => {
         const value = predicate(val);
         acc[value.toString()] = (acc[value.toString()] || 0) + 1;
@@ -55,7 +55,7 @@ const countBy = (arr, predicate) => {
     }, {}));
 };
 
-function downloadCsv(data, name) {
+export function downloadCsv(data, name) {
     var pom = document.createElement('a');
     var csvContent = data.join("\r\n"); //here we load our csv data
     var blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
@@ -64,5 +64,3 @@ function downloadCsv(data, name) {
     pom.setAttribute('download', `${name}.csv`);
     pom.click();
 }
-
-module.exports = {getOrCreateContainer, countBy, downloadCsv, createCounter};

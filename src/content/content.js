@@ -973,7 +973,7 @@ let observer = new MutationObserver(mutations => {
 let $listenedContainer = document.querySelector('body');
 $listenedContainer && observer.observe($listenedContainer, {childList: true, subtree: true});
 
-chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener(async (request) => {
     switch (request.cmd) {
         case 'onDownloadLink':
             if (request.links.inner) {
