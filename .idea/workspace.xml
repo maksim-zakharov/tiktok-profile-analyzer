@@ -2,43 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32561dbd-9ce6-4995-8027-ed9b24e4203f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Popup.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/tiktok.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/storage.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/background/background.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/content-download.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/content.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/profile.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/utilities.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/content/video-wappers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/popup-build.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/popup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/setupTests.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_locales/en/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/_locales/en/messages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_locales/ru/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/_locales/ru/messages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background/download-video.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/download-video.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background/tracker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/tracker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Foreground.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Options.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Popup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/storage.service.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/utility.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/foreground.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index-foreground.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index-options.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index-popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index-popup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/inject_script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/background.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/download-video.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/download-video.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/tracker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/tracker.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/utility.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/options.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/webpack.common.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -84,11 +62,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\tiktok-chrome-extension\src\content" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\background" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\components" />
       <recent name="D:\Projects\tiktok-chrome-extension\src" />
       <recent name="D:\Projects\tiktok-chrome-extension\public" />
-      <recent name="D:\Projects\tiktok-chrome-extension\images" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\tiktok-chrome-extension" />
@@ -107,7 +85,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609343575724</updated>
       <workItem from="1609343575922" duration="113600000" />
-      <workItem from="1609778333301" duration="47011000" />
+      <workItem from="1609778333301" duration="53219000" />
     </task>
     <servers />
   </component>
@@ -123,10 +101,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="805" y="311" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1610083522137" />
-    <state x="1372" y="384" width="579" height="592" key="find.popup" timestamp="1610299307486">
+    <state x="1372" y="384" width="579" height="592" key="find.popup" timestamp="1610306374750">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="1372" y="384" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1610299307486" />
+    <state x="1372" y="384" width="579" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1610306374750" />
     <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -135,16 +113,5 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="687" y="243" key="search.everywhere.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609669991964" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/content/content.js</url>
-          <line>278</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

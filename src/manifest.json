@@ -22,7 +22,9 @@
     }
   ],
   "background": {
-    "page": "./background.html",
+    "scripts": [
+      "background.js"
+    ],
     "persistent": false
   },
   "default_locale": "en",
