@@ -40,13 +40,13 @@ export let onChanged = async (keyName, resolve, init) => {
   }
 
   if (init) {
-    resolve(await getItem(keyName));
+    return resolve(await getItem(keyName));
   }
 
   chrome.storage.onChanged.addListener((changes) => {
     for (let key in changes) {
       if (key === keyName) {
-        resolve(changes[keyName].newValue);
+        return resolve(changes[keyName].newValue);
       }
     }
   });

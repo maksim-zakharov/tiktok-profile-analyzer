@@ -33,94 +33,94 @@ export let addItem = async (item, link) => {
 
   await onChanged('video_Views', enable => {
     if (!getProfilePage() && !getTagPage()) return;
-    enable ? addViews(link, item.stats.playCount) : Array.from(document.querySelectorAll("[data-video_views]")).map(elem => elem?.parentNode?.removeChild(elem));
+    enable ? addViews(link, item.stats.playCount) : Array.from(document.querySelectorAll("[data_video_views]")).map(elem => elem?.parentNode?.removeChild(elem));
   }, true)
 
   await onChanged('video_Likes', enable => {
     if (!getProfilePage() && !getTagPage()) return;
-    enable ? addLikes(link, item.stats.diggCount) : Array.from(document.querySelectorAll("[data-video_like]")).map(elem => elem?.parentNode?.removeChild(elem));
+    enable ? addLikes(link, item.stats.diggCount) : Array.from(document.querySelectorAll("[data_video_like]")).map(elem => elem?.parentNode?.removeChild(elem));
   }, true)
 
   await onChanged('video_Shares', enable => {
     if (!getProfilePage() && !getTagPage()) return;
-    enable ? addShare(link, item) : Array.from(document.querySelectorAll("[data-video_share]")).map(elem => elem?.parentNode?.removeChild(elem));
+    enable ? addShare(link, item) : Array.from(document.querySelectorAll("[data_video_share]")).map(elem => elem?.parentNode?.removeChild(elem));
   }, true)
   await onChanged('video_Comments', enable => {
     if (!getProfilePage() && !getTagPage()) return;
-    enable ? addComment(link, item) : Array.from(document.querySelectorAll("[data-video_comment]")).map(elem => elem?.parentNode?.removeChild(elem));
+    enable ? addComment(link, item) : Array.from(document.querySelectorAll("[data_video_comment]")).map(elem => elem?.parentNode?.removeChild(elem));
   }, true)
   await onChanged('video_ER', enable => {
     if (!getProfilePage() && !getTagPage()) return;
-    enable ? addER(link, item) : Array.from(document.querySelectorAll("[data-video_ER]")).map(elem => elem?.parentNode?.removeChild(elem));
+    enable ? addER(link, item) : Array.from(document.querySelectorAll("[data_video_ER]")).map(elem => elem?.parentNode?.removeChild(elem));
   }, true)
 
   link.classList.add('marked');
 }
 
 let addViews = (linkElement, likesCount) => {
-  if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_views], .jsx-1036923518.video-bottom-info svg')) {
+  if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data_video_views], .jsx-1036923518.video-bottom-info svg')) {
     return;
   }
   const likesButton = document.createElement('strong');
   likesButton.classList.add('like-icon');
   likesButton.classList.add('custom-views');
-  likesButton.setAttribute(`data-video_views`, convertNumberToString(likesCount));
+  likesButton.setAttribute(`data_video_views`, convertNumberToString(likesCount));
 
   const likesText = document.createElement('strong');
   likesText.classList.add('jsx-1036923518');
   likesText.innerText = convertNumberToString(likesCount);
-  likesText.setAttribute(`data-video_views`, convertNumberToString(likesCount));
+  likesText.setAttribute(`data_video_views`, convertNumberToString(likesCount));
 
   linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesButton);
   linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesText);
 }
 
 let addLikes = (linkElement, likesCount) => {
-  if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_like]')) {
+  if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data_video_like]')) {
     return;
   }
   const likesButton = document.createElement('strong');
   likesButton.classList.add('custom-like');
-  likesButton.setAttribute(`data-video_like`, convertNumberToString(likesCount));
+  likesButton.setAttribute(`data_video_like`, convertNumberToString(likesCount));
 
   const likesText = document.createElement('strong');
   likesText.classList.add('jsx-1036923518');
   likesText.innerText = convertNumberToString(likesCount);
-  likesText.setAttribute(`data-video_like`, convertNumberToString(likesCount));
+  likesText.setAttribute(`data_video_like`, convertNumberToString(likesCount));
 
   linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesButton);
   linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesText);
 }
 
 let addShare = (linkElement, item) => {
-  if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_share]')) {
+  if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data_video_share]')) {
     return;
   }
   const shareButton = document.createElement('svg');
   shareButton.classList.add('custom-share');
-  shareButton.setAttribute(`data-video_share`, convertNumberToString(item.stats.shareCount));
+  shareButton.setAttribute(`data_video_share`, convertNumberToString(item.stats.shareCount));
 
   const shareText = document.createElement('strong');
   shareText.classList.add('jsx-1036923518');
   shareText.innerText = convertNumberToString(item.stats.shareCount);
-  shareText.setAttribute(`data-video_share`, convertNumberToString(item.stats.shareCount));
+  shareText.setAttribute(`data_video_share`, convertNumberToString(item.stats.shareCount));
 
   linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(shareButton);
   linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(shareText);
 }
 
 let addComment = (linkElement, item) => {
-  if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_comment]')) {
+  if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data_video_comment]')) {
     return;
   }
   const commentButton = document.createElement('strong');
   commentButton.classList.add('custom-comment');
-  commentButton.setAttribute(`data-video_comment`, convertNumberToString(item.stats.commentCount));
+  commentButton.setAttribute(`data_video_comment`, convertNumberToString(item.stats.commentCount));
 
   const commentText = document.createElement('strong');
   commentText.classList.add('jsx-1036923518');
   commentText.innerText = convertNumberToString(item.stats.commentCount);
-  commentText.setAttribute(`data-video_comment`, convertNumberToString(item.stats.commentCount));
+  commentText.setAttribute(`data_video_comment`, convertNumberToString(item.stats.commentCount));
 
   linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(commentButton);
   linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(commentText);
@@ -147,7 +147,7 @@ let addER = (link, item) => {
   ERText.innerText = ER.toFixed(2) + '%';
   ERContainer.appendChild(ERText);
   link.setAttribute('data-ER', ER.toString());
-  ERContainer.setAttribute(`data-video_ER`, ER.toString());
+  ERContainer.setAttribute(`data_video_ER`, ER.toString());
 }
 export let sortByCreationTime = () => {
   var array = Array.from(document.querySelectorAll(`a[data-video_create-time]`))

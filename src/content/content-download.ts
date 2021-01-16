@@ -59,18 +59,15 @@ const view = {
       })
     })
 
-    window.addEventListener('storage', async () => {
-      const hasDownloadLink = localStorage.getItem('onDownloadLink')
-      if (hasDownloadLink) {
-        const request = JSON.parse(hasDownloadLink)
-        if (request.links.inner) {
-          await onDownloadLink(request.links);
-          localStorage.removeItem('onDownloadLink');
+    chrome.runtime.onMessage.addListener(async ({cmd, links}) => {
+      if (cmd === 'onDownloadLink') {
+        if (links.inner) {
+          await onDownloadLink(links);
         } else {
           console.log('Не получил ссылку перез скачиванием')
         }
       }
-    }, true);
+    });
   },
   addTimeline($container) {
     SELECTOR.appendTo.forEach((selector) => {

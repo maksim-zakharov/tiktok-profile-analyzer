@@ -6,16 +6,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        background: path.resolve(__dirname, "./src/background/background.ts"),
-        content: path.resolve(__dirname, "./src/content/content.ts"),
-        popup: path.resolve(__dirname, "./src/index-popup.tsx"),
+        background: path.resolve(__dirname, "../src/background/background.ts"),
+        // content: path.resolve(__dirname, "./src/content/content.ts"),
+        content: path.resolve(__dirname, "../src/views/Content/index.tsx"),
+        popup: path.resolve(__dirname, "../src/views/Popup/index.tsx"),
     },
     resolve: {
         extensions: [ '.tsx', '.ts', '.js' ],
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, '../dist')
     },
     module: {
         rules: [
@@ -68,17 +69,15 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'popup.html',
-            template: 'src/popup.html',
+            template: 'src/views/Popup/popup.html',
             chunks: ['popup']
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'src/manifest.json', to: '[name].[ext]' },
-                { from: 'src/images/*.png', to: 'images/[name].[ext]' },
-                { from: 'src/content/styles.css', to: 'content/[name].[ext]' },
-                // TODO Переделать на мультипапочность
-                { from: 'src/_locales/en/*', to: '_locales/en/[name].[ext]' },
-                { from: 'src/_locales/ru/*', to: '_locales/ru/[name].[ext]' }
+                { from: 'manifest.json', to: '[name].[ext]' },
+                { from: 'src/assets', to: 'assets' },
+                { from: 'src/views/Content/Content.css', to: '[name].[ext]' },
+                { from: 'src/_locales', to: '_locales' },
             ]
         }),
         new CleanWebpackPlugin(),

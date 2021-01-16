@@ -43,17 +43,37 @@ export const download = {
       result = await download.onDownload(tiktokURL)
     )
     if (result) {
-      localStorage.setItem('onDownloadLink', JSON.stringify({
-        outer: result,
-        inner: tiktokURL,
-      }))
+      chrome.tabs.sendMessage(tabId, {
+        'cmd': 'onDownloadLink',
+        links: {
+          outer: result,
+          inner: tiktokURL,
+        },
+        errorCounter,
+      });
     }
   }
 }
+let tabId;
+chrome.runtime.onMessage.addListener(function ({cmd, data}, sender, sendResponse) {
+  chrome.tabs.query({active: true, currentWindow: true}, async function (tabs) {
+    if (sender?.url?.indexOf('chrome-extension:') === -1) {
+      if (tabs.length < 1) {
+        console.error("no select tab");
+        chrome.runtime.sendMessage({cmd: "popup_error", result: {"status": -1, "msg": "Please Select One Tab."}});
+        return;
+      }
+      let current_tab = tabs[0];
+      let tab_url = current_tab['url'];
+      let tab_title = current_tab['title'];
+      tabId = current_tab.id;
+      console.log('tabId', tabId);
+    }
 
-chrome.runtime.onMessage.addListener(({cmd, data}) => {
-  switch (cmd) {
-    case "download":
-      download.onController(data.tiktokURL, data.errorCounter)
-  }
+    switch (cmd) {
+      case "download":
+        download.onController(data.tiktokURL, data.errorCounter)
+        break;
+    }
+  });
 });

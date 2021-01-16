@@ -1,6 +1,6 @@
-import './App.scss';
-import './tiktok.less';
-import { getItem, setItem, onChanged } from '../content/storage.service';
+import './Popup.scss';
+import '../../components/tiktok.less';
+import { getItem, setItem, onChanged } from '../../content/storage.service';
 import { Checkbox, Button } from 'antd';
 import * as React from 'react';
 import * as ReactGA from 'react-ga';
@@ -55,7 +55,7 @@ export default class Popup extends React.Component {
       <div className="profile-container">
         {/*<YMInitializer accounts={[70946401]} options={{webvisor: true}} version="2" />*/}
         <div className="logo">
-          <img src="../images/icon_128x128.png" alt=""/>
+          <img src="../../images/icon_128x128.png" alt=""/>
           <h1>{chrome.i18n.getMessage("appName")}</h1>
         </div>
         <div className="checkbox-group">
