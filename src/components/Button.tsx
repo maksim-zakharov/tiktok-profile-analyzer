@@ -14,7 +14,6 @@ export const Button: React.FC<ButtonType> = ({data, text}: ButtonType) => {
 
   const onClick = async () => {
     const result = (getProfilePage() ? await analyzeProfile(itemsDict, lastCursorDict) : await analyzeTagPage(itemsDict, lastCursorDict))
-    console.log(result);
     itemsDict = {...result?.itemsDict}
     lastCursorDict = {...result?.lastCursorDict}
   }

@@ -51,3 +51,24 @@ export let onChanged = async (keyName, resolve, init) => {
     }
   });
 }
+
+export let listenStorageKey = async (keyName, resolve, init) => {
+
+  const handler = (changes) => {
+    for (let key in changes) {
+      if (key === keyName) {
+        return resolve(changes[keyName].newValue);
+      }
+    }
+  };
+
+  if (init) {
+    resolve(await getItem(keyName));
+  }
+
+  chrome.storage.onChanged.addListener(handler);
+
+  return {
+    removeListener: () => chrome.storage.onChanged.removeListener(handler)
+  };
+}

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { Content } from './Content';
 import { VideoItem } from '../../components/VideoItem';
-import { analyzeProfile, analyzeTagPage, getOrCreateContainer, getProfilePage } from "../../content/utilities";
+import { getOrCreateContainer} from "../../content/utilities";
 import { SFCElement } from "react";
 import { Button } from "../../components/Button";
 
@@ -29,11 +29,9 @@ const videoObserver = new MutationObserver(renderVideos);
 const contentObserver = new IntersectionObserver(() => {
   render(<Content/>, getOrCreateContainer('tt-analytic-1'));
 
-  // render(<Button data="data_content_start_analyzing" text={chrome.i18n.getMessage('content_start_analyzing')}/>, document.querySelector('.share-title-container'));
   renderWithReplace(
     <Button data="data_content_start_analyzing" text={chrome.i18n.getMessage('content_start_analyzing')}/>
     , document.querySelector('.share-title-container'), "[data_content_start_analyzing]")
-
 
   titleObserver.disconnect();
 // @ts-ignore

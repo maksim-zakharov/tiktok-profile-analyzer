@@ -30,7 +30,7 @@ export let VideoItem: React.FC = ({id, nick}: { id: string, nick: string }) => {
     setVideo(video);
 
     return;
-  }, [items]);
+  });
 
   return (
     <React.Fragment>

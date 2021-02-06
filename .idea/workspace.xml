@@ -2,43 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32561dbd-9ce6-4995-8027-ed9b24e4203f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Button.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Counter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/VideoItem.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/contexts.provider.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/api.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/calculates.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Content/Content.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Content/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background/download-video.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/download-video.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background/tracker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/tracker.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Popup/Popup.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Popup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Popup/Popup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/content-download.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/content-download.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/content.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/content.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/VideoItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VideoItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/content/storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Content/Content.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/content/utilities.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/utilities.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/video-wappers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/video-wappers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/Screenshot_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/Screenshot_1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/Screenshot_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/Screenshot_2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/Screenshot_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/Screenshot_3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/Screenshot_4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/Screenshot_4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/Screenshot_5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/Screenshot_5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/Screenshot_6.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/Screenshot_6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/Screenshot_7.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/Screenshot_7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/Screenshot_8.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/Screenshot_8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/Screenshot_9.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/Screenshot_9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/icon_128x128.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/icon_128x128.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index-popup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Popup/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Popup/popup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.common.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/webpack.common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/webpack.dev.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.prod.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/webpack.prod.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zip-dist.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/zip-dist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Content/Content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Content/Content.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Content/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Content/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +82,14 @@
       <workItem from="1609778333301" duration="94584000" />
       <workItem from="1610603107197" duration="594000" />
       <workItem from="1610650924234" duration="593000" />
-      <workItem from="1610691464796" duration="6544000" />
+      <workItem from="1610691464796" duration="17597000" />
+      <workItem from="1610995495974" duration="1516000" />
+      <workItem from="1611609661729" duration="1314000" />
+      <workItem from="1611780551089" duration="593000" />
+      <workItem from="1611924147648" duration="217000" />
+      <workItem from="1611924431654" duration="594000" />
+      <workItem from="1612091375127" duration="591000" />
+      <workItem from="1612605238313" duration="594000" />
     </task>
     <servers />
   </component>
@@ -128,10 +105,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="805" y="311" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1610434246151" />
-    <state x="847" y="226" width="1201" height="886" key="find.popup" timestamp="1610817810872">
+    <state x="847" y="226" width="1201" height="886" key="find.popup" timestamp="1610913729767">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="847" y="226" width="1201" height="886" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1610817810872" />
+    <state x="847" y="226" width="1201" height="886" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1610913729767" />
     <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
