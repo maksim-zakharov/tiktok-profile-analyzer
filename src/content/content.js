@@ -94,28 +94,28 @@ var tiktokParse = async () => {
 var interval = setInterval(tiktokParse, +localStorage.getItem('timeout'))
 
 let addItem = async (item, link) => {
-    if (link.getAttribute('data-ER')) {
-        return;
-    }
+    // if (link.getAttribute('data-ER')) {
+    //     return;
+    // }
     link.setAttribute(`data-video_create-time`, item.createTime);
 
-    let footer = link.querySelector('.jsx-1036923518.card-footer.normal.no-avatar');
+    let footer = link.querySelector('.card-footer.normal.no-avatar');
     if (!footer) {
         footer = document.createElement('div');
         footer.classList.add('jsx-1036923518');
         footer.classList.add('card-footer');
         footer.classList.add('normal');
         footer.classList.add('no-avatar');
-        link.querySelector('.jsx-1778455663.video-card-mask').appendChild(footer);
+        link.querySelector('.video-card-mask')?.appendChild(footer);
     }
-    let firstContainer = link.querySelector('strong.jsx-1036923518.video-bottom-info');
+    let firstContainer = link.querySelector('strong.video-bottom-info');
     if (!firstContainer) {
         firstContainer = document.createElement('strong');
         firstContainer.classList.add('jsx-1036923518');
         firstContainer.classList.add('video-bottom-info');
         footer.appendChild(firstContainer);
     }
-    let secondContainer = link.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info');
+    let secondContainer = link.querySelector('.video-bottom-info:first-of-type + .video-bottom-info');
     if (!secondContainer) {
         secondContainer = document.createElement('strong');
         secondContainer.classList.add('jsx-1036923518');
@@ -150,7 +150,7 @@ let addItem = async (item, link) => {
 }
 
 let addViews = (linkElement, likesCount) => {
-    if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_views], .jsx-1036923518.video-bottom-info svg')) {
+    if (linkElement.querySelector('.video-bottom-info [data-video_views], .video-bottom-info svg')) {
         return;
     }
     const likesButton = document.createElement('strong');
@@ -163,12 +163,12 @@ let addViews = (linkElement, likesCount) => {
     likesText.innerText = convertNumberToString(likesCount);
     likesText.setAttribute(`data-video_views`, convertNumberToString(likesCount));
 
-    linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesButton);
-    linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesText);
+    linkElement.querySelector('.video-bottom-info')?.appendChild(likesButton);
+    linkElement.querySelector('.video-bottom-info')?.appendChild(likesText);
 }
 
 let addLikes = (linkElement, likesCount) => {
-    if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_like]')) {
+    if (linkElement.querySelector('.video-bottom-info [data-video_like]')) {
         return;
     }
     const likesButton = document.createElement('strong');
@@ -180,12 +180,12 @@ let addLikes = (linkElement, likesCount) => {
     likesText.innerText = convertNumberToString(likesCount);
     likesText.setAttribute(`data-video_like`, convertNumberToString(likesCount));
 
-    linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesButton);
-    linkElement.querySelector('.jsx-1036923518.video-bottom-info').appendChild(likesText);
+    linkElement.querySelector('.video-bottom-info')?.appendChild(likesButton);
+    linkElement.querySelector('.video-bottom-info')?.appendChild(likesText);
 }
 
 let addShare = (linkElement, item) => {
-    if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_share]')) {
+    if (linkElement.querySelector('.video-bottom-info [data-video_share]')) {
         return;
     }
     const shareButton = document.createElement('svg');
@@ -197,12 +197,12 @@ let addShare = (linkElement, item) => {
     shareText.innerText = convertNumberToString(item.stats.shareCount);
     shareText.setAttribute(`data-video_share`, convertNumberToString(item.stats.shareCount));
 
-    linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(shareButton);
-    linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(shareText);
+    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(shareButton);
+    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(shareText);
 }
 
 let addComment = (linkElement, item) => {
-    if (linkElement.querySelector('.jsx-1036923518.video-bottom-info [data-video_comment]')) {
+    if (linkElement.querySelector('.video-bottom-info [data-video_comment]')) {
         return;
     }
     const commentButton = document.createElement('strong');
@@ -214,18 +214,18 @@ let addComment = (linkElement, item) => {
     commentText.innerText = convertNumberToString(item.stats.commentCount);
     commentText.setAttribute(`data-video_comment`, convertNumberToString(item.stats.commentCount));
 
-    linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(commentButton);
-    linkElement.querySelector('.jsx-1036923518.video-bottom-info:first-of-type + .jsx-1036923518.video-bottom-info').appendChild(commentText);
+    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(commentButton);
+    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(commentText);
 }
 
 let addER = (link, item) => {
-    if (link.querySelector('.jsx-1036923518.card-footer.normal.no-avatar [data-ER]')) {
+    if (link.querySelector('.card-footer.normal.no-avatar [data-video_er]')) {
         return;
     }
     const ERContainer = document.createElement('strong');
     ERContainer.classList.add('jsx-1036923518');
     ERContainer.classList.add('video-bottom-info');
-    link.querySelector('.jsx-1036923518.card-footer.normal.no-avatar').appendChild(ERContainer);
+    link.querySelector('.card-footer.normal.no-avatar')?.appendChild(ERContainer);
 
     const ERButton = document.createElement('svg');
     ERButton.classList.add('jsx-1036923518');
@@ -255,7 +255,7 @@ let sortByCreationTime = () => {
         return 0;
     })
     array = array.map(link => link.closest('.video-feed-item.three-column-item'))
-    array.forEach(e => document.querySelector(".video-feed.compact").appendChild(e));
+    array.forEach(e => document.querySelector(".video-feed.compact")?.appendChild(e));
 }
 
 let sortByER = () => {
@@ -271,7 +271,7 @@ let sortByER = () => {
         return 0;
     })
     array = array.map(link => link.closest('.video-feed-item.three-column-item'))
-    array.forEach(e => document.querySelector(".video-feed.compact").appendChild(e));
+    array.forEach(e => document.querySelector(".video-feed.compact")?.appendChild(e));
 }
 
 let convertNumberToString = (number) => {
@@ -591,7 +591,7 @@ function createAnalyzeButton() {
     button.classList.add('tiktok-btn-pc-medium');
     button.classList.add('tiktok-btn-pc-primary');
     button.setAttribute('data_content_start_analyzing', 'button');
-    document.querySelector('.share-title-container').appendChild(button);
+    document.querySelector('.share-title-container')?.appendChild(button);
     button.textContent = chrome.i18n.getMessage('content_start_analyzing');
     button.addEventListener('click', getProfilePage() ? analyzeProfile : analyzeTagPage);
 }
@@ -612,7 +612,7 @@ function createCsvButton() {
     button.classList.add('tiktok-btn-pc-medium');
     button.classList.add('tiktok-btn-pc-primary');
     button.setAttribute('data_content_download_Csv', 'button');
-    document.querySelector('.share-title-container').appendChild(button);
+    document.querySelector('.share-title-container')?.appendChild(button);
     button.textContent = chrome.i18n.getMessage('content_download_Csv');
     button.addEventListener('click', async () => {
         const nick = getProfilePage();
@@ -741,6 +741,7 @@ async function analyzeProfile() {
     let lastCursor;
 
     const meta = document.querySelector('meta[property="al:ios:url"]').content;
+    const secUid = JSON.parse(document.querySelector('#__NEXT_DATA__')?.innerText)?.props?.pageProps?.userInfo?.user?.secUid;
     const url1 = new URL(`https://tiktok.com/${meta.replace('snssdk1233://', '')}`);
     const tagId = url1.pathname.split('/')[url1.pathname.split('/').length - 1];
     chrome.runtime.sendMessage({action: "start-analyze", data: {nick, tagId}});
@@ -757,13 +758,13 @@ async function analyzeProfile() {
 
     let response;
     do {
-        response = await axios.get(`https://m.tiktok.com/api/item_list/?count=30&id=${tagId}&maxCursor=${lastCursor}&minCursor=0&sourceType=8`).then(res => res.data)
+        response = await axios.get(`https://m.tiktok.com/api/post/item_list/?aid=1988&count=30&cursor=${lastCursor}&secUid=${secUid}`).then(res => res.data)
 
-        if (!response.items) {
+        if (!response.itemList) {
             break;
         }
 
-        itemsDict[nick].push(...response.items);
+        itemsDict[nick].push(...response.itemList);
 
         if (!itemsDict[nick] || !itemsDict[nick].length) {
             lastCursor = new Date().getTime() * 1000;

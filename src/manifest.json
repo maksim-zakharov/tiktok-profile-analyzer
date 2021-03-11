@@ -33,7 +33,6 @@
       "128": "images/icon_128x128.png"
     }
   },
-  "start_url": ".",
   "permissions": [
     "storage",
     "*://*.tiktok.com/*"

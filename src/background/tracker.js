@@ -12,7 +12,7 @@ chrome.runtime.onInstalled.addListener(() => {
     ga('require', 'displayfeatures');
     ga('send', 'pageview', '/options.html');
 
-    ymInit();
+    // ymInit();
 });
 
 // here we receive the coming message from the content script page
