@@ -1,5 +1,5 @@
 // content-script.js
-import { download } from '../background/download-video'
+import { download } from '../pages/background/download-video'
 
 let SELECTOR: any = {
   buttons: {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useItems, useLastCursor } from "../content/contexts.provider";
-import { analyzeProfile, analyzeTagPage, getProfilePage } from "../content/utilities";
+import { analyzeProfile, analyzeTagPage, getProfilePage } from "../pages/Content/Content";
 
 type ButtonType = {
   data: string,

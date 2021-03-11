@@ -1,4 +1,4 @@
-import {onChanged} from './storage.service';
+import {onChanged} from '../services/storage.service';
 import axios from 'axios';
 import { addItem, sortByCreationTime, sortByER } from "./video-wappers";
 import {
@@ -7,10 +7,10 @@ import {
     addAverageVideoCountPerDay, addRatingPerViews,
     addTopTags,
     addVideosCount, addViewsCount
-} from "./profile.service";
-import { getProfilePage, getTagPage, downloadCsv } from "./utilities";
+} from "../services/profile.service";
+import { getProfilePage, getTagPage } from "../pages/Content/Content";
 export * from './content-download'
-export * from './profile.service'
+export * from '../services/profile.service'
 export * from './video-wappers'
 
 var itemsDict = {};

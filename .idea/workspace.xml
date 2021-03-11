@@ -3,12 +3,26 @@
   <component name="ChangeListManager">
     <list default="true" id="32561dbd-9ce6-4995-8027-ed9b24e4203f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/webpack.common.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/webpack.common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/background.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/download-video.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/tracker.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Button.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/VideoItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VideoItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/utilities.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/utilities.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Content/Content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Content/Content.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Content/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Content/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/content-download.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/content-download.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/content.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/content.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/profile.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/storage.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/utilities.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/video-wappers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/video-wappers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Content/Content.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Content/Content.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Content/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Popup/Popup.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Popup/Popup.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Popup/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Popup/popup.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +55,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.11" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../launcher-frontend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../less-homeless-demo" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -56,18 +70,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\tiktok-chrome-extension\scripts" />
       <recent name="D:\Projects\tiktok-chrome-extension\src" />
       <recent name="D:\Projects\tiktok-chrome-extension" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\content" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\_locales" />
-      <recent name="D:\Projects\tiktok-chrome-extension\modal" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\tiktok-chrome-extension\src\services" />
+      <recent name="D:\Projects\tiktok-chrome-extension\src\pages" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\views\Content" />
       <recent name="D:\Projects\tiktok-chrome-extension" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\views\Popup" />
-      <recent name="D:\Projects\tiktok-chrome-extension\src\assets" />
-      <recent name="D:\Projects\tiktok-chrome-extension\src\views" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -90,6 +104,17 @@
       <workItem from="1611924431654" duration="594000" />
       <workItem from="1612091375127" duration="591000" />
       <workItem from="1612605238313" duration="594000" />
+      <workItem from="1612607459923" duration="1435000" />
+      <workItem from="1613043274528" duration="591000" />
+      <workItem from="1613584006857" duration="593000" />
+      <workItem from="1613590345719" duration="279000" />
+      <workItem from="1613591791249" duration="4897000" />
+      <workItem from="1613742213878" duration="537000" />
+      <workItem from="1613774451479" duration="593000" />
+      <workItem from="1614326104813" duration="12255000" />
+      <workItem from="1615021869163" duration="595000" />
+      <workItem from="1615082297369" duration="1802000" />
+      <workItem from="1615367046814" duration="594000" />
     </task>
     <servers />
   </component>
@@ -101,21 +126,35 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1610092348004" />
-    <state x="805" y="311" key="FileChooserDialogImpl" timestamp="1610434246151">
+    <state x="805" y="311" key="FileChooserDialogImpl" timestamp="1615021118877">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="805" y="311" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1610434246151" />
-    <state x="847" y="226" width="1201" height="886" key="find.popup" timestamp="1610913729767">
+    <state x="805" y="311" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1615021118877" />
+    <state x="93" y="93" width="1862" height="926" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog" timestamp="1614618239367">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="847" y="226" width="1201" height="886" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1610913729767" />
+    <state x="93" y="93" width="1862" height="926" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1614618239367" />
+    <state x="847" y="226" width="1201" height="886" key="find.popup" timestamp="1615135902875">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="847" y="226" width="1201" height="886" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1615135902875" />
     <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="681" y="259" key="run.anything.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609510986513" />
-    <state x="687" y="243" key="search.everywhere.popup" timestamp="1609669991964">
+    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup" timestamp="1614467740980">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="687" y="243" key="search.everywhere.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1609669991964" />
+    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1614467740980" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/pages/Popup/Popup.tsx</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

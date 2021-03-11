@@ -1,5 +1,4 @@
-import { convertNumberToString, countBy, createCounter, getOrCreateContainer  } from "./utilities";
-
+import { convertNumberToString, countBy, createCounter, getOrCreateContainer } from "../pages/Content/Content";
 
 export let addAverageERPerVideo = (itemsDict, nick, dataTag, row, name) => {
 

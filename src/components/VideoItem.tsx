@@ -1,7 +1,7 @@
 import * as React from "react";
-import { convertNumberToString } from "../content/utilities";
 import { useItems } from "../content/contexts.provider";
 import { useEffect, useState } from "react";
+import { convertNumberToString } from "../pages/Content/Content";
 
 // @ts-ignore
 export let VideoItem: React.FC = ({id, nick}: { id: string, nick: string }) => {

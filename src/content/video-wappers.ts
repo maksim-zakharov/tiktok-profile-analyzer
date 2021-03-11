@@ -1,5 +1,5 @@
-import { onChanged } from "./storage.service";
-import { convertNumberToString, getProfilePage, getTagPage } from "./utilities";
+import { onChanged } from "../services/storage.service";
+import { convertNumberToString, getProfilePage, getTagPage } from "../pages/Content/Content";
 
 export let addItem = async (item, link) => {
   if (link.getAttribute('data-ER')) {
@@ -63,7 +63,7 @@ let addViews = (linkElement, likesCount) => {
   }
   const likesButton = document.createElement('strong');
   likesButton.classList.add('like-icon');
-  likesButton.classList.add('custom-views');
+  likesButton.classList.add('custom-pages');
   likesButton.setAttribute(`data_video_views`, convertNumberToString(likesCount));
 
   const likesText = document.createElement('strong');

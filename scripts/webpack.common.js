@@ -6,10 +6,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        background: path.resolve(__dirname, "../src/background/background.ts"),
-        // content: path.resolve(__dirname, "./src/content/content.ts"),
-        content: path.resolve(__dirname, "../src/views/Content/index.tsx"),
-        popup: path.resolve(__dirname, "../src/views/Popup/index.tsx"),
+        background: path.resolve(__dirname, "../src/pages/background/background.ts"),
+        content: path.resolve(__dirname, "../src/pages/Content/index.tsx"),
+        popup: path.resolve(__dirname, "../src/pages/Popup/index.tsx"),
     },
     resolve: {
         extensions: [ '.tsx', '.ts', '.js' ],
@@ -69,14 +68,14 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'popup.html',
-            template: 'src/views/Popup/popup.html',
+            template: 'src/pages/Popup/popup.html',
             chunks: ['popup']
         }),
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'manifest.json', to: '[name].[ext]' },
                 { from: 'src/assets', to: 'assets' },
-                { from: 'src/views/Content/Content.css', to: '[name].[ext]' },
+                { from: 'src/pages/Content/Content.css', to: '[name].[ext]' },
                 { from: 'src/_locales', to: '_locales' },
             ]
         }),

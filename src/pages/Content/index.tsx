@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import { Content } from './Content';
+import { Content, getOrCreateContainer } from './Content';
 import { VideoItem } from '../../components/VideoItem';
-import { getOrCreateContainer} from "../../content/utilities";
-import { SFCElement } from "react";
 import { Button } from "../../components/Button";
+import { SFCElement } from "react";
 
 let renderVideos = () => {
   document.querySelectorAll(`a[href^="https://www.tiktok.com/@"]:not(.marked)`).forEach(element => {
