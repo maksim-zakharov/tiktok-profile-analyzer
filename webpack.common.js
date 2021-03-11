@@ -59,7 +59,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'src/manifest.json', to: '[name].[ext]' },
+                { from: 'manifest.json', to: '[name].[ext]' },
                 { from: 'src/inject_script.js', to: '[name].[ext]' },
                 { from: 'src/images/*.png', to: 'images/[name].[ext]' },
                 { from: 'src/content/styles.css', to: 'content/[name].[ext]' },
