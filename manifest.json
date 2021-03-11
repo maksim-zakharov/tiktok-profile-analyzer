@@ -1,1 +1,40 @@
-{"manifest_version":2,"name":"__MSG_appName__","description":"__MSG_appDesc__","version":"0.1.1","author":"Maksim Zakharov","icons":{"128":"images/icon_128x128.png"},"content_security_policy":"script-src 'self' https://ssl.google-analytics.com https://www.google-analytics.com https://mc.yandex.ru; object-src 'self'","content_scripts":[{"matches":["*://*.tiktok.com/*"],"js":["content.bundle.js"],"css":["content/styles.css"]}],"background":{"page":"./background.html","persistent":false},"options_page":"./options.html","default_locale":"en","browser_action":{"default_popup":"popup.html","default_icon":{"128":"images/icon_128x128.png"}},"permissions":["storage","*://*.tiktok.com/*"]}
+{
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "1.0.6",
+  "author": "Maksim Zakharov",
+  "icons": {
+    "128": "images/icon_128x128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.google-analytics.com https://mc.yandex.ru; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.tiktok.com/*"
+      ],
+      "js": [
+        "content.bundle.js"
+      ],
+      "css": [
+        "content/styles.css"
+      ]
+    }
+  ],
+  "background": {
+    "page": "./background.html",
+    "persistent": false
+  },
+  "options_page": "./options.html",
+  "default_locale": "en",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "images/icon_128x128.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "*://*.tiktok.com/*"
+  ]
+}

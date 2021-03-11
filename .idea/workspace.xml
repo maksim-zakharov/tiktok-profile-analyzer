@@ -49,18 +49,18 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\tiktok-chrome-extension\src" />
-      <recent name="D:\Projects\tiktok-chrome-extension\src\_locales" />
-      <recent name="D:\Projects\tiktok-chrome-extension" />
-      <recent name="D:\Projects\tiktok-chrome-extension\modal" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\tiktok-chrome-extension" />
+      <recent name="D:\Projects\tiktok-chrome-extension\scripts" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\background" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\components" />
       <recent name="D:\Projects\tiktok-chrome-extension\src" />
-      <recent name="D:\Projects\tiktok-chrome-extension\public" />
-      <recent name="D:\Projects\tiktok-chrome-extension\images" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\tiktok-chrome-extension" />
+      <recent name="D:\Projects\tiktok-chrome-extension\src" />
+      <recent name="D:\Projects\tiktok-chrome-extension\src\_locales" />
+      <recent name="D:\Projects\tiktok-chrome-extension\modal" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
