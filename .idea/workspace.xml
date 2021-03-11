@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32561dbd-9ce6-4995-8027-ed9b24e4203f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/update-manifest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zip-dist.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/zip-dist.js" afterDir="false" />
-    </list>
+    <list default="true" id="32561dbd-9ce6-4995-8027-ed9b24e4203f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
