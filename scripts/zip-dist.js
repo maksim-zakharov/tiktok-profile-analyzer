@@ -1,7 +1,7 @@
 var file_system = require('fs');
 var archiver = require('archiver');
 
-let rawdata = file_system.readFileSync('src/manifest.json')
+let rawdata = file_system.readFileSync('manifest.json')
 let manifest = JSON.parse(rawdata);
 
 var output = file_system.createWriteStream(`tiktok-chrome-extension-${manifest.version}.zip`);
