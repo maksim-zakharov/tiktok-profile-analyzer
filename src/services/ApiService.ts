@@ -29,7 +29,20 @@ type AuthorStats = {
   "heart": number, // 80200
 }
 
-type ProfileVideo = {
+export type ProfileChallenge = {
+  "id": string,// "76613285",
+  "title": string,// "фриланс",
+  "desc": string,
+  "profileThumb": string,
+  "profileMedium": string,
+  "profileLarger": string,
+  "coverThumb": string,
+  "coverMedium": string,
+  "coverLarger": string,
+  "isCommerce": boolean, // false
+}
+
+export type ProfileVideo = {
   "id": string, // "6916804448740183297",
   "desc": string, // "Какими биржами пользуетесь и какой функционал добавить? #фриланс #программист #программирование #апворк #фрилансзаработок #фрилансработа #фрилансер",
   "createTime": number, // 1610444034,
@@ -60,18 +73,7 @@ type ProfileVideo = {
     "duration": number, //38,
     "album": string, // "Cristal \u0026 МОЁТ"
   },
-  "challenges": {
-    "id": string,// "76613285",
-    "title": string,// "фриланс",
-    "desc": string,
-    "profileThumb": string,
-    "profileMedium": string,
-    "profileLarger": string,
-    "coverThumb": string,
-    "coverMedium": string,
-    "coverLarger": string,
-    "isCommerce": boolean, // false
-  }[  ],
+  "challenges": ProfileChallenge[ ],
   "stats": {
     "diggCount": number, //106,
     "shareCount": number, //4,

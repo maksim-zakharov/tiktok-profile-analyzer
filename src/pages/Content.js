@@ -1,9 +1,7 @@
-import {onChanged} from '../content/storage.service';
-import {countBy, downloadCsv, getOrCreateContainer, createCounter} from '../content/utility';
+import {downloadCsv} from '../content/utility';
 import apiService from '@services/ApiService';
-
-var itemsDict = {};
-var lastCursorDict = {};
+import counterService from '@services/CounterService'
+import storageService from '@services/StorageService';
 
 if (!+localStorage.getItem('timeout')) {
     localStorage.setItem('timeout', 1000);
@@ -42,9 +40,9 @@ var tiktokParse = async () => {
 
         updateProfile(nick);
 
-        if (lastCursorDict[nick] || itemsDict[nick] && loadedVideosCount <= markedVideosCount) {
-            for (let i = 0; i < itemsDict[nick].length; i++) {
-                const item = itemsDict[nick][i];
+        if (storageService.lastCursorDict[nick] || storageService.itemsDict[nick] && loadedVideosCount <= markedVideosCount) {
+            for (let i = 0; i < storageService.itemsDict[nick].length; i++) {
+                const item = storageService.itemsDict[nick][i];
 
                 const link = document.querySelector(`a[href^="https://www.tiktok.com/@${nick}/video/${item.id}"]`)
                 if (!link) {
@@ -71,9 +69,9 @@ var tiktokParse = async () => {
 
         updateProfile(tag);
 
-        if (lastCursorDict[tag] || itemsDict[tag] && loadedVideosCount <= markedVideosCount) {
-            for (let i = 0; i < itemsDict[tag].length; i++) {
-                const item = itemsDict[tag][i];
+        if (storageService.lastCursorDict[tag] || storageService.itemsDict[tag] && loadedVideosCount <= markedVideosCount) {
+            for (let i = 0; i < storageService.itemsDict[tag].length; i++) {
+                const item = storageService.itemsDict[tag][i];
 
                 const link = document.querySelector(`a[href*="/video/${item.id}"]`)
                 if (!link) {
@@ -123,123 +121,30 @@ let addItem = async (item, link) => {
         footer.appendChild(secondContainer);
     }
 
-    await onChanged('video_Views', enable => {
+    await storageService.onChanged('video_Views', enable => {
         if (!getProfilePage() && !getTagPage()) return;
-        enable ? addViews(link, item.stats.playCount) : Array.from(document.querySelectorAll("[data-video_views]")).map(elem => elem?.parentNode.removeChild(elem));
+        enable ? counterService.addViews(link, item.stats.playCount) : Array.from(document.querySelectorAll("[data-video_views]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
 
-    await onChanged('video_Likes', enable => {
+    await storageService.onChanged('video_Likes', enable => {
         if (!getProfilePage() && !getTagPage()) return;
-        enable ? addLikes(link, item.stats.diggCount) : Array.from(document.querySelectorAll("[data-video_like]")).map(elem => elem?.parentNode.removeChild(elem));
+        enable ? counterService.addLikes(link, item.stats.diggCount) : Array.from(document.querySelectorAll("[data-video_like]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
 
-    await onChanged('video_Shares', enable => {
+    await storageService.onChanged('video_Shares', enable => {
         if (!getProfilePage() && !getTagPage()) return;
-        enable ? addShare(link, item) : Array.from(document.querySelectorAll("[data-video_share]")).map(elem => elem?.parentNode.removeChild(elem));
+        enable ? counterService.addShare(link, item) : Array.from(document.querySelectorAll("[data-video_share]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
-    await onChanged('video_Comments', enable => {
+    await storageService.onChanged('video_Comments', enable => {
         if (!getProfilePage() && !getTagPage()) return;
-        enable ? addComment(link, item) : Array.from(document.querySelectorAll("[data-video_comment]")).map(elem => elem?.parentNode.removeChild(elem));
+        enable ? counterService.addComment(link, item) : Array.from(document.querySelectorAll("[data-video_comment]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
-    await onChanged('video_ER', enable => {
+    await storageService.onChanged('video_ER', enable => {
         if (!getProfilePage() && !getTagPage()) return;
-        enable ? addER(link, item) : Array.from(document.querySelectorAll("[data-video_ER]")).map(elem => elem?.parentNode.removeChild(elem));
+        enable ? counterService.addER(link, item) : Array.from(document.querySelectorAll("[data-video_ER]")).map(elem => elem?.parentNode.removeChild(elem));
     }, true)
 
     link.classList.add('marked');
-}
-
-let addViews = (linkElement, likesCount) => {
-    if (linkElement.querySelector('.video-bottom-info [data-video_views], .video-bottom-info svg')) {
-        return;
-    }
-    const likesButton = document.createElement('strong');
-    likesButton.classList.add('like-icon');
-    likesButton.classList.add('custom-views');
-    likesButton.setAttribute(`data-video_views`, convertNumberToString(likesCount));
-
-    const likesText = document.createElement('strong');
-    likesText.classList.add('jsx-1036923518');
-    likesText.innerText = convertNumberToString(likesCount);
-    likesText.setAttribute(`data-video_views`, convertNumberToString(likesCount));
-
-    linkElement.querySelector('.video-bottom-info')?.appendChild(likesButton);
-    linkElement.querySelector('.video-bottom-info')?.appendChild(likesText);
-}
-
-let addLikes = (linkElement, likesCount) => {
-    if (linkElement.querySelector('.video-bottom-info [data-video_like]')) {
-        return;
-    }
-    const likesButton = document.createElement('strong');
-    likesButton.classList.add('custom-like');
-    likesButton.setAttribute(`data-video_like`, convertNumberToString(likesCount));
-
-    const likesText = document.createElement('strong');
-    likesText.classList.add('jsx-1036923518');
-    likesText.innerText = convertNumberToString(likesCount);
-    likesText.setAttribute(`data-video_like`, convertNumberToString(likesCount));
-
-    linkElement.querySelector('.video-bottom-info')?.appendChild(likesButton);
-    linkElement.querySelector('.video-bottom-info')?.appendChild(likesText);
-}
-
-let addShare = (linkElement, item) => {
-    if (linkElement.querySelector('.video-bottom-info [data-video_share]')) {
-        return;
-    }
-    const shareButton = document.createElement('svg');
-    shareButton.classList.add('custom-share');
-    shareButton.setAttribute(`data-video_share`, convertNumberToString(item.stats.shareCount));
-
-    const shareText = document.createElement('strong');
-    shareText.classList.add('jsx-1036923518');
-    shareText.innerText = convertNumberToString(item.stats.shareCount);
-    shareText.setAttribute(`data-video_share`, convertNumberToString(item.stats.shareCount));
-
-    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(shareButton);
-    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(shareText);
-}
-
-let addComment = (linkElement, item) => {
-    if (linkElement.querySelector('.video-bottom-info [data-video_comment]')) {
-        return;
-    }
-    const commentButton = document.createElement('strong');
-    commentButton.classList.add('custom-comment');
-    commentButton.setAttribute(`data-video_comment`, convertNumberToString(item.stats.commentCount));
-
-    const commentText = document.createElement('strong');
-    commentText.classList.add('jsx-1036923518');
-    commentText.innerText = convertNumberToString(item.stats.commentCount);
-    commentText.setAttribute(`data-video_comment`, convertNumberToString(item.stats.commentCount));
-
-    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(commentButton);
-    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(commentText);
-}
-
-let addER = (link, item) => {
-    if (link.querySelector('.card-footer.normal.no-avatar [data-video_er]')) {
-        return;
-    }
-    const ERContainer = document.createElement('strong');
-    ERContainer.classList.add('jsx-1036923518');
-    ERContainer.classList.add('video-bottom-info');
-    link.querySelector('.card-footer.normal.no-avatar')?.appendChild(ERContainer);
-
-    const ERButton = document.createElement('svg');
-    ERButton.classList.add('jsx-1036923518');
-    ERButton.textContent = 'ER';
-    ERContainer.appendChild(ERButton);
-
-    const ERText = document.createElement('strong');
-    ERText.classList.add('jsx-1036923518');
-
-    const ER = ((item.stats.commentCount + item.stats.diggCount + item.stats.shareCount) * 100 / item.stats.playCount);
-    ERText.innerText = ER.toFixed(2) + '%';
-    ERContainer.appendChild(ERText);
-    link.setAttribute('data-ER', ER);
-    ERContainer.setAttribute(`data-video_ER`, ER);
 }
 
 let sortByCreationTime = () => {
@@ -274,300 +179,143 @@ let sortByER = () => {
     array.forEach(e => document.querySelector(".video-feed.compact")?.appendChild(e));
 }
 
-let convertNumberToString = (number) => {
-
-    let round = (num) => Math.round(num * 10) / 10;
-
-    let result = '';
-    if (number > 1000000000) {
-        result = `${round(number / 1000000000)}B`
-    } else if (number > 1000000) {
-        result = `${round(number / 1000000)}M`
-    } else if (number > 1000) {
-        result = `${round(number / 1000)}K`
-    } else {
-        result = number;
-    }
-    return result;
-}
-
-let addAverageERPerVideo = (nick, dataTag, row, name) => {
-
-    let avgER = 0;
-    if (itemsDict[nick]?.length) {
-
-        const fnER = (item) =>
-            item.stats.playCount ? (item.stats.commentCount + item.stats.diggCount + item.stats.shareCount) * 100 / item.stats.playCount
-                : 0;
-
-        const sum = itemsDict[nick].reduce((acc, item) => acc + fnER(item), 0);
-        avgER = (sum / itemsDict[nick].length).toFixed(2) + '%';
-    }
-
-    createCounter(avgER, name, dataTag, row);
-}
-
-let addAverageVideoCountPerDay = (nick, dataTag, row, name) => {
-    let counter = 0;
-    if (itemsDict[nick]?.length) {
-        const minTime = itemsDict[nick].reduce((acc, val) => {
-            return acc < val.createTime ? acc : val.createTime;
-        })
-
-        const maxTime = itemsDict[nick].reduce((acc, val) => {
-            return acc > val.createTime ? acc : val.createTime;
-        })
-
-        const diffInMs = new Date(maxTime * 1000) - new Date(minTime * 1000)
-        counter = (diffInMs / (1000 * 60 * 60 * 24 * itemsDict[nick].length)).toFixed(2);
-    }
-
-    createCounter(convertNumberToString(counter), name, dataTag, row);
-}
-
-let addAverageCreatedTimePerVideo = (nick, dataTag, row, name) => {
-    let counter = 0;
-    if (itemsDict[nick]?.length) {
-        counter = (itemsDict[nick].reduce((acc, curr) => {
-            const date = new Date(curr.createTime * 1000);
-            date.setFullYear(2000, 1, 1);
-            return acc + date.getTime()
-        }, 0) / itemsDict[nick].length);
-
-        counter = new Date(counter).toLocaleTimeString();
-    }
-
-    createCounter(convertNumberToString(counter), name, dataTag, row);
-}
-
-let addAverageCounterPerVideo = (nick, dataTag, fieldName, row, name) => {
-    let counter = 0;
-    if (itemsDict[nick]?.length) {
-        counter = (itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName], 0) / itemsDict[nick].length).toFixed(1);
-    }
-
-    createCounter(convertNumberToString(counter), name, dataTag, row);
-}
-
-let addRatingPerViews = (nick, dataTag, fieldName, row, name) => {
-    let counter = 0;
-    if (itemsDict[nick]?.length) {
-        counter = (itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName] * 100 / curr.stats.playCount, 0) / itemsDict[nick].length).toFixed(2);
-    }
-
-    createCounter(counter + '%', name, dataTag, row);
-}
-
-let addVideosCount = (nick, dataTag, row, name) => {
-
-    let counter = 0;
-    if (itemsDict[nick]?.length) {
-        counter = itemsDict[nick].length; // [0].authorStats.videoCount;
-    }
-
-    createCounter(convertNumberToString(counter), name, dataTag, row);
-}
-
-let addTopTags = (nick, dataTag, row, name) => {
-
-    let counter = [];
-    if (itemsDict[nick]?.length) {
-        counter = itemsDict[nick].filter(curr => curr.challenges).reduce((acc, curr) => acc.concat(...curr.challenges), []);
-        counter = countBy(counter, i => i.title).sort((a, b) => {
-            if (a[1] > b[1]) {
-                return -1;
-            }
-            if (a[1] < b[1]) {
-                return 1;
-            }
-            // a должно быть равным b
-            return 0;
-        }).splice(0, 5).map(([key]) => key);
-    }
-
-    let container = getOrCreateContainer(row);
-
-    let numberContainer = document.querySelector(`div[${dataTag}]`);
-
-    if (!numberContainer) {
-        numberContainer = document.createElement('div');
-        numberContainer.classList.add('number');
-        container.appendChild(numberContainer);
-    } else {
-        numberContainer.innerHTML = '';
-    }
-    numberContainer.setAttribute(`${dataTag}`, counter.map(key => `#${key}`).join(' '));
-
-    let numberTextLabel = document.querySelector(`div[${dataTag}] span`);
-    if (!numberTextLabel) {
-        numberTextLabel = document.createElement('span');
-        numberTextLabel.classList.add('unit');
-        numberTextLabel.textContent = name;
-        numberContainer.appendChild(numberTextLabel);
-    }
-
-    let numberCountLabel = numberContainer.querySelector(`a[${dataTag}]`);
-    if (!numberCountLabel) {
-        counter.forEach(tag => {
-            numberCountLabel = document.createElement('a');
-            numberCountLabel.title = `${tag}`;
-            numberContainer.appendChild(numberCountLabel);
-
-            numberCountLabel.href = `https://www.tiktok.com/tag/${tag}`
-            numberCountLabel.target = '_blank';
-            numberCountLabel.textContent = `#${tag}`;
-            numberCountLabel.setAttribute(`${dataTag}`, `#${tag}`);
-        })
-    }
-}
-
-let addViewsCount = (nick, dataTag, fieldName, row, name) => {
-
-    let counter = 0;
-    if (itemsDict[nick]?.length) {
-        counter = itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName], 0);
-    }
-
-    createCounter(convertNumberToString(counter), name, dataTag, row);
-}
-
 let updateProfile = async (nick) => {
 
-    await onChanged('profile_Views', enable => {
+    await storageService.onChanged('profile_Views', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addViewsCount(nick, "data_views", "playCount", "tt-analytic-1", chrome.i18n.getMessage('data_views'))
+            counterService.addViewsCount(nick, "data_views", "playCount", "tt-analytic-1", chrome.i18n.getMessage('data_views'))
         } else {
             var elem = document.querySelector("[data_views]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
-    await onChanged('profile_videos', enable => {
+    await storageService.onChanged('profile_videos', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addVideosCount(nick, "data_videos", "tt-analytic-1", chrome.i18n.getMessage('data_videos'))
+            counterService.addVideosCount(nick, "data_videos", "tt-analytic-1", chrome.i18n.getMessage('data_videos'))
         } else {
             var elem = document.querySelector("[data_videos]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
 
-    await onChanged('profile_Shares', enable => {
+    await storageService.onChanged('profile_Shares', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addViewsCount(nick, "data_shares", "shareCount", "tt-analytic-1", chrome.i18n.getMessage('data_shares'));
+            counterService.addViewsCount(nick, "data_shares", "shareCount", "tt-analytic-1", chrome.i18n.getMessage('data_shares'));
         } else {
             var elem = document.querySelector("[data_shares]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
-    await onChanged('profile_Comments', enable => {
+    await storageService.onChanged('profile_Comments', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addViewsCount(nick, "data_comments", "commentCount", "tt-analytic-1", chrome.i18n.getMessage('data_comments'));
+            counterService.addViewsCount(nick, "data_comments", "commentCount", "tt-analytic-1", chrome.i18n.getMessage('data_comments'));
         } else {
             var elem = document.querySelector("[data_comments]");
             elem?.parentNode.removeChild(elem)
         }
     }, true)
 
-    await onChanged('profile_rating_likes', enable => {
+    await storageService.onChanged('profile_rating_likes', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addRatingPerViews(nick, "data_rating_likes", "diggCount", "tt-analytic-2", chrome.i18n.getMessage('data_rating_likes'));
+            counterService.addRatingPerViews(nick, "data_rating_likes", "diggCount", "tt-analytic-2", chrome.i18n.getMessage('data_rating_likes'));
         } else {
             var elem = document.querySelector("[data_rating_likes]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
 
-    await onChanged('profile_rating_shares', enable => {
+    await storageService.onChanged('profile_rating_shares', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addRatingPerViews(nick, "data_rating_shares", "shareCount", "tt-analytic-2", chrome.i18n.getMessage('data_rating_shares'));
+            counterService.addRatingPerViews(nick, "data_rating_shares", "shareCount", "tt-analytic-2", chrome.i18n.getMessage('data_rating_shares'));
         } else {
             var elem = document.querySelector("[data_rating_shares]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
 
-    await onChanged('profile_rating_comments', enable => {
+    await storageService.onChanged('profile_rating_comments', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addRatingPerViews(nick, "data_rating_comments", "commentCount", "tt-analytic-2", chrome.i18n.getMessage('data_rating_comments'));
+            counterService.addRatingPerViews(nick, "data_rating_comments", "commentCount", "tt-analytic-2", chrome.i18n.getMessage('data_rating_comments'));
         } else {
             var elem = document.querySelector("[data_rating_comments]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
 
-    await onChanged('profile_Average_likes', enable => {
+    await storageService.onChanged('profile_Average_likes', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addAverageCounterPerVideo(nick, "data_avg_likes", "diggCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_likes'));
+            counterService.addAverageCounterPerVideo(nick, "data_avg_likes", "diggCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_likes'));
         } else {
             var elem = document.querySelector("[data_avg_likes]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
-    await onChanged('profile_Average_views', enable => {
+    await storageService.onChanged('profile_Average_views', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addAverageCounterPerVideo(nick, "data_avg_views", "playCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_views'));
+            counterService.addAverageCounterPerVideo(nick, "data_avg_views", "playCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_views'));
         } else {
             var elem = document.querySelector("[data_avg_views]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
-    await onChanged('profile_Average_shares', enable => {
+    await storageService.onChanged('profile_Average_shares', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addAverageCounterPerVideo(nick, "data_avg_shares", "shareCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_shares'));
+            counterService.addAverageCounterPerVideo(nick, "data_avg_shares", "shareCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_shares'));
         } else {
             var elem = document.querySelector("[data_avg_shares]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
-    await onChanged('profile_Average_comments', enable => {
+    await storageService.onChanged('profile_Average_comments', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addAverageCounterPerVideo(nick, "data_avg_comments", "commentCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_comments'));
+            counterService.addAverageCounterPerVideo(nick, "data_avg_comments", "commentCount", "tt-analytic-2", chrome.i18n.getMessage('data_avg_comments'));
         } else {
             var elem = document.querySelector("[data_avg_comments]");
             elem?.parentNode.removeChild(elem)
         }
     }, true)
-    await onChanged('profile_Average_ER', enable => {
+    await storageService.onChanged('profile_Average_ER', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addAverageERPerVideo(nick, "data_avg_er", "tt-analytic-2", chrome.i18n.getMessage('data_avg_er'));
+            counterService.addAverageERPerVideo(nick, "data_avg_er", "tt-analytic-2", chrome.i18n.getMessage('data_avg_er'));
         } else {
             var elem = document.querySelector("[data_avg_er]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
-    await onChanged('profile_Average_created_time', enable => {
+    await storageService.onChanged('profile_Average_created_time', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addAverageCreatedTimePerVideo(nick, "data_avg_created_time", "tt-analytic-2", chrome.i18n.getMessage('data_avg_created_time'));
+            counterService.addAverageCreatedTimePerVideo(nick, "data_avg_created_time", "tt-analytic-2", chrome.i18n.getMessage('data_avg_created_time'));
         } else {
             var elem = document.querySelector("[data_avg_created_time]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
-    await onChanged('profile_Average_videos_per_day', enable => {
+    await storageService.onChanged('profile_Average_videos_per_day', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addAverageVideoCountPerDay(nick, "data_avg_videos_per_day", "tt-analytic-2", chrome.i18n.getMessage('data_avg_videos_per_day'));
+            counterService.addAverageVideoCountPerDay(nick, "data_avg_videos_per_day", "tt-analytic-2", chrome.i18n.getMessage('data_avg_videos_per_day'));
         } else {
             var elem = document.querySelector("[data_avg_videos_per_day]")
             elem?.parentNode.removeChild(elem)
         }
     }, true)
-    await onChanged('profile_top5_tags', enable => {
+    await storageService.onChanged('profile_top5_tags', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         if (enable) {
-            addTopTags(nick, "data_top5_tags", "tt-analytic-3", chrome.i18n.getMessage('data_top5_tags'))
+            counterService.addTopTags(nick, "data_top5_tags", "tt-analytic-3", chrome.i18n.getMessage('data_top5_tags'))
         } else {
             var elem = document.querySelector("[data_top5_tags]")
             elem?.parentNode.removeChild(elem)
@@ -622,14 +370,11 @@ function createCsvButton() {
             return;
         }
 
-        if (!itemsDict[nick || tag] || !itemsDict[nick || tag].length) {
+        if (!storageService.itemsDict[nick || tag] || !storageService.itemsDict[nick || tag].length) {
             nick ? await analyzeProfile() : await analyzeTagPage();
         }
 
-        document.querySelector('[data_content_download_Csv]').setAttribute('disabled', 'disabled');
-        document.querySelector('[data_content_download_Csv]').innerHTML = `
-    <div class="tiktok-loading-ring" style="width: 18px; height: 18px;">
-    <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="white"></path></svg></div>`;
+        setLoadingToButton('data_content_download_Csv');
 
         downloadCsv([[
             chrome.i18n.getMessage('content_csv_url'),
@@ -643,8 +388,8 @@ function createCsvButton() {
             chrome.i18n.getMessage('content_csv_shares'),
             chrome.i18n.getMessage('content_csv_comments'),
             chrome.i18n.getMessage('content_csv_views'),
-            // ...Object.keys(itemsDict[nick][0].stats)
-        ].join(","), ...itemsDict[nick || tag].map(i => [
+            // ...Object.keys(storageService.itemsDict[nick][0].stats)
+        ].join(","), ...storageService.itemsDict[nick || tag].map(i => [
             `https://www.tiktok.com/@${i.author.uniqueId}/video/${i.id}`,
             i.desc.replaceAll(',', ' '),
             new Date(i.createTime * 1000).toLocaleString(),
@@ -654,8 +399,9 @@ function createCsvButton() {
             ...Object.values(i.stats)
         ].join(","))], nick || tag);
 
-        document.querySelector('[data_content_download_Csv]').removeAttribute('disabled');
-        document.querySelector('[data_content_download_Csv]').innerHTML = chrome.i18n.getMessage('content_download_Csv');
+
+        removeLoadingFromButton('data_content_download_Csv', 'content_download_Csv');
+
     });
 }
 
@@ -663,10 +409,7 @@ function createCsvButton() {
  * Анализирует текущий профиль, запрашивая все видосы по API, обновляет каунтеры
  */
 async function analyzeTagPage() {
-    document.querySelector('[data_content_start_analyzing]').setAttribute('disabled', 'disabled');
-    document.querySelector('[data_content_start_analyzing]').innerHTML = `
-    <div class="tiktok-loading-ring" style="width: 18px; height: 18px;">
-    <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="white"></path></svg></div>`;
+    setLoadingToButton('data_content_start_analyzing');
 
     const tag = getTagPage();
     if (!tag) {
@@ -683,11 +426,11 @@ async function analyzeTagPage() {
 
     let response;
     do {
-        if (!itemsDict[tag] || !itemsDict[tag].length) {
+        if (!storageService.itemsDict[tag] || !storageService.itemsDict[tag].length) {
             lastCursor = 0;
-            itemsDict[tag] = [];
+            storageService.itemsDict[tag] = [];
         } else {
-            lastCursor = itemsDict[tag].length;
+            lastCursor = storageService.itemsDict[tag].length;
         }
 
         response = await apiService.getChallengeVideosByChallengeID(tagId, lastCursor);
@@ -696,13 +439,13 @@ async function analyzeTagPage() {
             break;
         }
 
-        itemsDict[tag].push(...response.itemList);
+        storageService.itemsDict[tag].push(...response.itemList);
 
-        lastCursorDict[tag] = lastCursor;
+        storageService.lastCursorDict[tag] = lastCursor;
     } while (response.hasMore)
 
-    for (let i = 0; i < itemsDict[tag].length; i++) {
-        const item = itemsDict[tag][i];
+    for (let i = 0; i < storageService.itemsDict[tag].length; i++) {
+        const item = storageService.itemsDict[tag][i];
 
         const link = document.querySelector(`a[href*="/video/${item.id}"]`)
         if (!link) {
@@ -712,25 +455,21 @@ async function analyzeTagPage() {
         addItem(item, link);
     }
 
-    await onChanged('video_Sort_by_ER', enable => {
+    await storageService.onChanged('video_Sort_by_ER', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         enable ? sortByER() : sortByCreationTime();
     }, true)
 
     updateProfile(tag);
 
-    document.querySelector('[data_content_start_analyzing]').removeAttribute('disabled');
-    document.querySelector('[data_content_start_analyzing]').innerHTML = chrome.i18n.getMessage('content_start_analyzing');
+    removeLoadingFromButton('data_content_start_analyzing', 'content_start_analyzing');
 }
 
 /**
  * Анализирует текущий профиль, запрашивая все видосы по API, обновляет каунтеры
  */
 async function analyzeProfile() {
-    document.querySelector('[data_content_start_analyzing]').setAttribute('disabled', 'disabled');
-    document.querySelector('[data_content_start_analyzing]').innerHTML = `
-    <div class="tiktok-loading-ring" style="width: 18px; height: 18px;">
-    <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="white"></path></svg></div>`;
+    setLoadingToButton('data_content_start_analyzing');
 
     const nick = getProfilePage();
     if (!nick) {
@@ -746,11 +485,11 @@ async function analyzeProfile() {
     const tagId = url1.pathname.split('/')[url1.pathname.split('/').length - 1];
     chrome.runtime.sendMessage({action: "start-analyze", data: {nick, tagId}});
 
-    if (!itemsDict[nick] || !itemsDict[nick].length) {
+    if (!storageService.itemsDict[nick] || !storageService.itemsDict[nick].length) {
         lastCursor = new Date().getTime() * 1000;
-        itemsDict[nick] = [];
+        storageService.itemsDict[nick] = [];
     } else {
-        const minTime = itemsDict[nick].reduce((acc, val) => {
+        const minTime = storageService.itemsDict[nick].reduce((acc, val) => {
             return acc < val.createTime ? acc : val.createTime;
         })
         lastCursor = minTime * 1000;
@@ -764,23 +503,23 @@ async function analyzeProfile() {
             break;
         }
 
-        itemsDict[nick].push(...response.itemList);
+        storageService.itemsDict[nick].push(...response.itemList);
 
-        if (!itemsDict[nick] || !itemsDict[nick].length) {
+        if (!storageService.itemsDict[nick] || !storageService.itemsDict[nick].length) {
             lastCursor = new Date().getTime() * 1000;
-            itemsDict[nick] = [];
+            storageService.itemsDict[nick] = [];
         } else {
-            const minTime = itemsDict[nick].reduce((acc, val) => {
+            const minTime = storageService.itemsDict[nick].reduce((acc, val) => {
                 return acc < val.createTime ? acc : val.createTime;
             })
             lastCursor = minTime * 1000;
         }
 
-        lastCursorDict[nick] = lastCursor;
+        storageService.lastCursorDict[nick] = lastCursor;
     } while (response.hasMore)
 
-    for (let i = 0; i < itemsDict[nick].length; i++) {
-        const item = itemsDict[nick][i];
+    for (let i = 0; i < storageService.itemsDict[nick].length; i++) {
+        const item = storageService.itemsDict[nick][i];
 
         const link = document.querySelector(`a[href^="https://www.tiktok.com/@${nick}/video/${item.id}"]`)
         if (!link) {
@@ -790,13 +529,27 @@ async function analyzeProfile() {
         addItem(item, link);
     }
 
-    await onChanged('video_Sort_by_ER', enable => {
+    await storageService.onChanged('video_Sort_by_ER', enable => {
         if (!getProfilePage() && !getTagPage()) return;
         enable ? sortByER() : sortByCreationTime();
     }, true)
 
     updateProfile(nick);
 
-    document.querySelector('[data_content_start_analyzing]').removeAttribute('disabled');
-    document.querySelector('[data_content_start_analyzing]').innerHTML = chrome.i18n.getMessage('content_start_analyzing');
+    removeLoadingFromButton('data_content_start_analyzing', 'content_start_analyzing');
+}
+
+function setLoadingToButton(tagSelector) {
+    document.querySelector(`[${tagSelector}]`).setAttribute('disabled', 'disabled');
+    document.querySelector(`[${tagSelector}]`).innerHTML = `
+    <div class="tiktok-loading-ring" style="width: 18px; height: 18px;">
+    <svg class="ring tt-analytic" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 9.82843 17.3284 10.5 16.5 10.5C15.6716 10.5 15 9.82843 15 9C15 5.68629 12.3137 3 9 3C5.68629 3 3 5.68629 3 9C3 12.3137 5.68629 15 9 15C10.415 15 11.7119 14.512 12.7375 13.6941C13.3852 13.1775 14.329 13.2838 14.8455 13.9315C15.3621 14.5792 15.2558 15.5229 14.6081 16.0395C13.0703 17.266 11.1188 18 9 18C4.02944 18 0 13.9706 0 9Z" fill="white"></path>
+    </svg>
+    </div>`;
+}
+
+function removeLoadingFromButton(tagSelector, i18nText) {
+    document.querySelector(`[${tagSelector}]`).removeAttribute('disabled');
+    document.querySelector(`[${tagSelector}]`).innerHTML = chrome.i18n.getMessage(i18nText);
 }
