@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32561dbd-9ce6-4995-8027-ed9b24e4203f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/services/ApiService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_locales/en/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/_locales/en/messages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_locales/ru/messages.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/_locales/ru/messages.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Foreground.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Options.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Options.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/foreground.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index-foreground.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/inject_script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.common.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Content.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +74,7 @@
       <workItem from="1609343575922" duration="113600000" />
       <workItem from="1609778333301" duration="13491000" />
       <workItem from="1615535647255" duration="589000" />
-      <workItem from="1615552300828" duration="7125000" />
+      <workItem from="1615552300828" duration="7788000" />
     </task>
     <servers />
   </component>
@@ -119,10 +106,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="2027" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1615643328804" />
-    <state x="958" y="384" width="993" height="592" key="find.popup" timestamp="1615643385277">
+    <state x="958" y="384" width="993" height="592" key="find.popup" timestamp="1615644061084">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="958" y="384" width="993" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1615643385277" />
+    <state x="958" y="384" width="993" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1615644061084" />
     <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>

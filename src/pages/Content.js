@@ -259,12 +259,12 @@ let sortByCreationTime = () => {
 }
 
 let sortByER = () => {
-    var array = Array.from(document.querySelectorAll(`a[data-ER]`))
+    var array = Array.from(document.querySelectorAll(`a[href*="/video/"]`))
     array = array.sort((a, b) => {
-        if (+a.getAttribute('data-ER') > +b.getAttribute('data-ER')) {
+        if (!b.getAttribute('data-ER') || +a.getAttribute('data-ER') > +b.getAttribute('data-ER')) {
             return -1;
         }
-        if (+a.getAttribute('data-ER') < +b.getAttribute('data-ER')) {
+        if (!a.getAttribute('data-ER') || +a.getAttribute('data-ER') < +b.getAttribute('data-ER')) {
             return 1;
         }
         // a должно быть равным b
@@ -758,7 +758,7 @@ async function analyzeProfile() {
 
     let response;
     do {
-        response = await apiService.get(secUid, lastCursor)
+        response = await apiService.getProfileVideosBySecUid(secUid, lastCursor)
 
         if (!response.itemList) {
             break;
