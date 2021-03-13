@@ -11,10 +11,10 @@ module.exports = {
         options: path.resolve(__dirname, "./src/index-options.js"),
     },
     resolve: {
-        extensions: ['.js'],
+        extensions: [ '.tsx', '.ts', '.js' ],
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
     },
     module: {
@@ -22,6 +22,11 @@ module.exports = {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             },
             {
                 test: /\.js$/,
@@ -65,8 +70,7 @@ module.exports = {
                 { from: 'src/content/styles.css', to: 'content/[name].[ext]' },
                 { from: 'src/background/*', to: '[name].[ext]' },
                 // TODO Переделать на мультипапочность
-                { from: 'src/_locales/en/*', to: '_locales/en/[name].[ext]' },
-                { from: 'src/_locales/ru/*', to: '_locales/ru/[name].[ext]' }
+                { from: 'src/_locales', to: '_locales' },
             ]
         }),
         new CleanWebpackPlugin(),
