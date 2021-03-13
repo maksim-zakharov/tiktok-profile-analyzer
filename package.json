@@ -20,8 +20,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "webpack serve --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js && node scripts/zip-dist.js",
+    "start": "webpack serve --open --config scripts/webpack.dev.js",
+    "build": "webpack --config scripts/webpack.prod.js && node scripts/zip-dist.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "version": "node scripts/update-manifest.js && git add . && git push -f origin",

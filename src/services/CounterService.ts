@@ -1,4 +1,4 @@
-import { countBy, createCounter, getOrCreateContainer } from "../content/utility";
+import utilityService from "./utility";
 import storageService from '@services/StorageService';
 import { ProfileChallenge } from "@services/ApiService";
 
@@ -126,7 +126,7 @@ export default {
       avgER = (sum / storageService.itemsDict[nick].length).toFixed(2) + '%';
     }
 
-    createCounter(avgER, name, dataTag, row);
+    utilityService.createCounter(avgER, name, dataTag, row);
   },
 
   addAverageVideoCountPerDay(nick: string, dataTag: string, row, name: string) {
@@ -144,7 +144,7 @@ export default {
       counter = (diffInMs / (1000 * 60 * 60 * 24 * storageService.itemsDict[nick].length)).toFixed(2);
     }
 
-    createCounter(this.convertNumberToString(counter), name, dataTag, row);
+    utilityService.createCounter(this.convertNumberToString(counter), name, dataTag, row);
   },
 
   addAverageCreatedTimePerVideo(nick: string, dataTag: string, row, name: string) {
@@ -159,7 +159,7 @@ export default {
       counter = new Date(counter).toLocaleTimeString();
     }
 
-    createCounter(this.convertNumberToString(counter), name, dataTag, row);
+    utilityService.createCounter(this.convertNumberToString(counter), name, dataTag, row);
   },
 
   addAverageCounterPerVideo(nick, dataTag, fieldName, row, name) {
@@ -168,7 +168,7 @@ export default {
       counter = (storageService.itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName], 0) / storageService.itemsDict[nick].length).toFixed(1);
     }
 
-    createCounter(this.convertNumberToString(counter), name, dataTag, row);
+    utilityService.createCounter(this.convertNumberToString(counter), name, dataTag, row);
   },
 
   addRatingPerViews(nick, dataTag, fieldName, row, name) {
@@ -177,7 +177,7 @@ export default {
       counter = (storageService.itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName] * 100 / curr.stats.playCount, 0) / storageService.itemsDict[nick].length).toFixed(2);
     }
 
-    createCounter(counter + '%', name, dataTag, row);
+    utilityService.createCounter(counter + '%', name, dataTag, row);
   },
 
   addVideosCount(nick, dataTag, row, name) {
@@ -187,7 +187,7 @@ export default {
       counter = storageService.itemsDict[nick].length; // [0].authorStats.videoCount;
     }
 
-    createCounter(this.convertNumberToString(counter), name, dataTag, row);
+    utilityService.createCounter(this.convertNumberToString(counter), name, dataTag, row);
   },
 
   addTopTags(nick, dataTag, row, name) {
@@ -195,7 +195,7 @@ export default {
     let counter: string[] = [];
     if (storageService.itemsDict[nick]?.length) {
       const challenges = storageService.itemsDict[nick].filter(curr => curr.challenges).reduce((acc, curr) => acc.concat(...curr.challenges), [] as ProfileChallenge[]);
-      counter = countBy(challenges, i => i.title).sort((a, b) => {
+      counter = utilityService.countBy(challenges, i => i.title).sort((a, b) => {
         if (a[1] > b[1]) {
           return -1;
         }
@@ -207,7 +207,7 @@ export default {
       }).splice(0, 5).map(([key]) => key);
     }
 
-    let container = getOrCreateContainer(row);
+    let container = utilityService.getOrCreateContainer(row);
 
     let numberContainer = document.querySelector(`div[${dataTag}]`);
 
@@ -249,6 +249,6 @@ export default {
       counter = storageService.itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName], 0);
     }
 
-    createCounter(this.convertNumberToString(counter), name, dataTag, row);
+    utilityService.createCounter(this.convertNumberToString(counter), name, dataTag, row);
   }
 }

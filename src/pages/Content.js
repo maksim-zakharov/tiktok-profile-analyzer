@@ -1,4 +1,4 @@
-import {downloadCsv} from '../content/utility';
+import utilityService from '@services/utility';
 import apiService from '@services/ApiService';
 import counterService from '@services/CounterService'
 import storageService from '@services/StorageService';
@@ -376,7 +376,7 @@ function createCsvButton() {
 
         setLoadingToButton('data_content_download_Csv');
 
-        downloadCsv([[
+        utilityService.downloadCsv([[
             chrome.i18n.getMessage('content_csv_url'),
             chrome.i18n.getMessage('content_csv_desc'),
             chrome.i18n.getMessage('content_csv_createDate'),

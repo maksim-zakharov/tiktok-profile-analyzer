@@ -6,18 +6,18 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        content: path.resolve(__dirname, "./src/pages/Content.js"),
-        popup: path.resolve(__dirname, "./src/pages/Popup/index.tsx")
+        content: path.resolve(__dirname, "../src/pages/Content.js"),
+        popup: path.resolve(__dirname, "../src/pages/Popup/index.tsx")
     },
     resolve: {
         extensions: [ '.tsx', '.ts', '.js' ],
         alias: {
-            '@services': path.resolve(__dirname, "src/services")
+            '@services': path.resolve(__dirname, "../src/services")
         }
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, '../dist')
     },
     module: {
         rules: [
@@ -62,9 +62,9 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'manifest.json', to: '[name].[ext]' },
-                { from: 'src/images/*.png', to: 'images/[name].[ext]' },
-                { from: 'src/content/styles.css', to: 'content/[name].[ext]' },
-                { from: 'src/background/*', to: '[name].[ext]' },
+                { from: 'src/assets/*.png', to: 'assets/[name].[ext]' },
+                { from: 'src/styles.css', to: '[name].[ext]' },
+                { from: 'src/pages/Background/*', to: '[name].[ext]' },
                 { from: 'src/_locales', to: '_locales' },
             ]
         }),
