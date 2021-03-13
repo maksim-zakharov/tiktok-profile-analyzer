@@ -1,11 +1,9 @@
 {
   "appName": {
-    "message": "Tiktok Profile Analyzer",
-    "description": "The title of the application, displayed in the web store."
+    "message": "Tiktok Analytics",
   },
   "appDesc": {
-    "message": "This extension will analyze a Tiktok profile using API.",
-    "description":"The description of the application, displayed in the web store."
+    "message": "Scan your profile and get detailed statistics!",
   },
   "profile_videos": {
     "message": "Enable Videos"
