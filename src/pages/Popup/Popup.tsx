@@ -1,4 +1,4 @@
-import './App.scss';
+import './Popup.scss';
 import 'antd/dist/antd.css';
 import { Checkbox } from 'antd';
 import * as React from 'react';
@@ -78,7 +78,7 @@ const Popup = () => {
     <div className="profile-container">
       {/*<YMInitializer accounts={[70946401]} options={{webvisor: true}} version="2" />*/}
       <div className="logo">
-        <img src="../images/icon_128x128.png" alt=""/>
+        <img src="../../images/icon_128x128.png" alt=""/>
         <h1>{chrome.i18n.getMessage("appName")}</h1>
       </div>
       <div className="checkbox-group">

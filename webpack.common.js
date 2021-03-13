@@ -7,8 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     entry: {
         content: path.resolve(__dirname, "./src/pages/Content.js"),
-        popup: path.resolve(__dirname, "./src/index-popup.js"),
-        options: path.resolve(__dirname, "./src/index-options.js"),
+        popup: path.resolve(__dirname, "./src/pages/Popup/index.tsx")
     },
     resolve: {
         extensions: [ '.tsx', '.ts', '.js' ],
@@ -57,13 +56,8 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'popup.html',
-            template: 'src/popup.html',
+            template: 'src/pages/Popup/popup.html',
             chunks: ['popup']
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'options.html',
-            template: 'src/options.html',
-            chunks: ['options']
         }),
         new CopyWebpackPlugin({
             patterns: [
