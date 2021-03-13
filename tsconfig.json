@@ -9,9 +9,15 @@
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": ".",
+    "baseUrl": "src",
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": false,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "paths": {
+      "@services/*": [
+        "services/*"
+      ]
+    }
   }
 }

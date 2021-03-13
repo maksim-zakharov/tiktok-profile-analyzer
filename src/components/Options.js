@@ -7,8 +7,6 @@ import {
     Link,
     Redirect
 } from "react-router-dom";
-import Popup from './Popup.js';
-import Foreground from './Foreground.js';
 function Options() {
     return (
         <Router>
@@ -23,23 +21,9 @@ function Options() {
                             <li>
                                 <Link to="/popup">Popup</Link>
                             </li>
-                            <li>
-                                <Link to="/foreground">Foreground</Link>
-                            </li>
                         </ul>
                     </nav>
                 </div>
-                <Switch>
-                    {/*<Route exact path="/popup">*/}
-                    {/*    <Popup />*/}
-                    {/*</Route>*/}
-                    {/*<Route exact path="/foreground">*/}
-                    {/*    <Foreground />*/}
-                    {/*</Route>*/}
-                    {/*<Route exact path="/">*/}
-                    {/*    <Redirect to="/options.html" />*/}
-                    {/*</Route>*/}
-                </Switch>
             </div>
         </Router>
     )

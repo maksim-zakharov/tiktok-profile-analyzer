@@ -6,12 +6,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        content: path.resolve(__dirname, "./src/content/content.js"),
+        content: path.resolve(__dirname, "./src/pages/Content.js"),
         popup: path.resolve(__dirname, "./src/index-popup.js"),
         options: path.resolve(__dirname, "./src/index-options.js"),
     },
     resolve: {
         extensions: [ '.tsx', '.ts', '.js' ],
+        alias: {
+            '@services': path.resolve(__dirname, "src/services")
+        }
     },
     output: {
         filename: '[name].js',
@@ -65,11 +68,9 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'manifest.json', to: '[name].[ext]' },
-                { from: 'src/inject_script.js', to: '[name].[ext]' },
                 { from: 'src/images/*.png', to: 'images/[name].[ext]' },
                 { from: 'src/content/styles.css', to: 'content/[name].[ext]' },
                 { from: 'src/background/*', to: '[name].[ext]' },
-                // TODO Переделать на мультипапочность
                 { from: 'src/_locales', to: '_locales' },
             ]
         }),
