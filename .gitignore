@@ -26,3 +26,5 @@ dist/
 
 *.zip
 /dev-build/
+
+.idea/
