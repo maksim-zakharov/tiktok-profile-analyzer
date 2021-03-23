@@ -2,8 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32561dbd-9ce6-4995-8027-ed9b24e4203f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/background/tracker.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/build.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/env.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/webserver.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/zip-dist.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/zip-dist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/background.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/background.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/tracker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Popup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-options.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index-options.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index-popup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.common.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.dev.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.prod.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.prod.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,16 +62,10 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="D:\Projects\tiktok-chrome-extension\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\tiktok-chrome-extension" />
-      <recent name="D:\Projects\tiktok-chrome-extension\src" />
-      <recent name="D:\Projects\tiktok-chrome-extension\src\_locales" />
-      <recent name="D:\Projects\tiktok-chrome-extension\modal" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\tiktok-chrome-extension\src\pages" />
       <recent name="D:\Projects\tiktok-chrome-extension" />
@@ -62,6 +73,24 @@
       <recent name="D:\Projects\tiktok-chrome-extension\src\background" />
       <recent name="D:\Projects\tiktok-chrome-extension\src\components" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\tiktok-chrome-extension" />
+      <recent name="D:\Projects\tiktok-chrome-extension\src" />
+      <recent name="D:\Projects\tiktok-chrome-extension\src\_locales" />
+      <recent name="D:\Projects\tiktok-chrome-extension\modal" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -82,6 +111,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="479" y="211" width="1089" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1616531361309">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="479" y="211" width="1089" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1616531361309" />
     <state x="755" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609517909742">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -90,26 +123,26 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="805" y="311" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1609698313463" />
-    <state width="2027" height="305" key="GridCell.Tab.0.bottom" timestamp="1615643328804">
+    <state width="2027" height="288" key="GridCell.Tab.0.bottom" timestamp="1616533286899">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2027" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1615643328804" />
-    <state width="2027" height="305" key="GridCell.Tab.0.center" timestamp="1615643328804">
+    <state width="2027" height="288" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1616533286899" />
+    <state width="2027" height="288" key="GridCell.Tab.0.center" timestamp="1616533286899">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2027" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1615643328804" />
-    <state width="2027" height="305" key="GridCell.Tab.0.left" timestamp="1615643328804">
+    <state width="2027" height="288" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1616533286899" />
+    <state width="2027" height="288" key="GridCell.Tab.0.left" timestamp="1616533286899">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2027" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1615643328804" />
-    <state width="2027" height="305" key="GridCell.Tab.0.right" timestamp="1615643328804">
+    <state width="2027" height="288" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1616533286899" />
+    <state width="2027" height="288" key="GridCell.Tab.0.right" timestamp="1616533286899">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2027" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1615643328804" />
-    <state x="958" y="384" width="993" height="592" key="find.popup" timestamp="1615644061084">
+    <state width="2027" height="288" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1616533286899" />
+    <state x="958" y="384" width="993" height="592" key="find.popup" timestamp="1616533431816">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="958" y="384" width="993" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1615644061084" />
+    <state x="958" y="384" width="993" height="592" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1616533431816" />
     <state x="681" y="259" key="run.anything.popup" timestamp="1609510986513">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>

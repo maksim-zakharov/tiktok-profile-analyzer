@@ -19,7 +19,7 @@ archive.on('error', function(err){
 archive.pipe(output);
 
 // append files from a sub-directory, putting its contents at the root of archive
-archive.directory('dist/', false);
+archive.directory('build/', false);
 
 // // append files from a sub-directory and naming it `new-subdir` within the archive
 // archive.directory('subdir/', 'new-subdir');

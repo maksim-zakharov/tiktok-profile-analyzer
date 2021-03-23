@@ -1,0 +1,164 @@
+{
+  "appName": {
+    "message": "Tiktok Аналитика"
+  },
+  "appDesc": {
+    "message": "Отсканируй профиль и получи подробную статистику!"
+  },
+  "profile_videos": {
+    "message": "Показать видео"
+  },
+  "profile_Views": {
+    "message": "Показать просмотры"
+  },
+  "profile_Shares": {
+    "message": "Показать репосты"
+  },
+  "profile_Comments": {
+    "message": "Показать комментарии"
+  },
+  "profile_rating_likes": {
+    "message": "Показать Рейтинг одобрения"
+  },
+  "profile_rating_comments": {
+    "message": "Показать Рейтинг обсуждаемости"
+  },
+  "profile_rating_shares": {
+    "message": "Показать Рейтинг распространения"
+  },
+  "profile_Average_likes": {
+    "message": "Показать среднее лайков"
+  },
+  "profile_Average_views": {
+    "message": "Показать среднее просмотров"
+  },
+  "profile_Average_shares": {
+    "message": "Показать среднее репостов"
+  },
+  "profile_Average_comments": {
+    "message": "Показать среднее комментариев"
+  },
+  "profile_Average_ER": {
+    "message": "Показать средний коеффициент вовлеченности"
+  },
+  "profile_Average_created_time": {
+    "message": "Показать среднее время постинга"
+  },
+  "profile_Average_videos_per_day": {
+    "message": "Показать среднее количество видео в день"
+  },
+  "profile_top5_tags": {
+    "message": "Показать топ 5 тегов"
+  },
+  "video_Views": {
+    "message": "Показать просмотры"
+  },
+  "video_Likes": {
+    "message": "Показать лайки"
+  },
+  "video_Shares": {
+    "message": "Показать репосты"
+  },
+  "video_Comments": {
+    "message": "Показать комментарии"
+  },
+  "video_ER": {
+    "message": "Показать вовлеченность"
+  },
+  "video_Sort_by_ER": {
+    "message": "Сортировать по вовлеченности"
+  },
+  "content_start_analyzing": {
+    "message": "Сканировать"
+  },
+  "popup_profile_title": {
+    "message": "Профиль"
+  },
+  "popup_video_title": {
+    "message": "Видео"
+  },
+  "data_rating_likes": {
+    "message": "Рейтинг одобрения"
+  },
+  "data_rating_comments": {
+    "message": "Рейтинг обсуждаемости"
+  },
+  "data_rating_shares": {
+    "message": "Рейтинг распространения"
+  },
+  "data_avg_videos_per_day": {
+    "message": "Средн. кол-во видео в день"
+  },
+  "data_avg_created_time": {
+    "message": "Средн. время создания"
+  },
+  "data_avg_er": {
+    "message": "Средн. коэффициент вовлеченности"
+  },
+  "data_avg_comments": {
+    "message": "Средн. комментарии"
+  },
+  "data_avg_shares": {
+    "message": "Средн. репосты"
+  },
+  "data_avg_likes": {
+    "message": "Средн. лайки"
+  },
+  "data_avg_views": {
+    "message": "Средн. просмотры"
+  },
+  "data_videos": {
+    "message": "Видео"
+  },
+  "data_comments": {
+    "message": "Комментарии"
+  },
+  "data_shares": {
+    "message": "Поделились"
+  },
+  "data_views": {
+    "message": "Просмотры"
+  },
+  "data_top5_tags": {
+    "message": "Топ 5 тегов"
+  },
+  "donate": {
+    "message": "Помочь автору :)"
+  },
+  "content_download_Csv": {
+    "message": "Скачать CSV"
+  },
+  "content_csv_url": {
+    "message": "Ссылка"
+  },
+  "content_csv_desc": {
+    "message": "Описание"
+  },
+  "content_csv_createDate": {
+    "message": "Дата создания"
+  },
+  "content_csv_createTime": {
+    "message": "Время создания"
+  },
+  "content_csv_challenges": {
+    "message": "Теги"
+  },
+  "content_csv_duration": {
+    "message": "Длительность"
+  },
+  "content_csv_ER": {
+    "message": "Вовлеченность"
+  },
+  "content_csv_likes": {
+    "message": "Лайки"
+  },
+  "content_csv_shares": {
+    "message": "Поделились"
+  },
+  "content_csv_comments": {
+    "message": "Комментарии"
+  },
+  "content_csv_views": {
+    "message": "Просмотры"
+  }
+}

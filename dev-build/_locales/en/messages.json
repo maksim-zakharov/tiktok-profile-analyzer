@@ -1,0 +1,164 @@
+{
+  "appName": {
+    "message": "Tiktok Analytics"
+  },
+  "appDesc": {
+    "message": "Scan your profile and get detailed statistics!"
+  },
+  "profile_videos": {
+    "message": "Enable Videos"
+  },
+  "profile_Views": {
+    "message": "Enable Views"
+  },
+  "profile_Shares": {
+    "message": "Enable Shares"
+  },
+  "profile_Comments": {
+    "message": "Enable Comments"
+  },
+  "profile_rating_likes": {
+    "message": "Likes rating"
+  },
+  "profile_rating_comments": {
+    "message": "Comments rating"
+  },
+  "profile_rating_shares": {
+    "message": "Share rating"
+  },
+  "profile_Average_views": {
+    "message": "Enable Average views"
+  },
+  "profile_Average_shares": {
+    "message": "Enable Average shares"
+  },
+  "profile_Average_comments": {
+    "message": "Enable Average comments"
+  },
+  "profile_Average_likes": {
+    "message": "Enable Average likes"
+  },
+  "profile_Average_ER": {
+    "message": "Enable Average ER"
+  },
+  "profile_Average_created_time": {
+    "message": "Enable Average created time"
+  },
+  "profile_Average_videos_per_day": {
+    "message": "Enable Average videos per day"
+  },
+  "profile_top5_tags": {
+    "message": "Enable top 5 tags"
+  },
+  "video_Likes": {
+    "message": "Enable Likes"
+  },
+  "video_Views": {
+    "message": "Enable Views"
+  },
+  "video_Shares": {
+    "message": "Enable Shares"
+  },
+  "video_Comments": {
+    "message": "Enable Comments"
+  },
+  "video_ER": {
+    "message": "Enable ER"
+  },
+  "video_Sort_by_ER": {
+    "message": "Enable sorting by ER"
+  },
+  "content_start_analyzing": {
+    "message": "Start Analyzing"
+  },
+  "popup_profile_title": {
+    "message": "Profile"
+  },
+  "popup_video_title": {
+    "message": "Video"
+  },
+  "data_rating_likes": {
+    "message": "Enable Likes rating"
+  },
+  "data_rating_comments": {
+    "message": "EnableComments rating"
+  },
+  "data_rating_shares": {
+    "message": "Enable Share rating"
+  },
+  "data_avg_videos_per_day": {
+    "message": "Avg. videos per day"
+  },
+  "data_avg_created_time": {
+    "message": "Avg. created time"
+  },
+  "data_avg_er": {
+    "message": "Avg. ER"
+  },
+  "data_avg_comments": {
+    "message": "Avg. comments"
+  },
+  "data_avg_shares": {
+    "message": "Avg. shares"
+  },
+  "data_avg_views": {
+    "message": "Avg. views"
+  },
+  "data_avg_likes": {
+    "message": "Avg. likes"
+  },
+  "data_comments": {
+    "message": "Comments"
+  },
+  "data_videos": {
+    "message": "Videos"
+  },
+  "data_shares": {
+    "message": "Shares"
+  },
+  "data_views": {
+    "message": "Views"
+  },
+  "data_top5_tags": {
+    "message": "Top 5 tags"
+  },
+  "donate": {
+    "message": "Donate"
+  },
+  "content_download_Csv": {
+    "message": "Download CSV"
+  },
+  "content_csv_url": {
+    "message": "Link"
+  },
+  "content_csv_desc": {
+    "message": "Description"
+  },
+  "content_csv_createDate": {
+    "message": "Created date"
+  },
+  "content_csv_createTime": {
+    "message": "Created time"
+  },
+  "content_csv_challenges": {
+    "message": "Tags"
+  },
+  "content_csv_duration": {
+    "message": "Duration"
+  },
+  "content_csv_ER": {
+    "message": "ER"
+  },
+  "content_csv_likes": {
+    "message": "Likes"
+  },
+  "content_csv_shares": {
+    "message": "Shares"
+  },
+  "content_csv_comments": {
+    "message": "Comments"
+  },
+  "content_csv_views": {
+    "message": "Views"
+  }
+}

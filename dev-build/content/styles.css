@@ -1,0 +1,158 @@
+.custom-like {
+    display: flex;
+    fill: rgb(255, 255, 255);
+    height: 20px;
+    width: 20px;
+    margin-right: 4px;
+    background-color: #fff;
+    -webkit-mask-image: url("https://sf16-scmcdn-va.ibytedtos.com/goofy/tiktok/web/node/_next/static/images/unlike-c0928a8c3ac7b448ef79c4bb26aec869.svg");
+    mask-image: url("https://sf16-scmcdn-va.ibytedtos.com/goofy/tiktok/web/node/_next/static/images/unlike-c0928a8c3ac7b448ef79c4bb26aec869.svg");
+}
+
+.video-bottom-info {
+    display: inline-grid !important;
+    width: 100%;
+    grid-template-columns: 24px auto 24px auto;
+}
+
+.video-bottom-info svg:nth-child(1) {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.video-bottom-info strong:nth-child(2) {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.video-bottom-info strong:nth-child(3) {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.video-bottom-info strong:nth-child(4) {
+    grid-row: 1;
+    grid-column: 4;
+}
+
+.card-footer.no-avatar.jsx-1036923518 {
+    padding: 7px !important;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), #000000);
+    height: 80px;
+}
+
+.video-count {
+    display: flex;
+    align-items: center;
+}
+
+.custom-views {
+    display: flex;
+    fill: rgb(255, 255, 255);
+    height: 24px;
+    width: 24px;
+    margin: 0 2px 0 -2px;
+    background-color: #fff;
+    -webkit-mask-image: url("https://sf16-scmcdn-va.ibytedtos.com/goofy/tiktok/web/node/_next/static/images/view-736d40b557e0d2adeefc680ff6af8b36.svg");
+    mask-image: url("https://sf16-scmcdn-va.ibytedtos.com/goofy/tiktok/web/node/_next/static/images/view-736d40b557e0d2adeefc680ff6af8b36.svg");
+}
+
+.custom-share {
+    display: flex;
+    fill: rgb(255, 255, 255);
+    height: 24px;
+    width: 24px;
+    margin: 0 2px 0 -2px;
+    background-color: #fff;
+    -webkit-mask-image: url("https://sf16-scmcdn-va.ibytedtos.com/goofy/tiktok/web/node/_next/static/images/share-5c6687723530cc85fbe7a61ef85b6354.svg");
+    mask-image: url("https://sf16-scmcdn-va.ibytedtos.com/goofy/tiktok/web/node/_next/static/images/share-5c6687723530cc85fbe7a61ef85b6354.svg");
+}
+
+.custom-comment {
+    display: flex;
+    fill: rgb(255, 255, 255);
+    height: 24px;
+    width: 24px;
+    margin-right: 2px;
+    background-color: #fff;
+    -webkit-mask-image: url("https://sf16-scmcdn-va.ibytedtos.com/goofy/tiktok/web/node/_next/static/images/comment-ef8d70b8abb425517f76ae39a9ae3958.svg");
+    mask-image: url("https://sf16-scmcdn-va.ibytedtos.com/goofy/tiktok/web/node/_next/static/images/comment-ef8d70b8abb425517f76ae39a9ae3958.svg");
+}
+
+.share-layout.compact .share-layout-main {
+    width: 792px !important;
+}
+
+.popup-button {
+    transform: translateY(-178px);
+    height: 20px;
+}
+
+.count-infos {
+    flex-wrap: wrap !important;
+}
+
+.count-infos:not(:first-of-type) {
+    margin: 0 !important;
+}
+
+.ring.tt-analytic {
+    -webkit-animation: rotating 2s linear infinite;
+    -moz-animation: rotating 2s linear infinite;
+    -ms-animation: rotating 2s linear infinite;
+    -o-animation: rotating 2s linear infinite;
+    animation: rotating 2s linear infinite;
+}
+
+
+@keyframes rotating {
+    from {
+        -ms-transform: rotateZ(0deg);
+        -moz-transform: rotateZ(0deg);
+        -webkit-transform: rotateZ(0deg);
+        -o-transform: rotateZ(0deg);
+        transform: rotateZ(0deg);
+    }
+    to {
+        -ms-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+        -webkit-transform: rotateZ(360deg);
+        -o-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+    }
+}
+
+.share-layout.compact .share-layout-header {
+    width: auto !important;
+}
+
+.count-infos a:hover {
+    text-decoration: underline !important;
+}
+
+.card-footer.jsx-1036923518 {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    height: 100px;
+}
+
+.card-footer.jsx-1036923518 strong.jsx-1036923518 {
+    font-family: proxima-semibold, PingFangSC, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    vertical-align: middle;
+    color: rgb(255, 255, 255);
+}
+
+.share-follow.jsx-683523640 {
+    font-family: "sofiapro-semibold",PingFangSC,sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    width: 208px;
+    height: 36px;
+    padding: 0;
+    margin: 0;
+    margin-top: 16px;
+}
