@@ -1,10 +1,15 @@
-import './Popup.scss';
-import 'antd/dist/antd.css';
-import { Checkbox } from 'antd';
+import './Popup.less';
+import { Button, Checkbox, Modal, Space, Spin } from 'antd';
 import * as React from 'react';
 import * as ReactGA from 'react-ga';
 import { useEffect, useState } from "react";
 import storageService from '@services/StorageService';
+import { LoadingOutlined } from '@ant-design/icons';
+
+enum FrameUrlType {
+  Quiz = 'https://docs.google.com/forms/d/e/1FAIpQLSf5Kr-QMNfpYeG7OUIAipoCY9jDrrvuo1Z3AK8j5xMJ2GcyxQ/viewform?embedded=true', // Исследование
+  Bug = 'https://docs.google.com/forms/d/e/1FAIpQLScgWPlrQqcxOdowTneH8Tv8m3jURkuiTk_5rGn8EN8rVRBCeg/viewform?embedded=true' // Баг
+}
 
 const Popup = () => {
 
@@ -35,7 +40,18 @@ const Popup = () => {
     {name: 'video_Sort_by_ER'},
   ]
 
-  const [state, setState] = useState({});
+  const [state, setState] = useState({
+    show: false,
+    loading: false,
+    frameUrl: '',
+  });
+
+  const onCloseModal = () => setState(prevState => ({...prevState, show: false}));
+  const hideSpinner = () => setState(prevState => ({...prevState, loading: false}));
+  const onShowModal = (frameUrl: FrameUrlType) => setState(prevState => ({
+    ...prevState,
+    loading: state.frameUrl !== frameUrl, frameUrl, show: true
+  }))
 
   const onInit = async () => {
     ReactGA.initialize('UA-186370775-1');
@@ -97,7 +113,25 @@ const Popup = () => {
                       onChange={(e) => onChange(e, checkbox.name)}>{chrome.i18n.getMessage(checkbox.name)}</Checkbox>)}
         </div>
       </div>
-      <a href="https://yoomoney.ru/to/410016200700541" target="_blank">{chrome.i18n.getMessage('donate')}</a>
+      <Space>
+        <a href="https://yoomoney.ru/to/410016200700541" target="_blank">{chrome.i18n.getMessage('donate')}</a>
+        <Button type="primary" onClick={() => onShowModal(FrameUrlType.Quiz)}>
+          Report bug
+        </Button>
+      </Space>
+      <Modal
+        width="fit-content"
+        visible={state.show}
+        onCancel={onCloseModal}
+        footer={null}>
+        <Spin spinning={state.loading} indicator={<LoadingOutlined style={{fontSize: 48}} spin/>}>
+          <iframe
+            src={state.frameUrl}
+            onLoad={hideSpinner}
+            width="640" height="640" frameBorder="0" marginHeight={0} marginWidth={0}> Loading...
+          </iframe>
+        </Spin>
+      </Modal>
     </div>
   );
 }

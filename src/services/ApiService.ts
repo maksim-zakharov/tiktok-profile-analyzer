@@ -120,9 +120,9 @@ export type ProfileVideo = {
 }
 
 type ProfileVideoListResponse = {
-  "statusCode": number, // 0,
+  "statusCode"?: number, // 0,
   "itemList": ProfileVideo[],
-  "cursor": string, // "1608218154000",
+  "cursor"?: string, // "1608218154000",
   "hasMore": boolean
 }
 

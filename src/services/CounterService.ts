@@ -3,98 +3,6 @@ import storageService from '@services/StorageService';
 import { ProfileChallenge } from "@services/ApiService";
 
 export default {
-  addViews(linkElement, likesCount) {
-    if (linkElement.querySelector('.video-bottom-info [data-video_views], .video-bottom-info svg')) {
-      return;
-    }
-    const likesButton = document.createElement('strong');
-    likesButton.classList.add('like-icon');
-    likesButton.classList.add('custom-views');
-    likesButton.setAttribute(`data-video_views`, this.convertNumberToString(likesCount));
-
-    const likesText = document.createElement('strong');
-    likesText.classList.add('jsx-1036923518');
-    likesText.innerText = this.convertNumberToString(likesCount);
-    likesText.setAttribute(`data-video_views`, this.convertNumberToString(likesCount));
-
-    linkElement.querySelector('.video-bottom-info')?.appendChild(likesButton);
-    linkElement.querySelector('.video-bottom-info')?.appendChild(likesText);
-  },
-
-  addLikes(linkElement, likesCount) {
-    if (linkElement.querySelector('.video-bottom-info [data-video_like]')) {
-      return;
-    }
-    const likesButton = document.createElement('strong');
-    likesButton.classList.add('custom-like');
-    likesButton.setAttribute(`data-video_like`, this.convertNumberToString(likesCount));
-
-    const likesText = document.createElement('strong');
-    likesText.classList.add('jsx-1036923518');
-    likesText.innerText = this.convertNumberToString(likesCount);
-    likesText.setAttribute(`data-video_like`, this.convertNumberToString(likesCount));
-
-    linkElement.querySelector('.video-bottom-info')?.appendChild(likesButton);
-    linkElement.querySelector('.video-bottom-info')?.appendChild(likesText);
-  },
-
-  addShare(linkElement, item) {
-    if (linkElement.querySelector('.video-bottom-info [data-video_share]')) {
-      return;
-    }
-    const shareButton = document.createElement('svg');
-    shareButton.classList.add('custom-share');
-    shareButton.setAttribute(`data-video_share`, this.convertNumberToString(item.stats.shareCount));
-
-    const shareText = document.createElement('strong');
-    shareText.classList.add('jsx-1036923518');
-    shareText.innerText = this.convertNumberToString(item.stats.shareCount);
-    shareText.setAttribute(`data-video_share`, this.convertNumberToString(item.stats.shareCount));
-
-    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(shareButton);
-    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(shareText);
-  },
-
-  addComment(linkElement, item) {
-    if (linkElement.querySelector('.video-bottom-info [data-video_comment]')) {
-      return;
-    }
-    const commentButton = document.createElement('strong');
-    commentButton.classList.add('custom-comment');
-    commentButton.setAttribute(`data-video_comment`, this.convertNumberToString(item.stats.commentCount));
-
-    const commentText = document.createElement('strong');
-    commentText.classList.add('jsx-1036923518');
-    commentText.innerText = this.convertNumberToString(item.stats.commentCount);
-    commentText.setAttribute(`data-video_comment`, this.convertNumberToString(item.stats.commentCount));
-
-    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(commentButton);
-    linkElement.querySelector('.video-bottom-info:first-of-type + .video-bottom-info')?.appendChild(commentText);
-  },
-
-  addER(link, item) {
-    if (link.querySelector('.card-footer.normal.no-avatar [data-video_er]')) {
-      return;
-    }
-    const ERContainer = document.createElement('strong');
-    ERContainer.classList.add('jsx-1036923518');
-    ERContainer.classList.add('video-bottom-info');
-    link.querySelector('.card-footer.normal.no-avatar')?.appendChild(ERContainer);
-
-    const ERButton = document.createElement('svg');
-    ERButton.classList.add('jsx-1036923518');
-    ERButton.textContent = 'ER';
-    ERContainer.appendChild(ERButton);
-
-    const ERText = document.createElement('strong');
-    ERText.classList.add('jsx-1036923518');
-
-    const ER = ((item.stats.commentCount + item.stats.diggCount + item.stats.shareCount) * 100 / item.stats.playCount);
-    ERText.innerText = ER.toFixed(2) + '%';
-    ERContainer.appendChild(ERText);
-    link.setAttribute('data-ER', ER.toString());
-    ERContainer.setAttribute(`data-video_ER`, ER.toString());
-  },
 
   convertNumberToString(number) {
 
@@ -180,14 +88,16 @@ export default {
     utilityService.createCounter(counter + '%', name, dataTag, row);
   },
 
-  addVideosCount(nick, dataTag, row, name) {
+  addVideosCount(nick, dataTag?, row?, name?): number {
 
     let counter = 0;
     if (storageService.itemsDict[nick]?.length) {
       counter = storageService.itemsDict[nick].length; // [0].authorStats.videoCount;
     }
 
-    utilityService.createCounter(this.convertNumberToString(counter), name, dataTag, row);
+    // utilityService.createCounter(this.convertNumberToString(counter), name, dataTag, row);
+
+    return counter;
   },
 
   addTopTags(nick, dataTag, row, name) {
@@ -242,13 +152,15 @@ export default {
       })
     }
   },
-  addViewsCount(nick: string, dataTag: string, fieldName: string, row, name) {
+  addViewsCount(nick: string, dataTag: string, fieldName: string, row?, name?): number {
 
     let counter = 0;
     if (storageService.itemsDict[nick]?.length) {
       counter = storageService.itemsDict[nick].reduce((acc, curr) => acc + curr.stats[fieldName], 0);
     }
 
-    utilityService.createCounter(this.convertNumberToString(counter), name, dataTag, row);
+    // utilityService.createCounter(this.convertNumberToString(counter), name, dataTag, row);
+
+    return counter;
   }
 }

@@ -1,32 +1,10 @@
-.App {
-  text-align: center;
-}
+@import '../../../node_modules/antd/lib/style/themes/default.less';
+@import '../../../node_modules/antd/dist/antd.less'; // Import Ant Design styles by less entry
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
+@primary-color: #fe2c55;
+@link-color: @primary-color;
+@border-color-base: @primary-color;
+@checkbox-color: @primary-color;
 
 .checkbox-container {
   display: inline-grid;
@@ -64,15 +42,6 @@
   width: 700px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 a {
   display: flex;
   background-color: #fe2c55 !important;
@@ -94,7 +63,7 @@ a {
   justify-content: center;
 }
 
-.ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #FE2C55 !important;
-  border-color: #FE2C55 !important;
-}
+//.ant-checkbox-checked .ant-checkbox-inner {
+//  background-color: #FE2C55 !important;
+//  border-color: #FE2C55 !important;
+//}

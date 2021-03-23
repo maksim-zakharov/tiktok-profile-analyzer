@@ -22,7 +22,7 @@
     }
   ],
   "background": {
-    "page": "./background.html",
+    "page": "background.html",
     "persistent": false
   },
   "default_locale": "en",
@@ -33,6 +33,8 @@
     }
   },
   "permissions": [
+    "alarms",
+    "tabs",
     "storage",
     "*://*.tiktok.com/*"
   ]
